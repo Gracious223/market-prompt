@@ -1,0 +1,51 @@
+name: Email Daily Newsletter
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'newsletters/20**.html'
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Find new newsletter file
+        id: find
+        run: |
+          FILE=$(git diff --name-only HEAD~1 HEAD -- 'newsletters/20*.html' | grep -v "\-preview" | head -1)
+          if [ -z "$FILE" ]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+            echo "file=$FILE" >> $GITHUB_OUTPUT
+            echo "date=$(basename $FILE .html)" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Load newsletter HTML into env
+        if: steps.find.outputs.skip != 'true'
+        run: |
+          {
+            echo 'newsletter_html<<__NEWSLETTER__'
+            cat "${{ steps.find.outputs.file }}"
+            echo '__NEWSLETTER__'
+          } >> $GITHUB_ENV
+
+      - name: Send newsletter email
+        if: steps.find.outputs.skip != 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "The Signal — ${{ steps.find.outputs.date }}"
+          to: ${{ secrets.MAIL_TO }}
+          from: "The Signal <${{ secrets.MAIL_USERNAME }}>"
+          html_body: ${{ env.newsletter_html }}
