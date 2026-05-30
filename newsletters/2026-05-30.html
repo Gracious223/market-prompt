@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Signal — AI in Markets | 30 May 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f4f1eb;
+      font-family: 'Inter', sans-serif;
+      color: #1a1a2e;
+      padding: 40px 20px;
+    }
+
+    .wrapper {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: #1a1a2e;
+      border-radius: 4px 4px 0 0;
+      padding: 48px 48px 36px;
+      text-align: center;
+    }
+
+    .header .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #c9a96e;
+      margin-bottom: 16px;
+    }
+
+    .header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: #f4f1eb;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+
+    .header h1 span {
+      color: #c9a96e;
+    }
+
+    .header .tagline {
+      font-size: 13px;
+      color: #8a8fa8;
+      margin-top: 12px;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+
+    .header .date-bar {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid #2d2d4a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header .date-bar span {
+      font-size: 11px;
+      color: #8a8fa8;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .header .date-bar .issue {
+      background: #c9a96e;
+      color: #1a1a2e;
+      padding: 3px 10px;
+      border-radius: 2px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+    }
+
+    /* ── INTRO ── */
+    .intro {
+      background: #c9a96e;
+      padding: 24px 48px;
+    }
+
+    .intro p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #1a1a2e;
+      font-weight: 400;
+    }
+
+    .intro p strong {
+      font-weight: 600;
+    }
+
+    /* ── BODY ── */
+    .body {
+      background: #ffffff;
+      padding: 0 48px 48px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      padding-top: 40px;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-label .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .section-label h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #8a8fa8;
+    }
+
+    .section-label .line {
+      flex: 1;
+      height: 1px;
+      background: #ebebeb;
+    }
+
+    /* ── STORY CARD ── */
+    .story {
+      margin-bottom: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid #f0ede6;
+    }
+
+    .story:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .story .tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+      margin-bottom: 10px;
+    }
+
+    .story h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: #1a1a2e;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    .story p {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #4a4a5a;
+    }
+
+    .story .why-it-matters {
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: #f4f1eb;
+      border-left: 3px solid #c9a96e;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .story .why-it-matters p {
+      font-size: 12px;
+      font-style: italic;
+      color: #6a6a7a;
+    }
+
+    .story .why-it-matters strong {
+      color: #1a1a2e;
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    .story a {
+      color: #c9a96e;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .story a:hover { text-decoration: underline; }
+
+    /* tag colours */
+    .tag.markets    { background: #e8f4f8; color: #2a7fa8; }
+    .tag.tools      { background: #f0f8e8; color: #4a8a2a; }
+    .tag.labs       { background: #f8e8f4; color: #8a2a7a; }
+    .tag.pm         { background: #f8f0e8; color: #8a5a2a; }
+    .tag.risk       { background: #f8e8e8; color: #8a2a2a; }
+
+    /* dot colours */
+    .dot.markets { background: #2a7fa8; }
+    .dot.tools   { background: #4a8a2a; }
+    .dot.labs    { background: #8a2a7a; }
+    .dot.pm      { background: #8a5a2a; }
+    .dot.risk    { background: #8a2a2a; }
+
+    /* ── STAT ROW ── */
+    .stat-row {
+      display: flex;
+      gap: 16px;
+      margin: 32px 0;
+    }
+
+    .stat-card {
+      flex: 1;
+      background: #1a1a2e;
+      border-radius: 4px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .stat-card .number {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #c9a96e;
+      line-height: 1;
+    }
+
+    .stat-card .label {
+      font-size: 10px;
+      font-weight: 500;
+      color: #8a8fa8;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, #c9a96e, transparent);
+      margin: 8px 0;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: #1a1a2e;
+      border-radius: 0 0 4px 4px;
+      padding: 32px 48px;
+      text-align: center;
+    }
+
+    .footer p {
+      font-size: 11px;
+      color: #8a8fa8;
+      line-height: 1.8;
+    }
+
+    .footer .footer-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      color: #c9a96e;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="eyebrow">Your Weekly Intelligence Brief</div>
+    <h1>The <span>Signal</span></h1>
+    <p class="tagline">AI · Public Markets · Product Management</p>
+    <div class="date-bar">
+      <span>30 May 2026</span>
+      <span class="issue">Issue No. 01</span>
+      <span>Curated for Efia</span>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro">
+    <p>
+      This week: AI penetrates every layer of capital markets, Vanguard ships a production
+      AI tool for advisors, Google bets on speed over scale, and the PM role continues
+      to bifurcate. <strong>Five stories. One brief. Everything you need to stay sharp.</strong>
+    </p>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- STAT ROW -->
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="number">$75B</div>
+        <div class="label">Incremental revenue AI-native banking could generate by 2030</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">93%</div>
+        <div class="label">US companies deploying or scaling AI in finance within 18 months</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">30–100%</div>
+        <div class="label">Adviser capacity boost from AI in wealth management</div>
+      </div>
+    </div>
+
+    <!-- SECTION 1: MARKETS -->
+    <div class="section">
+      <div class="section-label">
+        <div class="dot markets"></div>
+        <h2>AI in Public Markets</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="story">
+        <span class="tag markets">Financial Services</span>
+        <h3>AI Now Accounts for Nearly Half of All Investment-Grade Debt Issuance</h3>
+        <p>
+          Apollo's research arm reported this week that AI-related issuers now represent
+          nearly 50% of all IG bond issuance and 87% of VC funding — a signal that the AI
+          investment cycle has moved well beyond hype into structural capital allocation.
+          For portfolio managers, this is no longer a thematic tilt; it's the base case.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> Your internal users are making
+          decisions in a market where AI is the dominant force. Understanding this shapes
+          what data and signals your product should surface to them.</p>
+        </div>
+        <a href="https://www.apollo.com/wealth/the-daily-spark/ai-penetrating-every-corner-of-financial-markets">Read at Apollo →</a>
+      </div>
+
+      <div class="story">
+        <span class="tag markets">Wealth Management</span>
+        <h3>Vanguard Ships "Expert Insights" — AI Portfolio Analysis for Advisors</h3>
+        <p>
+          Vanguard launched a production AI tool that transforms complex portfolio data
+          into client-ready guidance, aligned with their investment methodology. It will
+          be embedded into the free Portfolio Analytics Tool later in 2026. This is one of
+          the clearest examples yet of an incumbent shipping an AI product that's
+          genuinely workflow-integrated — not a chatbot bolted on the side.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> Study this product closely —
+          Vanguard's approach to making AI output "client-ready" and "aligned to
+          methodology" is exactly the trust and explainability problem you'll face
+          building for your internal analysts.</p>
+        </div>
+        <a href="https://corporate.vanguard.com/content/corporatesite/us/en/corp/who-we-are/pressroom/press-release-vanguard-launches-expert-insights-equipping-advisors-with-ai-powered-portfolio-analysis-expertise-04092026.html">Read at Vanguard →</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 2: TOOLS -->
+    <div class="section">
+      <div class="section-label">
+        <div class="dot tools"></div>
+        <h2>Tools for Analysts & PMs</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="story">
+        <span class="tag tools">Research Tools</span>
+        <h3>AlphaSense Evolves into a Full Research Agent</h3>
+        <p>
+          AlphaSense's January 2026 Generative Search update transformed the platform
+          from a search tool into a full research agent — capable of answering multi-step
+          questions and producing structured deliverables by combining quantitative data
+          with broker research, expert calls, and filings. Hedge funds and buy-side analysts
+          are the primary users.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> This is a direct competitor
+          blueprint. AlphaSense shows what "good" looks like for an AI product serving
+          analysts — the key is unifying qualitative and quantitative sources in one
+          conversational interface, not just adding chat to existing tools.</p>
+        </div>
+        <a href="https://meetingnotes.com/blog/ai-tools-for-hedge-funds">See full landscape →</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 3: LABS -->
+    <div class="section">
+      <div class="section-label">
+        <div class="dot labs"></div>
+        <h2>From the Labs</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="story">
+        <span class="tag labs">Google I/O</span>
+        <h3>Google Bets on Speed — Gemini 3.5 Flash Over a Frontier Behemoth</h3>
+        <p>
+          At Google I/O this week, Google debuted Gemini 3.5 Flash rather than a
+          heavyweight frontier model, signalling a deliberate strategy: stay at the
+          frontier while prioritising models cheap and fast enough to deploy across
+          billions of users. Search is being overhauled for both short queries and
+          chatbot-style conversations. YouTube is getting "Ask YouTube."
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> Speed and cost-efficiency are
+          becoming the real competitive moat in AI — not raw capability. When you're
+          scoping your product, latency and cost per query matter as much as model quality
+          to your users.</p>
+        </div>
+        <a href="https://www.axios.com/2026/05/21/google-ai-anthropic-openai-war">Read at Axios →</a>
+      </div>
+
+      <div class="story">
+        <span class="tag labs">Anthropic</span>
+        <h3>Anthropic Expands — Milan and Seoul Offices Open This Week</h3>
+        <p>
+          Anthropic opened its Milan office on 27 May and appointed a Representative
+          Director for Korea ahead of a Seoul opening on 26 May — two enterprise market
+          pushes in the same week. The frontier race is described by all three major labs
+          as "neck and neck," with different tradeoffs on cost, speed, and compute.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> Anthropic is actively building
+          enterprise presence. Understanding their go-to-market motion is useful context
+          for your longer-term goal of interviewing there.</p>
+        </div>
+        <a href="https://www.anthropic.com/news">Read at Anthropic →</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 4: PM -->
+    <div class="section">
+      <div class="section-label">
+        <div class="dot pm"></div>
+        <h2>AI Product Management</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="story">
+        <span class="tag pm">Career & Role</span>
+        <h3>The PM Role Is Splitting — Generalists Are Being Squeezed Out</h3>
+        <p>
+          94% of product professionals now use AI frequently, with nearly half embedding
+          it deeply into daily workflows. The result: generalist PM roles are under
+          pressure as companies increasingly demand specialisation — AI-native PMs, growth
+          PMs, platform PMs. The PMs gaining ground are those reallocating reclaimed hours
+          toward product vision and customer empathy: the tasks AI cannot replicate.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> You are making exactly the right
+          move transitioning into AI PM specialisation now. The market is rewarding this
+          shift. The risk to avoid: becoming a requirements-passer rather than a
+          strategic leader with real AI product depth.</p>
+        </div>
+        <a href="https://userpilot.com/blog/product-management-trends/">Read full report →</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 5: RISK -->
+    <div class="section">
+      <div class="section-label">
+        <div class="dot risk"></div>
+        <h2>Watch Closely</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="story">
+        <span class="tag risk">Risk</span>
+        <h3>IMF Flags AI-Fuelled Cyberattacks as a Financial Stability Risk</h3>
+        <p>
+          The IMF raised formal concerns this week about AI's role in destabilising
+          financial systems — advanced models can now dramatically reduce the time and
+          cost needed to identify and exploit vulnerabilities across widely used systems.
+          Separately, a Cambridge Judge Business School report found that accuracy of
+          AI-generated financial outputs (48%) and cyber threats (50%) are now the top
+          two concerns among financial firms deploying AI.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> When your internal analysts rely on
+          AI outputs to make investment decisions, accuracy and auditability are
+          non-negotiable product requirements — not nice-to-haves. Build these into your
+          PRD from day one.</p>
+        </div>
+        <a href="https://www.imf.org/en/blogs/articles/2026/05/07/financial-stability-risks-mount-as-artificial-intelligence-fuels-cyberattacks">Read at IMF →</a>
+      </div>
+    </div>
+
+  </div><!-- /body -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-title">The Signal</div>
+    <p>
+      Curated weekly for Efia Amankwa · AI Product Manager, Public Markets<br/>
+      Next edition: 06 June 2026<br/><br/>
+      Saved to <code style="color:#c9a96e; font-size:11px;">newsletters/</code> in your project workspace
+    </p>
+  </div>
+
+</div>
+</body>
+</html>
