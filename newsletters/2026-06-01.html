@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Signal — AI in Markets | 01 June 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f4f1eb;
+      font-family: 'Inter', sans-serif;
+      color: #1a1a2e;
+      padding: 40px 20px;
+    }
+
+    .wrapper {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: #1a1a2e;
+      border-radius: 4px 4px 0 0;
+      padding: 48px 48px 36px;
+      text-align: center;
+    }
+
+    .header .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #c9a96e;
+      margin-bottom: 16px;
+    }
+
+    .header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: #f4f1eb;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+
+    .header h1 span {
+      color: #c9a96e;
+    }
+
+    .header .tagline {
+      font-size: 13px;
+      color: #8a8fa8;
+      margin-top: 12px;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+
+    .header .date-bar {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid #2d2d4a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header .date-bar span {
+      font-size: 11px;
+      color: #8a8fa8;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .header .date-bar .issue {
+      background: #c9a96e;
+      color: #1a1a2e;
+      padding: 3px 10px;
+      border-radius: 2px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+    }
+
+    /* ── INTRO ── */
+    .intro {
+      background: #c9a96e;
+      padding: 24px 48px;
+    }
+
+    .intro p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #1a1a2e;
+      font-weight: 400;
+    }
+
+    .intro p strong {
+      font-weight: 600;
+    }
+
+    /* ── BODY ── */
+    .body {
+      background: #ffffff;
+      padding: 0 48px 48px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      padding-top: 40px;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-label .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .section-label h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #8a8fa8;
+    }
+
+    .section-label .line {
+      flex: 1;
+      height: 1px;
+      background: #ebebeb;
+    }
+
+    /* ── STORY CARD ── */
+    .story {
+      margin-bottom: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid #f0ede6;
+    }
+
+    .story:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .story .tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+      margin-bottom: 10px;
+    }
+
+    .story h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: #1a1a2e;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    .story p {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #4a4a5a;
+    }
+
+    .story .why-it-matters {
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: #f4f1eb;
+      border-left: 3px solid #c9a96e;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .story .why-it-matters p {
+      font-size: 12px;
+      font-style: italic;
+      color: #6a6a7a;
+    }
+
+    .story .why-it-matters strong {
+      color: #1a1a2e;
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    .story a {
+      color: #c9a96e;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .story a:hover { text-decoration: underline; }
+
+    /* tag colours */
+    .tag.markets    { background: #e8f4f8; color: #2a7fa8; }
+    .tag.tools      { background: #f0f8e8; color: #4a8a2a; }
+    .tag.labs       { background: #f8e8f4; color: #8a2a7a; }
+    .tag.pm         { background: #f8f0e8; color: #8a5a2a; }
+    .tag.risk       { background: #f8e8e8; color: #8a2a2a; }
+
+    /* dot colours */
+    .dot.markets { background: #2a7fa8; }
+    .dot.tools   { background: #4a8a2a; }
+    .dot.labs    { background: #8a2a7a; }
+    .dot.pm      { background: #8a5a2a; }
+    .dot.risk    { background: #8a2a2a; }
+
+    /* ── STAT ROW ── */
+    .stat-row {
+      display: flex;
+      gap: 16px;
+      margin: 32px 0;
+    }
+
+    .stat-card {
+      flex: 1;
+      background: #1a1a2e;
+      border-radius: 4px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .stat-card .number {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #c9a96e;
+      line-height: 1;
+    }
+
+    .stat-card .label {
+      font-size: 10px;
+      font-weight: 500;
+      color: #8a8fa8;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, #c9a96e, transparent);
+      margin: 8px 0;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: #1a1a2e;
+      border-radius: 0 0 4px 4px;
+      padding: 32px 48px;
+      text-align: center;
+    }
+
+    .footer p {
+      font-size: 11px;
+      color: #8a8fa8;
+      line-height: 1.8;
+    }
+
+    .footer .footer-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      color: #c9a96e;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="eyebrow">Your Weekly Intelligence Brief</div>
+    <h1>The <span>Signal</span></h1>
+    <p class="tagline">AI · Public Markets · Product Management</p>
+    <div class="date-bar">
+      <span>01 June 2026</span>
+      <span class="issue">Issue No. 02</span>
+      <span>Curated for Efia</span>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro">
+    <p>
+      This week: Anthropic overtakes OpenAI as the world's most valuable AI startup on the
+      back of Claude Opus 4.8, the trillion-dollar IPO window cracks open with SpaceX and
+      OpenAI, the buy-side AI stack settles into distinct layers, and the bubble debate gets
+      louder. <strong>Five stories. One brief. Everything you need to stay sharp.</strong>
+    </p>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- STAT ROW -->
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="number">$965B</div>
+        <div class="label">Anthropic valuation after its $65B raise — past OpenAI</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">$175–185B</div>
+        <div class="label">Alphabet's planned 2026 capex — roughly double 2025</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">$3T</div>
+        <div class="label">Morgan Stanley estimate for global data-center spend, 2025–28</div>
+      </div>
+    </div>
+
+    <!-- SECTION 1: MARKETS -->
+    <div class="section">
+      <div class="section-label">
+        <div class="dot markets"></div>
+        <h2>AI in Public Markets</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="story">
+        <span class="tag markets">IPO Watch</span>
+        <h3>The Trillion-Dollar IPO Test: SpaceX Files, OpenAI Lines Up Behind It</h3>
+        <p>
+          SpaceX's S-1 went public on 20 May, with a roadshow expected the week of 4 June
+          and a first trade targeted for mid-month. OpenAI is reportedly preparing to file
+          confidentially within days. After years of mega-rounds in private markets, the two
+          most-watched names of the AI era are about to be priced by public investors — the
+          first real test of whether public-market discipline agrees with private valuations.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> Your analysts and PMs will be modelling
+          these names within weeks. The interesting product question: what does a defensible
+          AI valuation actually rest on — revenue durability, compute contracts, or narrative?
+          That framing is exactly the kind of judgement your tools should help surface, not bury.</p>
+        </div>
+        <a href="https://www.investing.com/analysis/the-trilliondollar-ipo-test-spacex-and-openai-face-public-markets-200680688">Read at Investing.com →</a>
+      </div>
+
+      <div class="story">
+        <span class="tag markets">Capex</span>
+        <h3>Alphabet's $175–185B Capex Plan Triggers a Sell-Off</h3>
+        <p>
+          Alphabet guided to $175–185B of capital expenditure in 2026 — roughly double
+          2025's level — and investors responded by selling, questioning whether record AI
+          spend will convert into earnings. It's a sharper version of the question now hanging
+          over every hyperscaler: the spend is certain, the payback isn't.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> The market is starting to price
+          AI on unit economics, not vision decks. When you scope an AI product, the same
+          discipline applies internally — cost-per-query and demonstrable ROI are becoming the
+          questions that get budget approved or killed.</p>
+        </div>
+        <a href="https://fortune.com/2026/05/30/ai-chip-token-bubble-economy-nvidia-microsoft-hyperscalers-2/">Read at Fortune →</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 2: TOOLS -->
+    <div class="section">
+      <div class="section-label">
+        <div class="dot tools"></div>
+        <h2>Tools for Analysts & PMs</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="story">
+        <span class="tag tools">Buy-Side Stack</span>
+        <h3>The Hedge-Fund AI Stack Splits Into Three Layers</h3>
+        <p>
+          A clear pattern emerged in this year's buy-side tooling round-ups: the funds getting
+          real value aren't asking one platform to do everything. The stack now separates into
+          a <strong>research layer</strong> (AlphaSense, Third Bridge — find and synthesise
+          faster), an <strong>infrastructure layer</strong> (Palantir AIP, Blueflame AI — make
+          fragmented proprietary and alternative data actionable, with the governance compliance
+          demands), and an <strong>operational layer</strong> (the knowledge work around
+          meetings, CRM, and internal comms).
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> This is the most useful build-vs-buy map
+          you'll see. Pick which layer you're competing in before writing a line of PRD —
+          trying to span all three is how internal AI tools die. Note that the infrastructure
+          layer is where governance and auditability live; that's the hardest moat and likely
+          your real differentiator for analysts.</p>
+        </div>
+        <a href="https://www.thirdbridge.com/en-us/about-us/media/perspectives/ai-tools-for-hedge-funds">Read at Third Bridge →</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 3: LABS -->
+    <div class="section">
+      <div class="section-label">
+        <div class="dot labs"></div>
+        <h2>From the Labs</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="story">
+        <span class="tag labs">Anthropic</span>
+        <h3>Anthropic Ships Claude Opus 4.8 — and Passes OpenAI in Value</h3>
+        <p>
+          Anthropic shipped Claude Opus 4.8, claiming it tops OpenAI's GPT-5.5 and Google's
+          Gemini 3.1 Pro on agentic coding, <strong>financial analysis</strong>, and computer
+          use. Days later, on 28 May, it announced a $65B round at a ~$965B valuation — led by
+          Altimeter, Dragoneer, Greenoaks, and Sequoia — nearly tripling February's $380B mark
+          and vaulting past OpenAI as the most valuable AI startup in the world.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> "Financial analysis" as a named benchmark
+          category is the signal here — the frontier labs are now optimising for exactly your
+          users' domain. Worth running Opus 4.8 against your own analyst workflows before
+          committing to a model in any PRD; the default leader changed this month.
+          <em>(For the record: this newsletter was generated by Opus 4.8.)</em></p>
+        </div>
+        <a href="https://www.thestreet.com/technology/anthropic-drops-new-claude-model-as-openai-ipo-race-heats-up">Read at TheStreet →</a>
+      </div>
+
+      <div class="story">
+        <span class="tag labs">Google I/O</span>
+        <h3>Google's Gemini Spark Pushes From Assistants to Agents</h3>
+        <p>
+          At I/O, Google paired Gemini 3.5 Flash with Gemini Spark — a general-purpose agent
+          that reasons across your connected apps rather than just answering prompts. The framing
+          from Mountain View: the assistant era is giving way to autonomous agents that take
+          multi-step action. The strategic tell remains speed and cost over a frontier behemoth.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> "Agent that acts across connected systems"
+          is the design pattern your analysts will soon expect by default. The hard part isn't
+          the model — it's permissioning, auditability, and what happens when an agent acts on
+          stale or wrong data. Scope those constraints early.</p>
+        </div>
+        <a href="https://www.cnbc.com/2026/05/19/google-ai-ultra-gemini-spark-omni.html">Read at CNBC →</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 4: PM -->
+    <div class="section">
+      <div class="section-label">
+        <div class="dot pm"></div>
+        <h2>AI Product Management</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="story">
+        <span class="tag pm">Career & Role</span>
+        <h3>CPO Report: The "Product Builder" Is Up 10x as Generalist PMs Decline</h3>
+        <p>
+          A 2026 CPO Insights report makes a blunt prediction: traditional product managers
+          could "disappear" by 2030. Its data shows the number of <strong>Product Builders</strong>
+          — a hybrid PM-engineering role — up 10x, while traditional PM headcount is down 30%
+          across industries and as much as 70% in SaaS. The roles surviving are the ones closest
+          to either building or to irreplaceable product judgement.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> This continues last issue's "the role is
+          splitting" thread — and it's a direct challenge to you. The defensible position isn't
+          "AI PM" as a title; it's being able to prototype and reason about the system yourself.
+          Push on your own gap here: can you stand up a working agent demo, or only spec one?</p>
+        </div>
+        <a href="https://www.prnewswire.com/news-releases/2026-cpo-insights-report-predicts-product-managers-will-disappear-by-2030-302782732.html">Read the report →</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 5: RISK -->
+    <div class="section">
+      <div class="section-label">
+        <div class="dot risk"></div>
+        <h2>Watch Closely</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="story">
+        <span class="tag risk">Bubble Risk</span>
+        <h3>Circular AI Financing Draws Dot-Com Comparisons</h3>
+        <p>
+          The web of cross-investments and capacity commitments between Microsoft, OpenAI,
+          Nvidia, Google, and Anthropic is drawing scrutiny for resembling the vendor-financing
+          structures of the late dot-com era — money flowing in a circle that can inflate
+          valuations. Morgan Stanley pegs 2025–28 global data-center spend near $3T, roughly
+          half funded by private credit. Reports that OpenAI missed user and revenue targets
+          added fresh fuel to crash talk.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> "Is this revenue real or circular?" is a
+          question your analysts will ask of every AI name — and increasingly, of internal AI
+          projects too. Build for the downside case: if the funding climate tightens, the AI
+          tools that survive are the ones with proven, measurable value, not promise.</p>
+        </div>
+        <a href="https://www.bloomberg.com/graphics/2026-ai-circular-deals/">Read at Bloomberg →</a>
+      </div>
+    </div>
+
+  </div><!-- /body -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-title">The Signal</div>
+    <p>
+      Curated for Efia Amankwa · AI Product Manager, Public Markets<br/>
+      Next edition: 08 June 2026<br/><br/>
+      Saved to <code style="color:#c9a96e; font-size:11px;">newsletters/</code> in your project workspace
+    </p>
+  </div>
+
+</div>
+</body>
+</html>
