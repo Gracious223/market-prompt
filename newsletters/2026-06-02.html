@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Signal — AI in Markets | 02 June 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f4f1eb;
+      font-family: 'Inter', sans-serif;
+      color: #1a1a2e;
+      padding: 40px 20px;
+    }
+
+    .wrapper {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: #1a1a2e;
+      border-radius: 4px 4px 0 0;
+      padding: 48px 48px 36px;
+      text-align: center;
+    }
+
+    .header .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #c9a96e;
+      margin-bottom: 16px;
+    }
+
+    .header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: #f4f1eb;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+
+    .header h1 span {
+      color: #c9a96e;
+    }
+
+    .header .tagline {
+      font-size: 13px;
+      color: #8a8fa8;
+      margin-top: 12px;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+
+    .header .date-bar {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid #2d2d4a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header .date-bar span {
+      font-size: 11px;
+      color: #8a8fa8;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .header .date-bar .issue {
+      background: #c9a96e;
+      color: #1a1a2e;
+      padding: 3px 10px;
+      border-radius: 2px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+    }
+
+    /* ── INTRO ── */
+    .intro {
+      background: #c9a96e;
+      padding: 24px 48px;
+    }
+
+    .intro p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #1a1a2e;
+      font-weight: 400;
+    }
+
+    .intro p strong {
+      font-weight: 600;
+    }
+
+    /* ── BODY ── */
+    .body {
+      background: #ffffff;
+      padding: 0 48px 48px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      padding-top: 40px;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-label .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .section-label h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #8a8fa8;
+    }
+
+    .section-label .line {
+      flex: 1;
+      height: 1px;
+      background: #ebebeb;
+    }
+
+    /* ── STORY CARD ── */
+    .story {
+      margin-bottom: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid #f0ede6;
+    }
+
+    .story:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .story .tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+      margin-bottom: 10px;
+    }
+
+    .story h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: #1a1a2e;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    .story p {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #4a4a5a;
+    }
+
+    .story .why-it-matters {
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: #f4f1eb;
+      border-left: 3px solid #c9a96e;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .story .why-it-matters p {
+      font-size: 12px;
+      font-style: italic;
+      color: #6a6a7a;
+    }
+
+    .story .why-it-matters strong {
+      color: #1a1a2e;
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    .story a {
+      color: #c9a96e;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .story a:hover { text-decoration: underline; }
+
+    /* tag colours */
+    .tag.markets    { background: #e8f4f8; color: #2a7fa8; }
+    .tag.tools      { background: #f0f8e8; color: #4a8a2a; }
+    .tag.labs       { background: #f8e8f4; color: #8a2a7a; }
+    .tag.pm         { background: #f8f0e8; color: #8a5a2a; }
+    .tag.risk       { background: #f8e8e8; color: #8a2a2a; }
+
+    /* dot colours */
+    .dot.markets { background: #2a7fa8; }
+    .dot.tools   { background: #4a8a2a; }
+    .dot.labs    { background: #8a2a7a; }
+    .dot.pm      { background: #8a5a2a; }
+    .dot.risk    { background: #8a2a2a; }
+
+    /* ── STAT ROW ── */
+    .stat-row {
+      display: flex;
+      gap: 16px;
+      margin: 32px 0;
+    }
+
+    .stat-card {
+      flex: 1;
+      background: #1a1a2e;
+      border-radius: 4px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .stat-card .number {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #c9a96e;
+      line-height: 1;
+    }
+
+    .stat-card .label {
+      font-size: 10px;
+      font-weight: 500;
+      color: #8a8fa8;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, #c9a96e, transparent);
+      margin: 8px 0;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: #1a1a2e;
+      border-radius: 0 0 4px 4px;
+      padding: 32px 48px;
+      text-align: center;
+    }
+
+    .footer p {
+      font-size: 11px;
+      color: #8a8fa8;
+      line-height: 1.8;
+    }
+
+    .footer .footer-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      color: #c9a96e;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="eyebrow">Your Intelligence Brief</div>
+    <h1>The <span>Signal</span></h1>
+    <p class="tagline">AI · Public Markets · Product Management</p>
+    <div class="date-bar">
+      <span>02 June 2026</span>
+      <span class="issue">Issue No. 03</span>
+      <span>Curated for Efia</span>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro">
+    <p>
+      Today: Anthropic beats OpenAI to the IPO filing on a $47B revenue run-rate, SAP ships
+      a full suite of agentic finance tools for CFOs, OpenAI buys its way into personal
+      finance, and "tokenmaxxing" gives way to hard ROI questions.
+      <strong>Five stories. One brief. Everything you need to stay sharp.</strong>
+    </p>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- STAT ROW -->
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="number">$47B</div>
+        <div class="label">Anthropic's revenue run-rate, up from $30B earlier this year</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">$80B</div>
+        <div class="label">Debt Google plans to raise to fund its AI build-out</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">150</div>
+        <div class="label">New orgs across 15+ countries getting Anthropic's Mythos</div>
+      </div>
+    </div>
+
+    <!-- SECTION 1: MARKETS -->
+    <div class="section">
+      <div class="section-label">
+        <div class="dot markets"></div>
+        <h2>AI in Public Markets</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="story">
+        <span class="tag markets">IPO Watch</span>
+        <h3>Anthropic Confidentially Files for IPO — Beating OpenAI to the Window</h3>
+        <p>
+          On 1 June, Anthropic confidentially filed IPO paperwork with the SEC, leapfrogging
+          OpenAI to the milestone. The context is staggering: a $47B revenue run-rate (up from
+          ~$30B earlier this year and $10B in annual revenue last year), driven largely by its
+          Claude Code coding assistant, and a fresh $965B valuation versus OpenAI's $852B
+          March mark. The private-market AI leaders are now racing to be priced in public.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> This is the cleanest case study you'll
+          get in how AI revenue durability gets scrutinised. Watch what the S-1 reveals about
+          gross margins and customer concentration — those are the same questions your analysts
+          ask of any AI name, and exactly the signals a good internal tool should surface fast.</p>
+        </div>
+        <a href="https://www.npr.org/2026/06/01/nx-s1-5843199/anthropic-ipo-filing-ai-large">Read at NPR →</a>
+      </div>
+
+      <div class="story">
+        <span class="tag markets">Capital</span>
+        <h3>Google Stock Slips on Plans to Raise $80B for AI</h3>
+        <p>
+          Google shares fell after it signalled plans to raise roughly $80B in debt to fund
+          its AI infrastructure build-out — a follow-on to the capex anxiety that's been
+          dogging the hyperscalers. Nvidia, meanwhile, buoyed the broader tech tape, with its
+          CEO publicly backing Marvell. The split tape tells the story: investors love the
+          chips, but are increasingly wary of who's borrowing to buy them.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> The market is now separating "AI
+          beneficiary" from "AI spender." That distinction is a product opportunity — a tool
+          that maps a portfolio's exposure to AI capex vs. AI revenue is genuinely useful, and
+          most generic dashboards don't do it.</p>
+        </div>
+        <a href="https://finance.yahoo.com/sectors/technology/live/tech-stocks-today-anthropic-files-for-ipo-before-openai-nvidia-buoys-tech-sector-100000979.html">Read at Yahoo Finance →</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 2: TOOLS -->
+    <div class="section">
+      <div class="section-label">
+        <div class="dot tools"></div>
+        <h2>Tools for Analysts & PMs</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="story">
+        <span class="tag tools">Enterprise AI</span>
+        <h3>SAP Ships a Full Suite of Agentic AI Tools for CFOs</h3>
+        <p>
+          SAP rolled out a broad set of agentic AI tools spanning most of corporate finance —
+          cash management, tax, FP&A, billing, and governance. The flagship is a financial
+          closing assistant that surfaces bottlenecks, automates postings and reconciliations,
+          and resolves discrepancies <strong>in real time, with accuracy and auditability</strong>
+          built in. Oracle made a parallel move extending its agentic platform into corporate banking.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> Study SAP's framing — "accuracy and
+          auditability" isn't marketing here, it's the core feature for finance buyers. This is
+          the exact bar your internal tools must clear. Notice they shipped agents scoped to
+          specific workflows (closing, billing) rather than one do-everything assistant — that's
+          the design pattern that survives enterprise scrutiny.</p>
+        </div>
+        <a href="https://www.cfodive.com/news/sap-ramps-push-autonomous-finance-agentic-ai/819929/">Read at CFO Dive →</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 3: LABS -->
+    <div class="section">
+      <div class="section-label">
+        <div class="dot labs"></div>
+        <h2>From the Labs</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="story">
+        <span class="tag labs">Anthropic</span>
+        <h3>Anthropic Expands Mythos to 150 Orgs Across Critical Infrastructure</h3>
+        <p>
+          Anthropic widened access to its high-capability Mythos model, bringing 150 additional
+          partners across 15+ countries into Project Glasswing — spanning power, water,
+          healthcare, communications, and hardware. The model's advanced capabilities (including
+          on the cybersecurity side) mean access is being gated and rolled out deliberately
+          rather than opened broadly.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> Gated, sector-by-sector rollout is itself
+          a product decision — Anthropic is treating capability as something to govern, not just
+          ship. When you scope powerful AI for analysts, the access model and guardrails are
+          part of the product, not an afterthought bolted on at launch.</p>
+        </div>
+        <a href="https://www.cnbc.com/2026/06/02/anthropic-mythos-ai-project-glasswing.html">Read at CNBC →</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 4: PM -->
+    <div class="section">
+      <div class="section-label">
+        <div class="dot pm"></div>
+        <h2>AI Product Management</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="story">
+        <span class="tag pm">Strategy</span>
+        <h3>OpenAI Buys Its Way Into Personal Finance With Hiro</h3>
+        <p>
+          OpenAI acquired Hiro, an AI personal-finance startup — a clear signal that the
+          frontier labs are no longer content to sell raw model access and are moving up the
+          stack into vertical applications. For anyone building a finance product on top of a
+          foundation model, your platform partner is increasingly also a potential competitor.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> This is the central build-vs-buy tension
+          of AI PM right now: the model provider can absorb your use case. Your defensibility
+          has to come from what they can't easily replicate — proprietary data, deep workflow
+          integration, and the trust/compliance layer specific to your internal users. Thin
+          wrappers over a model API are the most exposed.</p>
+        </div>
+        <a href="https://www.fintechfutures.com/m-a/openai-snaps-up-ai-personal-finance-start-up-hiro">Read at FinTech Futures →</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 5: RISK -->
+    <div class="section">
+      <div class="section-label">
+        <div class="dot risk"></div>
+        <h2>Watch Closely</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="story">
+        <span class="tag risk">Market Discipline</span>
+        <h3>"Tokenmaxxing" Is Fading — ROI Scrutiny Replaces Usage-at-All-Costs</h3>
+        <p>
+          A growing chorus of analysts say the era of "tokenmaxxing" — maximising AI/LLM usage
+          for its own sake — is fading, as companies scrutinise return on investment and scale
+          back after burning through annual AI budgets within months. Pair this with reports of
+          OpenAI missing user and revenue targets, and the mood is shifting from "deploy
+          everywhere" to "prove it pays."
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> The budget climate for internal AI tools
+          is tightening. Build measurable value in from day one — time saved per analyst,
+          decisions improved, errors caught. If you can't instrument the ROI, your project is
+          exactly the kind being cut in this cycle. This is your sharpest near-term risk.</p>
+        </div>
+        <a href="https://stocktwits.com/news-articles/markets/equity/tokenmaxxing-fading-what-it-means-for-nvidia-openai-anthropic/cZ0gpBnReHL">Read at Stocktwits →</a>
+      </div>
+    </div>
+
+  </div><!-- /body -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-title">The Signal</div>
+    <p>
+      Curated for Efia Amankwa · AI Product Manager, Public Markets<br/>
+      Generated on request · 02 June 2026<br/><br/>
+      Saved to <code style="color:#c9a96e; font-size:11px;">newsletters/</code> in your project workspace
+    </p>
+  </div>
+
+</div>
+</body>
+</html>

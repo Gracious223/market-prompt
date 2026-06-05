@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Signal — AI in Markets | 05 June 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f4f1eb;
+      font-family: 'Inter', sans-serif;
+      color: #1a1a2e;
+      padding: 40px 20px;
+    }
+
+    .wrapper {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: #1a1a2e;
+      border-radius: 4px 4px 0 0;
+      padding: 48px 48px 36px;
+      text-align: center;
+    }
+
+    .header .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #c9a96e;
+      margin-bottom: 16px;
+    }
+
+    .header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: #f4f1eb;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+
+    .header h1 span {
+      color: #c9a96e;
+    }
+
+    .header .tagline {
+      font-size: 13px;
+      color: #8a8fa8;
+      margin-top: 12px;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+
+    .header .date-bar {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid #2d2d4a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header .date-bar span {
+      font-size: 11px;
+      color: #8a8fa8;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .header .date-bar .issue {
+      background: #c9a96e;
+      color: #1a1a2e;
+      padding: 3px 10px;
+      border-radius: 2px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+    }
+
+    /* ── INTRO ── */
+    .intro {
+      background: #c9a96e;
+      padding: 24px 48px;
+    }
+
+    .intro p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #1a1a2e;
+      font-weight: 400;
+    }
+
+    .intro p strong {
+      font-weight: 600;
+    }
+
+    /* ── BODY ── */
+    .body {
+      background: #ffffff;
+      padding: 0 48px 48px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      padding-top: 40px;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-label .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .section-label h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #8a8fa8;
+    }
+
+    .section-label .line {
+      flex: 1;
+      height: 1px;
+      background: #ebebeb;
+    }
+
+    /* ── STORY CARD ── */
+    .story {
+      margin-bottom: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid #f0ede6;
+    }
+
+    .story:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .story .tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+      margin-bottom: 10px;
+    }
+
+    .story h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: #1a1a2e;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    .story p {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #4a4a5a;
+    }
+
+    .story .why-it-matters {
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: #f4f1eb;
+      border-left: 3px solid #c9a96e;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .story .why-it-matters p {
+      font-size: 12px;
+      font-style: italic;
+      color: #6a6a7a;
+    }
+
+    .story .why-it-matters strong {
+      color: #1a1a2e;
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    .story a {
+      color: #c9a96e;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .story a:hover { text-decoration: underline; }
+
+    /* tag colours */
+    .tag.markets    { background: #e8f4f8; color: #2a7fa8; }
+    .tag.tools      { background: #f0f8e8; color: #4a8a2a; }
+    .tag.labs      { background: #f8e8f4; color: #8a2a7a; }
+    .tag.pm        { background: #f8f0e8; color: #8a5a2a; }
+    .tag.risk      { background: #f8e8e8; color: #8a2a2a; }
+
+    /* dot colours */
+    .dot.markets { background: #2a7fa8; }
+    .dot.tools   { background: #4a8a2a; }
+    .dot.labs    { background: #8a2a7a; }
+    .dot.pm      { background: #8a5a2a; }
+    .dot.risk    { background: #8a2a2a; }
+
+    /* ── STAT ROW ── */
+    .stat-row {
+      display: flex;
+      gap: 16px;
+      margin: 32px 0;
+    }
+
+    .stat-card {
+      flex: 1;
+      background: #1a1a2e;
+      border-radius: 4px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .stat-card .number {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #c9a96e;
+      line-height: 1;
+    }
+
+    .stat-card .label {
+      font-size: 10px;
+      font-weight: 500;
+      color: #8a8fa8;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, #c9a96e, transparent);
+      margin: 8px 0;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: #1a1a2e;
+      border-radius: 0 0 4px 4px;
+      padding: 32px 48px;
+      text-align: center;
+    }
+
+    .footer p {
+      font-size: 11px;
+      color: #8a8fa8;
+      line-height: 1.8;
+    }
+
+    .footer .footer-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      color: #c9a96e;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="eyebrow">Your Intelligence Brief</div>
+    <h1>The <span>Signal</span></h1>
+    <p class="tagline">AI · Public Markets · Product Management</p>
+    <div class="date-bar">
+      <span>05 June 2026</span>
+      <span class="issue">Issue No. 04</span>
+      <span>Curated for Efia</span>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro">
+    <p>
+      Today: the memory-chip rally pushes Micron past $1T, the trillion-dollar IPO window
+      sets a hard date with SpaceX on 12 June, Perplexity and Bloomberg square off over the
+      analyst's desktop, the hyperscalers crash the AI-coding party, and the circular-deal
+      math behind the boom draws fresh scrutiny.
+      <strong>Six stories. One brief. Everything you need to stay sharp.</strong>
+    </p>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- STAT ROW -->
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="number">$1T</div>
+        <div class="label">Micron's market cap — now worth more than JPMorgan Chase</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">12 Jun</div>
+        <div class="label">SpaceX expected IPO date, with OpenAI to follow</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">$200</div>
+        <div class="label">Monthly price of Perplexity's Bloomberg-terminal challenger</div>
+      </div>
+    </div>
+
+    <!-- SECTION 1: MARKETS -->
+    <div class="section">
+      <div class="section-label">
+        <div class="dot markets"></div>
+        <h2>AI in Public Markets</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="story">
+        <span class="tag markets">Equities</span>
+        <h3>Micron Tops $1 Trillion as the Memory Trade Becomes the AI Trade</h3>
+        <p>
+          The market is surging — and it's still all about AI, but the leadership has rotated.
+          Micron crossed $1 trillion in market value this week, now worth more than JPMorgan
+          Chase, with shares up nearly 1,000% over the past year. SanDisk is up more than
+          4,500% over the same window. The bottleneck has moved from raw compute to the
+          high-bandwidth memory that feeds it, and capital is repricing the picks-and-shovels
+          layer accordingly.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> The "AI winner" is no longer a single
+          name — it's a supply chain that re-ranks as bottlenecks shift (compute → memory →
+          next: power, networking). A tool that tracks <em>where</em> the constraint is this
+          quarter, not just who sells chips, is far more useful to a PM than another flat list
+          of AI tickers.</p>
+        </div>
+        <a href="https://www.cnn.com/2026/06/02/investing/stocks-memory-ai-boom">Read at CNN Business →</a>
+      </div>
+
+      <div class="story">
+        <span class="tag markets">IPO Watch</span>
+        <h3>The Trillion-Dollar IPO Window Gets a Date: SpaceX on 12 June, OpenAI Next</h3>
+        <p>
+          SpaceX is expected to go public on 12 June, with OpenAI lined up to follow, days
+          after Anthropic confidentially filed its own paperwork. All three are expected to
+          debut valued between $1T and $2T — figures that would place them among the world's
+          dozen largest companies by market cap on day one. The Motley Fool notes the harder
+          question is timing: index inclusion (e.g. the S&P 500) lags the listing and depends
+          on float, profitability, and seasoning rules.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> "When does it enter the index" is a
+          different — and more tractable — question than "is it a good company." Passive flows
+          hinge on inclusion mechanics, not narrative. That's a concrete, rules-based signal an
+          internal tool can compute and flag; the kind of unglamorous edge analysts actually
+          pay for.</p>
+        </div>
+        <a href="https://www.fool.com/investing/2026/06/04/when-will-spacex-anthropic-and-openai-join-sp500/">Read at The Motley Fool →</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 2: TOOLS -->
+    <div class="section">
+      <div class="section-label">
+        <div class="dot tools"></div>
+        <h2>Tools for Analysts & PMs</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="story">
+        <span class="tag tools">Buy-Side Stack</span>
+        <h3>Perplexity vs. Bloomberg: the Fight for the Analyst's Desktop Goes Agentic</h3>
+        <p>
+          Two visions of the research workstation are colliding. Bloomberg's <strong>ASKB</strong>
+          — billed as the biggest rethink of the terminal in its history — runs a coordinated
+          network of agents that build screens and full research reports on the fly, blending
+          Bloomberg data, 800+ sell-side providers, and alt-data (card transactions, foot
+          traffic, satellite imagery) with a firm's own house views, using models from
+          Bloomberg and Anthropic. Against it, Perplexity Computer offers a ~$200/mo challenger
+          wired to 40+ live data tools including SEC EDGAR, FactSet, and S&P Global.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> This is the build-vs-buy decision playing
+          out at full scale. Bloomberg's moat is proprietary + alt-data and integration; the
+          challenger's wedge is price and open tool-access. When you scope your internal tool,
+          be honest about which side you're on — you almost certainly can't out-data Bloomberg,
+          so your edge has to be workflow depth and your users' proprietary context.</p>
+        </div>
+        <a href="https://www.bloomberg.com/company/stories/meet-askb-bloomberg-introduces-agentic-ai-to-the-bloomberg-terminal/">Read at Bloomberg →</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 3: LABS -->
+    <div class="section">
+      <div class="section-label">
+        <div class="dot labs"></div>
+        <h2>From the Labs</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="story">
+        <span class="tag labs">Frontier Models</span>
+        <h3>Microsoft and Google Crash the AI-Coding Party — Anthropic's Stronghold</h3>
+        <p>
+          Anthropic has zoomed ahead of the field in generative AI largely on the back of
+          Claude Code, its coding assistant — and just shipped Claude Opus 4.8. Now Microsoft
+          and Google are making a concerted push into AI coding models, leaning on their
+          balance sheets and cloud distribution to lure developers away. Coding is the clearest
+          product-market fit the labs have found; everyone now wants the seat.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> Note <em>where</em> the competition is
+          fiercest — coding, because the value is measurable (PRs merged, bugs caught) and the
+          workflow is well-defined. That's the template for a defensible AI product: pick a
+          domain where output quality is verifiable and tied to a real workflow, not an
+          open-ended "assistant." Distribution (cloud, IDE) is decisive once quality converges.</p>
+        </div>
+        <a href="https://www.cnbc.com/2026/06/01/microsoft-and-google-take-on-anthropic-and-openai-in-ai-coding-models.html">Read at CNBC →</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 4: PM -->
+    <div class="section">
+      <div class="section-label">
+        <div class="dot pm"></div>
+        <h2>AI Product Management</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="story">
+        <span class="tag pm">Unit Economics</span>
+        <h3>GitHub Copilot Moves to Usage-Based Pricing — the Reckoning Reaches the Bestseller</h3>
+        <p>
+          GitHub Copilot is shifting to usage-based pricing in June 2026. The reason is brutally
+          simple: flat-fee seats stopped working once agentic features ran up real inference
+          bills — some heavy users reportedly cost Microsoft ~$80/month while paying $10. Even
+          the category's flagship product can't subsidise unbounded token consumption
+          indefinitely.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> Pricing is a product decision, and
+          "unlimited for a flat fee" is a trap when your marginal cost is live inference. If
+          you're building an internal AI tool, model cost-per-action from day one and design
+          the UX so usage is legible to the user — otherwise your power users quietly become
+          your biggest loss centre, exactly as they did for Copilot.</p>
+        </div>
+        <a href="https://fortune.com/2026/05/30/ai-chip-token-bubble-economy-nvidia-microsoft-hyperscalers-2/">Read at Fortune →</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 5: RISK -->
+    <div class="section">
+      <div class="section-label">
+        <div class="dot risk"></div>
+        <h2>Watch Closely</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="story">
+        <span class="tag risk">Systemic Risk</span>
+        <h3>The Circular Deals Underwriting the Boom Draw Sharper Scrutiny</h3>
+        <p>
+          Bloomberg's tracker of "AI circular deals" lays out how Microsoft, OpenAI and Nvidia
+          keep paying each other — Nvidia invests in OpenAI, which buys Nvidia GPUs to fill
+          data centres, and round it goes. Analysts warn this creates two systemic risks:
+          <strong>reflexive demand</strong> (one firm slowing capex drags revenue across the
+          whole cluster) and <strong>mispriced capacity</strong> (build decisions rely on
+          internal signals rather than independent market validation). Projected data-centre
+          spend: ~$3T in the coming years.
+        </p>
+        <div class="why-it-matters">
+          <p><strong>Why it matters for you:</strong> Revenue that recirculates inside a closed
+          loop isn't the same as revenue from independent end-demand — and that distinction is
+          exactly what an S-1 or an analyst should stress-test. For your own products, the
+          lesson is the same: validate demand outside the hype loop. Pilots driven by FOMO
+          budgets are the first thing cut when the reflexive cycle turns.</p>
+        </div>
+        <a href="https://www.bloomberg.com/graphics/2026-ai-circular-deals/">Read at Bloomberg →</a>
+      </div>
+    </div>
+
+  </div><!-- /body -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-title">The Signal</div>
+    <p>
+      Curated for Efia Amankwa · AI Product Manager, Public Markets<br/>
+      Generated on request · 05 June 2026<br/><br/>
+      Saved to <code style="color:#c9a96e; font-size:11px;">newsletters/</code> in your project workspace
+    </p>
+  </div>
+
+</div>
+</body>
+</html>
