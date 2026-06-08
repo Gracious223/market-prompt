@@ -132,6 +132,22 @@ def parse_issue(path: Path):
             })
         sectionlist.append({"name": name, "dot": dot, "stories": stories})
 
+    # Files we can't parse into our template (e.g. the scheduled agent's richer
+    # bespoke layout) are kept as-is and only indexed — never overwritten.
+    external = len(sectionlist) == 0
+    if not num:
+        num = _search(r"Issue No\.\s*(\d+)", text, default="")
+    if external:
+        lead = _search(r'class="pill[^"]*">(.*?)<', text) or "Daily Edition"
+        dek = _search(r"<h2[^>]*>.*?</h2>\s*<p[^>]*>(.*?)</p>", text)
+        if not dek:
+            dek = _search(r'class="story-body"[^>]*>.*?<p[^>]*>(.*?)</p>', text)
+        summary = html.unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", dek))).strip()
+        if not summary:
+            summary = _search(r'class="subtitle">(.*?)<', text) or "Daily edition of The Signal."
+    else:
+        lead = sectionlist[0]["name"]
+
     dots = []
     for s in sectionlist:
         if s["dot"] not in dots:
@@ -144,7 +160,7 @@ def parse_issue(path: Path):
         "file": path.name, "title": title, "eyebrow": eyebrow, "issue": issue, "num": num,
         "date_label": date_label or sort_dt.strftime("%d %B %Y"), "intro_html": intro_html,
         "summary": summary, "stat_cards": stat_cards, "sectionlist": sectionlist,
-        "sections": dots, "sort_dt": sort_dt,
+        "sections": dots, "sort_dt": sort_dt, "external": external, "lead": lead,
     }
 
 
@@ -336,7 +352,7 @@ def render_card(issue, index=0):
     href = f'newsletters/{issue["file"]}'
     num = html.escape(issue["num"] or "—")
     img = issue_image(issue["num"], index, "") or ""
-    lead = issue["sectionlist"][0]["name"] if issue["sectionlist"] else "Daily Brief"
+    lead = issue["lead"]
     secs_attr = " ".join(issue["sections"])
     haystack = html.escape(
         f'{issue["title"]} {issue["issue"]} {issue["summary"]} '
@@ -687,7 +703,8 @@ def main():
     issues = collect()
     OUTPUT.write_text(render(issues), encoding="utf-8")
     for idx, d in enumerate(issues):
-        (NEWSLETTERS / d["file"]).write_text(render_article(d, idx), encoding="utf-8")
+        if not d.get("external"):
+            (NEWSLETTERS / d["file"]).write_text(render_article(d, idx), encoding="utf-8")
     print(f"Built index.html + {len(issues)} article page(s) from {len(_IMAGES)} image(s):")
     for i in issues:
         n_stories = sum(len(s["stories"]) for s in i["sectionlist"])
