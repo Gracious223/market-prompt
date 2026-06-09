@@ -8,11 +8,11 @@
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--ink:#14142b;--ink-2:#1d1d3a;--paper:#f6f3ec;--gold:#c9a96e;--gold-soft:#e3cfa6;--muted:#8a8fa8;--muted-d:#5b5f78;--line:#e8e3d8;--card:#fff}
+:root{--ink:#14142b;--ink-2:#1d1d3a;--paper:#f6f3ec;--gold:#c9a96e;--gold-soft:#e3cfa6;--muted:#8a8fa8;--muted-d:#5b5f78;--line:#e8e3d8;--card:#fff;--pop:#ff6f5e}
 html{scroll-behavior:smooth}
 body{background:var(--paper);font-family:'Inter',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-.progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:90;background:linear-gradient(90deg,var(--gold),var(--gold-soft))}
+.progress{position:fixed;top:0;left:0;height:4px;width:0;z-index:90;background:linear-gradient(90deg,var(--pop),var(--gold))}
 .anav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:13px 24px;background:rgba(20,20,43,.78);backdrop-filter:saturate(160%) blur(14px);-webkit-backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid rgba(201,169,110,.18)}
 .anav .back{font-family:'Playfair Display',serif;font-weight:800;font-size:17px;color:var(--paper)}
 .anav .back span{color:var(--gold)}
@@ -28,7 +28,8 @@ a{color:inherit;text-decoration:none}
 .ahero .eyebrow{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
 .ahero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(46px,9vw,88px);line-height:.95;letter-spacing:-1.5px}
 .ahero h1 span{background:linear-gradient(120deg,var(--gold),var(--gold-soft));-webkit-background-clip:text;background-clip:text;color:transparent}
-.ahero .tag{margin-top:18px;font-size:14px;font-weight:300;letter-spacing:.5px;color:#d4d6e4}
+.ahero .edition{margin-top:16px;font-family:'Playfair Display',serif;font-style:italic;font-weight:600;font-size:clamp(20px,3.4vw,30px);color:var(--gold-soft);letter-spacing:-.3px}
+.ahero .tag{margin-top:14px;font-size:14px;font-weight:300;letter-spacing:.5px;color:#d4d6e4}
 .date-bar{margin:26px auto 0;max-width:520px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;align-items:center;padding-top:18px;border-top:1px solid rgba(255,255,255,.16)}
 .date-bar span{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#c2c5d8}
 .date-bar .issue{background:var(--gold);color:var(--ink);padding:3px 11px;border-radius:999px;font-weight:700}
@@ -49,18 +50,19 @@ a{color:inherit;text-decoration:none}
 .section{padding-top:52px}
 .sec-banner{position:relative;height:128px;border-radius:14px;overflow:hidden;background-size:cover;background-position:center;display:flex;align-items:flex-end}
 .sec-banner .sec-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,43,.3),rgba(20,20,43,.8))}
-.sec-banner .sec-head{position:relative;z-index:2;display:flex;align-items:center;gap:12px;padding:20px 24px}
+.sec-banner .sec-head{position:relative;z-index:2;display:flex;align-items:center;gap:11px;padding:20px 24px}
+.sec-banner .sec-emoji{font-size:22px;line-height:1}
 .sec-banner .dot{width:10px;height:10px;border-radius:50%}
-.sec-banner h2{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#fff}
+.sec-banner h2{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#fff}
 .dot.markets{background:#3a9bcf}.dot.tools{background:#5aa83a}.dot.labs{background:#b54a9e}.dot.pm{background:#cf9a3a}.dot.risk{background:#cf524a}
 .stories{margin-top:22px;display:flex;flex-direction:column;gap:22px}
-.story{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:30px 32px;transition:transform .2s,box-shadow .2s,border-color .2s}
-.story:hover{transform:translateY(-3px);box-shadow:0 22px 44px -26px rgba(20,20,43,.4);border-color:transparent}
-.story .tag{display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 10px;border-radius:999px;margin-bottom:14px}
-.story .tag .ic{width:12px;height:12px}
+.story{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px 32px;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s,border-color .3s}
+.story:hover{transform:translateY(-5px) scale(1.008);box-shadow:0 26px 48px -26px rgba(20,20,43,.45);border-color:transparent}
+.story .tag{display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 11px;border-radius:999px;margin-bottom:14px}
 .tag.markets{background:#e8f4f8;color:#2a7fa8}.tag.tools{background:#eef8e6;color:#4a8a2a}.tag.labs{background:#f8e8f4;color:#8a2a7a}.tag.pm{background:#f8f0e8;color:#8a5a2a}.tag.risk{background:#f8e8e8;color:#8a2a2a}
-.story h3{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;line-height:1.25;letter-spacing:-.3px;margin-bottom:12px}
-.story > p{font-size:15px;line-height:1.8;color:#42445a}
+.tag.markets::before{content:"📈 "}.tag.tools::before{content:"🛠️ "}.tag.labs::before{content:"🧪 "}.tag.pm::before{content:"🎯 "}.tag.risk::before{content:"⚠️ "}
+.story h3{font-family:'Playfair Display',serif;font-size:25px;font-weight:700;line-height:1.25;letter-spacing:-.3px;margin-bottom:12px}
+.story > p{font-size:16px;line-height:1.8;color:#3c3c50}
 .story > p strong{color:var(--ink);font-weight:600}
 .why-it-matters{margin-top:16px;padding:16px 20px;background:#faf7f0;border-left:3px solid var(--gold);border-radius:0 8px 8px 0}
 .why-it-matters p{font-size:13px;line-height:1.7;color:#5a5a6e;font-style:italic}
@@ -94,8 +96,9 @@ a{color:inherit;text-decoration:none}
     <div class="bg" style="background-image:url('../assets/img/img2.jpg')"></div>
     <div class="scrim"></div>
     <div class="inner">
-      <div class="eyebrow">Your Intelligence Brief</div>
+      <div class="eyebrow">Your Intelligence Brief · ☕ 5 min read</div>
       <h1>The <span>Signal</span></h1>
+      <p class="edition">“The Trillion-Dollar Trio”</p>
       <p class="tag">AI · Public Markets · Product Management</p>
       <div class="date-bar">
         <span>09 June 2026</span>
@@ -105,139 +108,137 @@ a{color:inherit;text-decoration:none}
     </div>
   </header>
 
-  <div class="intro"><p>Today: OpenAI files too — the trillion-dollar trio is now real, Nvidia turns from growth
-      story to capital-returner with an $80B buyback, Google's Gemini 3.5 lands a 2M-token
-      context window, cheap-vs-deep model tiers become a product decision, and the EU quietly
-      defers the AI rules your compliance team was bracing for.
-      <strong>Six stories. One brief. Everything you need to stay sharp.</strong></p></div>
+  <div class="intro"><p>Today, in plain English: OpenAI is also getting ready to sell shares to the public — so
+      three giant AI companies are now heading to the stock market at once. Nvidia is handing
+      cash back to shareholders for the first time in a big way. Google's new AI can read about
+      15 novels' worth of text in one go. And the EU just delayed the AI rules banks were
+      rushing to meet. <strong>Six quick reads. No jargon.</strong></p></div>
 
-  <nav class="toc" id="toc"><a href="#sec-0" data-target="sec-0"><span class="dot markets"></span>AI in Public Markets</a><a href="#sec-1" data-target="sec-1"><span class="dot tools"></span>Tools for Analysts & PMs</a><a href="#sec-2" data-target="sec-2"><span class="dot labs"></span>From the Labs</a><a href="#sec-3" data-target="sec-3"><span class="dot pm"></span>AI Product Management</a><a href="#sec-4" data-target="sec-4"><span class="dot risk"></span>Watch Closely</a></nav>
+  <nav class="toc" id="toc"><a href="#sec-0" data-target="sec-0"><span class="dot markets"></span>📈 AI in Public Markets</a><a href="#sec-1" data-target="sec-1"><span class="dot tools"></span>🛠️ Tools for Analysts & PMs</a><a href="#sec-2" data-target="sec-2"><span class="dot labs"></span>🧪 From the Labs</a><a href="#sec-3" data-target="sec-3"><span class="dot pm"></span>🎯 AI Product Management</a><a href="#sec-4" data-target="sec-4"><span class="dot risk"></span>⚠️ Watch Closely</a></nav>
 
   <main class="acontent">
-    <div class="stat-row"><div class="stat-card"><div class="number">$1T</div><div class="label">OpenAI's targeted IPO valuation, as soon as September</div></div><div class="stat-card"><div class="number">$80B</div><div class="label">Nvidia's new share-buyback program, plus a 25x dividend hike</div></div><div class="stat-card"><div class="number">2M</div><div class="label">Token context window in Google's new Gemini 3.5 Pro</div></div></div>
+    <div class="stat-row"><div class="stat-card"><div class="number">$1T</div><div class="label">What OpenAI hopes to be worth when it sells shares to the public</div></div><div class="stat-card"><div class="number">$80B</div><div class="label">Cash Nvidia is handing back to shareholders, plus a big dividend bump</div></div><div class="stat-card"><div class="number">2M</div><div class="label">Words Google's new Gemini can read at once — roughly 15 novels</div></div></div>
     
         <section class="section sec reveal" id="sec-0">
           <div class="sec-banner" style="background-image:url('../assets/img/img7.jpg')">
             <div class="sec-scrim"></div>
-            <div class="sec-head"><span class="dot markets"></span><h2>AI in Public Markets</h2></div>
+            <div class="sec-head"><span class="sec-emoji">📈</span><span class="dot markets"></span><h2>AI in Public Markets</h2></div>
           </div>
           <div class="stories">
             <article class="story reveal">
-              <span class="tag markets"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg>IPO Watch</span>
-              <h3>OpenAI Files Too — the Trillion-Dollar Trio Is Now Real</h3>
-              <p>A week after Anthropic, OpenAI has filed for its own US IPO, with both expected to go
-          public as soon as the fall — OpenAI reportedly targeting a valuation of up to $1
-          trillion (versus its $852B March mark and Anthropic's $965B+). Alongside SpaceX, that's
-          three trillion-dollar debuts arriving in quick succession — what Bloomberg calls the
-          most consequential test of investor appetite for high-growth tech in a decade.</p>
-              <div class="why-it-matters"><p><strong>Why it matters for you:</strong> This stops being a "will they list" story and
-          becomes a "can the market absorb them" story. Three correlated mega-listings in one
-          window is a liquidity-and-sentiment event, not just three tickers. The sharp question for
-          your analysts: if the first debut prices softly, how does that re-rate the other two —
-          and everything held as an AI proxy?</p></div>
+              <span class="tag markets">Going Public</span>
+              <h3>OpenAI Joins the Queue to Go Public — Now It's Three Giants at Once</h3>
+              <p>Last week, Anthropic (the maker of the Claude chatbot) filed the paperwork to sell
+          shares to the public. Now OpenAI (the maker of ChatGPT) is doing the same. Both could
+          start trading on the stock market — what people call "going public" — as soon as this
+          autumn, and OpenAI is hoping to be valued at up to $1 trillion. Add in Elon Musk's
+          SpaceX, and that's three enormous companies hitting the market in a short window.</p>
+              <div class="why-it-matters"><p><strong>Why this matters to you:</strong> Until now this was a "will they?" story.
+          Now it's a "can the market handle all three?" story. When several huge companies sell
+          shares at the same time, they compete for the same pool of investor money — so if the
+          first one sells for less than hoped, it can drag down how people value the other two.
+          That's the question your analysts will be asking.</p></div>
               <a class="source" href="https://www.bloomberg.com/news/articles/2026-06-09/openai-and-anthropic-ipos-will-put-ai-enthusiasm-to-the-test" target="_blank" rel="noopener">Read at Bloomberg →</a>
             </article>
             <article class="story reveal">
-              <span class="tag markets"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg>Capital Returns</span>
-              <h3>Nvidia Turns Capital-Returner: $80B Buyback and a 25x Dividend Hike</h3>
-              <p>Fresh off an 85% revenue surge to $81.6B, Nvidia unveiled an $80B share-repurchase
-          program and raised its quarterly dividend 25-fold — from $0.01 to $0.25. Analysts stayed
-          constructive (a "Strong Buy" consensus and a ~$298 average target, roughly 43% above
-          recent levels), but the gesture itself is the signal: a hyper-growth name is now handing
-          cash back.</p>
-              <div class="why-it-matters"><p><strong>Why it matters for you:</strong> Big buybacks and dividends are what companies
-          do when reinvestment runway starts to look finite relative to cash generation. It doesn't
-          mean growth is over — but it's a subtle regime marker worth tracking. The narrative is
-          maturing from "AI hyper-growth" toward "AI cash machine," and that shift changes which
-          investors own the stock.</p></div>
+              <span class="tag markets">Cash Back</span>
+              <h3>Nvidia Starts Handing Cash Back: an $80B Buyback and a Much Bigger Dividend</h3>
+              <p>Nvidia — the company whose chips power most AI — just had another huge quarter, with
+          sales up 85%. But instead of only reinvesting that money, it's now returning some to
+          shareholders. It announced an $80 billion "buyback" (using spare cash to buy back its
+          own shares, which usually nudges the share price up) and raised its dividend — a regular
+          cash payout to shareholders — 25-fold, from one cent to 25 cents a share.</p>
+              <div class="why-it-matters"><p><strong>Why this matters to you:</strong> Companies usually start handing cash back
+          when they're making more than they can easily reinvest. It doesn't mean the growth is
+          over — but it's a quiet sign the story is shifting from "explosive growth" to "steady
+          cash machine." And that shift changes the kind of investor who wants to own the stock.</p></div>
               <a class="source" href="https://intellectia.ai/blog/nvidia-earnings-report-may-2026" target="_blank" rel="noopener">Read at Intellectia →</a>
             </article></div>
         </section>
         <section class="section sec reveal" id="sec-1">
           <div class="sec-banner" style="background-image:url('../assets/img/img4.jpg')">
             <div class="sec-scrim"></div>
-            <div class="sec-head"><span class="dot tools"></span><h2>Tools for Analysts & PMs</h2></div>
+            <div class="sec-head"><span class="sec-emoji">🛠️</span><span class="dot tools"></span><h2>Tools for Analysts & PMs</h2></div>
           </div>
           <div class="stories">
             <article class="story reveal">
-              <span class="tag tools"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>Long Context</span>
-              <h3>Gemini 3.5 Pro's 2M-Token Window: Load the Whole Filing Set at Once</h3>
-              <p>Google's Gemini 3.5 Pro reaches general availability this month with a
-          <strong>2-million-token context window</strong> and a "Deep Think" reasoning mode. In
-          practical terms, that's enough to hold an entire S-1, several years of 10-Ks, and the
-          sell-side notes around them in a single prompt — then reason across all of it without the
-          retrieval-stitching that used to fragment the analysis.</p>
-              <div class="why-it-matters"><p><strong>Why it matters for you:</strong> Long context quietly changes your build-vs-buy
-          math. A chunk of the RAG plumbing you might have scoped — chunking, embedding, re-ranking
-          — gets absorbed by the model. Your differentiation moves to what you put <em>in</em> the
-          window (proprietary data, the right documents) and how you <em>verify</em> what comes out,
-          not the retrieval pipeline itself.</p></div>
+              <span class="tag tools">Handy New Tool</span>
+              <h3>Google's New Gemini Can Read About 15 Novels at Once</h3>
+              <p>Google's new Gemini 3.5 Pro can take in up to 2 million "tokens" — roughly 1.5 million
+          words, or about 15 novels — in a single go, and it has a "Deep Think" mode for harder
+          questions. In plain terms: you could hand it a company's entire stock-market filing,
+          several years of annual reports, and all the analyst notes at the same time, and ask it
+          to make sense of the whole pile at once.</p>
+              <div class="why-it-matters"><p><strong>Why this matters to you:</strong> Until now, feeding an AI lots of documents
+          meant building a fiddly system that chops them into pieces and fetches the right bits
+          when needed. The model now does much of that work itself. So if you're building a tool,
+          the value isn't in that plumbing anymore — it's in giving the AI the right private
+          documents and carefully checking that its answers are correct.</p></div>
               <a class="source" href="https://www.techtimes.com/articles/317919/20260606/google-gemini-35-pro-nears-june-launch-2-million-token-context-deep-think-reasoning.htm" target="_blank" rel="noopener">Read at TechTimes →</a>
             </article></div>
         </section>
         <section class="section sec reveal" id="sec-2">
           <div class="sec-banner" style="background-image:url('../assets/img/img3.jpg')">
             <div class="sec-scrim"></div>
-            <div class="sec-head"><span class="dot labs"></span><h2>From the Labs</h2></div>
+            <div class="sec-head"><span class="sec-emoji">🧪</span><span class="dot labs"></span><h2>From the Labs</h2></div>
           </div>
           <div class="stories">
             <article class="story reveal">
-              <span class="tag labs"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v5L5 17a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg>Google</span>
-              <h3>Google Ships Its Agent Stack: Gemini 3.5 Flash, Spark, and a World Model</h3>
-              <p>Out of I/O 2026, Google framed an "agentic Gemini era." Gemini 3.5 Flash now tops the
-          prior 3.1 Pro on hard agentic and coding benchmarks (Terminal-Bench 2.1: 76.2%, MCP
-          Atlas: 83.6%), <strong>Gemini Spark</strong> is a general-purpose agent that reasons
-          across your connected apps, and <strong>Omni</strong> is a new world model. Computer Use
-          tooling now ships in the Gemini 3 preview models.</p>
-              <div class="why-it-matters"><p><strong>Why it matters for you:</strong> The story isn't one model — it's that all
-          three frontier labs (Google, OpenAI, Anthropic) now ship a <em>stack</em>: model + agent
-          + tool-use + connectors. The frontier is shifting from "best model" to "best agent that
-          plugs into real systems." Evaluate vendors on the whole stack and its connectors, not the
-          benchmark headline.</p></div>
+              <span class="tag labs">Google</span>
+              <h3>Google Shows Off Its Full AI Toolkit: a Faster Model, an Assistant, and More</h3>
+              <p>At its big developer event, Google leaned into AI "agents" — software that can take
+          actions for you, not just chat back. Its faster, cheaper model (Gemini 3.5 Flash) now
+          beats last year's top model on tough tests. It also showed Spark, a general assistant
+          that can work across the apps you've connected it to, and Omni, a model that learns how
+          the physical world behaves.</p>
+              <div class="why-it-matters"><p><strong>Why this matters to you:</strong> All three big AI labs — Google, OpenAI, and
+          Anthropic — now sell a whole bundle: the model, an assistant built on top of it, and the
+          connectors that plug into your other software. So when you choose a provider, judge the
+          whole bundle and how well it links up with your systems — not just which model scores
+          highest on a test.</p></div>
               <a class="source" href="https://blog.google/innovation-and-ai/sundar-pichai-io-2026/" target="_blank" rel="noopener">Read at Google →</a>
             </article></div>
         </section>
         <section class="section sec reveal" id="sec-3">
           <div class="sec-banner" style="background-image:url('../assets/img/img8.jpg')">
             <div class="sec-scrim"></div>
-            <div class="sec-head"><span class="dot pm"></span><h2>AI Product Management</h2></div>
+            <div class="sec-head"><span class="sec-emoji">🎯</span><span class="dot pm"></span><h2>AI Product Management</h2></div>
           </div>
           <div class="stories">
             <article class="story reveal">
-              <span class="tag pm"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 3 21 8 12 13 3 8 12 3"/><polyline points="3 14 12 19 21 14"/></svg>Model Tiering</span>
-              <h3>Cheap-and-Fast vs. Deep-and-Slow Is Now a Product Decision</h3>
-              <p>The frontier is splitting into tiers: fast, cheap models (Gemini 3.5 Flash) tuned for
-          high-volume agentic work, and deliberate reasoning models (Gemini 3.5 Pro's "Deep Think,"
-          OpenAI's o-series) that trade speed and cost for accuracy on hard problems. Efficiency
-          gains mean yesterday's frontier quality now runs at a fraction of the price.</p>
-              <div class="why-it-matters"><p><strong>Why it matters for you:</strong> Picking "the best model" is the wrong frame —
-          routing is the product. The mature design sends routine, high-volume queries to a cheap
-          fast tier and escalates only the genuinely hard ones to an expensive reasoning tier. Get
-          that routing right and you cut cost an order of magnitude without users noticing; get it
-          wrong and you either bankrupt the feature or make it feel slow.</p></div>
+              <span class="tag pm">Smart Choices</span>
+              <h3>Pick the Right AI for the Job: Cheap-and-Fast vs. Slow-and-Smart</h3>
+              <p>AI models now come in two broad flavours: quick, cheap ones that are great for everyday
+          tasks, and slower, pricier ones that "think harder" to get tough problems right. And
+          because the technology keeps improving, what counted as top-of-the-line last year now
+          costs a fraction of the price to run.</p>
+              <div class="why-it-matters"><p><strong>Why this matters to you:</strong> "Which model is best?" is the wrong
+          question. The smart move is to send easy, everyday requests to the cheap fast model, and
+          only pass the genuinely hard ones to the expensive "thinking" model. Get that split
+          right and you can cut your costs dramatically without users ever noticing. Get it wrong
+          and you'll either burn money or make the product feel slow.</p></div>
               <a class="source" href="https://cloud.google.com/blog/products/ai-machine-learning/innovations-from-google-io-26-on-google-cloud" target="_blank" rel="noopener">Read at Google Cloud →</a>
             </article></div>
         </section>
         <section class="section sec reveal" id="sec-4">
           <div class="sec-banner" style="background-image:url('../assets/img/img1.jpg')">
             <div class="sec-scrim"></div>
-            <div class="sec-head"><span class="dot risk"></span><h2>Watch Closely</h2></div>
+            <div class="sec-head"><span class="sec-emoji">⚠️</span><span class="dot risk"></span><h2>Watch Closely</h2></div>
           </div>
           <div class="stories">
             <article class="story reveal">
-              <span class="tag risk"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2 20h20L12 4z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg>Regulation</span>
-              <h3>The EU Just Deferred the AI Rules Your Compliance Team Was Bracing For</h3>
-              <p>Under the AI Act Omnibus agreement reached on 7 May, the EU deferred the high-risk
-          obligations most firms were preparing for this August — pushing Annex III use-based
-          requirements (credit scoring, insurance underwriting, recruitment, and more) out to
-          <strong>2 December 2027</strong>. The Act still becomes broadly applicable on 2 August
-          2026, and penalties remain steep: up to €30M or 6% of global turnover. For finance, most
-          credit, underwriting, AML, and fraud systems sit in the high-risk bucket.</p>
-              <div class="why-it-matters"><p><strong>Why it matters for you:</strong> A deferral is a double-edged gift. It buys
-          breathing room, but the requirements (transparency, human oversight, documentation) are
-          coming regardless — and teams that treat the delay as "later" will scramble in 2027.
-          Build the audit trail and oversight hooks into your product now, while it's cheap, rather
-          than retrofitting them under a deadline.</p></div>
+              <span class="tag risk">New Rules</span>
+              <h3>The EU Just Pushed Back the AI Rules Banks Were Rushing to Meet</h3>
+              <p>The EU's big new AI law was about to put strict rules on "high-risk" uses — things like
+          deciding who gets a loan or what they pay for insurance — starting this August. But
+          lawmakers just delayed those specific rules to December 2027. The wider law still kicks
+          in this August, and the penalties are serious: fines of up to €30 million, or 6% of a
+          company's worldwide sales, whichever is bigger.</p>
+              <div class="why-it-matters"><p><strong>Why this matters to you:</strong> A delay sounds like good news, but it's a
+          trap if you treat it as "forget about it." The requirements — being open about how the
+          AI works, keeping a human in the loop, and documenting decisions — are still coming.
+          Teams that build those habits in now, while it's cheap and easy, will sail through;
+          teams that wait will be scrambling in 2027.</p></div>
               <a class="source" href="https://www.legalnodes.com/article/eu-ai-act-2026-updates-compliance-requirements-and-business-risks" target="_blank" rel="noopener">Read at Legal Nodes →</a>
             </article></div>
         </section>

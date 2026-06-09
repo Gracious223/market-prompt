@@ -8,11 +8,11 @@
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--ink:#14142b;--ink-2:#1d1d3a;--paper:#f6f3ec;--gold:#c9a96e;--gold-soft:#e3cfa6;--muted:#8a8fa8;--muted-d:#5b5f78;--line:#e8e3d8;--card:#fff}
+:root{--ink:#14142b;--ink-2:#1d1d3a;--paper:#f6f3ec;--gold:#c9a96e;--gold-soft:#e3cfa6;--muted:#8a8fa8;--muted-d:#5b5f78;--line:#e8e3d8;--card:#fff;--pop:#ff6f5e}
 html{scroll-behavior:smooth}
 body{background:var(--paper);font-family:'Inter',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-.progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:90;background:linear-gradient(90deg,var(--gold),var(--gold-soft))}
+.progress{position:fixed;top:0;left:0;height:4px;width:0;z-index:90;background:linear-gradient(90deg,var(--pop),var(--gold))}
 .anav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:13px 24px;background:rgba(20,20,43,.78);backdrop-filter:saturate(160%) blur(14px);-webkit-backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid rgba(201,169,110,.18)}
 .anav .back{font-family:'Playfair Display',serif;font-weight:800;font-size:17px;color:var(--paper)}
 .anav .back span{color:var(--gold)}
@@ -28,7 +28,8 @@ a{color:inherit;text-decoration:none}
 .ahero .eyebrow{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
 .ahero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(46px,9vw,88px);line-height:.95;letter-spacing:-1.5px}
 .ahero h1 span{background:linear-gradient(120deg,var(--gold),var(--gold-soft));-webkit-background-clip:text;background-clip:text;color:transparent}
-.ahero .tag{margin-top:18px;font-size:14px;font-weight:300;letter-spacing:.5px;color:#d4d6e4}
+.ahero .edition{margin-top:16px;font-family:'Playfair Display',serif;font-style:italic;font-weight:600;font-size:clamp(20px,3.4vw,30px);color:var(--gold-soft);letter-spacing:-.3px}
+.ahero .tag{margin-top:14px;font-size:14px;font-weight:300;letter-spacing:.5px;color:#d4d6e4}
 .date-bar{margin:26px auto 0;max-width:520px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;align-items:center;padding-top:18px;border-top:1px solid rgba(255,255,255,.16)}
 .date-bar span{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#c2c5d8}
 .date-bar .issue{background:var(--gold);color:var(--ink);padding:3px 11px;border-radius:999px;font-weight:700}
@@ -49,18 +50,19 @@ a{color:inherit;text-decoration:none}
 .section{padding-top:52px}
 .sec-banner{position:relative;height:128px;border-radius:14px;overflow:hidden;background-size:cover;background-position:center;display:flex;align-items:flex-end}
 .sec-banner .sec-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,43,.3),rgba(20,20,43,.8))}
-.sec-banner .sec-head{position:relative;z-index:2;display:flex;align-items:center;gap:12px;padding:20px 24px}
+.sec-banner .sec-head{position:relative;z-index:2;display:flex;align-items:center;gap:11px;padding:20px 24px}
+.sec-banner .sec-emoji{font-size:22px;line-height:1}
 .sec-banner .dot{width:10px;height:10px;border-radius:50%}
-.sec-banner h2{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#fff}
+.sec-banner h2{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#fff}
 .dot.markets{background:#3a9bcf}.dot.tools{background:#5aa83a}.dot.labs{background:#b54a9e}.dot.pm{background:#cf9a3a}.dot.risk{background:#cf524a}
 .stories{margin-top:22px;display:flex;flex-direction:column;gap:22px}
-.story{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:30px 32px;transition:transform .2s,box-shadow .2s,border-color .2s}
-.story:hover{transform:translateY(-3px);box-shadow:0 22px 44px -26px rgba(20,20,43,.4);border-color:transparent}
-.story .tag{display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 10px;border-radius:999px;margin-bottom:14px}
-.story .tag .ic{width:12px;height:12px}
+.story{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px 32px;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s,border-color .3s}
+.story:hover{transform:translateY(-5px) scale(1.008);box-shadow:0 26px 48px -26px rgba(20,20,43,.45);border-color:transparent}
+.story .tag{display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 11px;border-radius:999px;margin-bottom:14px}
 .tag.markets{background:#e8f4f8;color:#2a7fa8}.tag.tools{background:#eef8e6;color:#4a8a2a}.tag.labs{background:#f8e8f4;color:#8a2a7a}.tag.pm{background:#f8f0e8;color:#8a5a2a}.tag.risk{background:#f8e8e8;color:#8a2a2a}
-.story h3{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;line-height:1.25;letter-spacing:-.3px;margin-bottom:12px}
-.story > p{font-size:15px;line-height:1.8;color:#42445a}
+.tag.markets::before{content:"📈 "}.tag.tools::before{content:"🛠️ "}.tag.labs::before{content:"🧪 "}.tag.pm::before{content:"🎯 "}.tag.risk::before{content:"⚠️ "}
+.story h3{font-family:'Playfair Display',serif;font-size:25px;font-weight:700;line-height:1.25;letter-spacing:-.3px;margin-bottom:12px}
+.story > p{font-size:16px;line-height:1.8;color:#3c3c50}
 .story > p strong{color:var(--ink);font-weight:600}
 .why-it-matters{margin-top:16px;padding:16px 20px;background:#faf7f0;border-left:3px solid var(--gold);border-radius:0 8px 8px 0}
 .why-it-matters p{font-size:13px;line-height:1.7;color:#5a5a6e;font-style:italic}
@@ -94,8 +96,9 @@ a{color:inherit;text-decoration:none}
     <div class="bg" style="background-image:url('../assets/img/img6.jpg')"></div>
     <div class="scrim"></div>
     <div class="inner">
-      <div class="eyebrow">Your Intelligence Brief</div>
+      <div class="eyebrow">Your Intelligence Brief · ☕ 5 min read</div>
       <h1>The <span>Signal</span></h1>
+      <p class="edition">“The Memory Boom”</p>
       <p class="tag">AI · Public Markets · Product Management</p>
       <div class="date-bar">
         <span>05 June 2026</span>
@@ -111,7 +114,7 @@ a{color:inherit;text-decoration:none}
       math behind the boom draws fresh scrutiny.
       <strong>Six stories. One brief. Everything you need to stay sharp.</strong></p></div>
 
-  <nav class="toc" id="toc"><a href="#sec-0" data-target="sec-0"><span class="dot markets"></span>AI in Public Markets</a><a href="#sec-1" data-target="sec-1"><span class="dot tools"></span>Tools for Analysts & PMs</a><a href="#sec-2" data-target="sec-2"><span class="dot labs"></span>From the Labs</a><a href="#sec-3" data-target="sec-3"><span class="dot pm"></span>AI Product Management</a><a href="#sec-4" data-target="sec-4"><span class="dot risk"></span>Watch Closely</a></nav>
+  <nav class="toc" id="toc"><a href="#sec-0" data-target="sec-0"><span class="dot markets"></span>📈 AI in Public Markets</a><a href="#sec-1" data-target="sec-1"><span class="dot tools"></span>🛠️ Tools for Analysts & PMs</a><a href="#sec-2" data-target="sec-2"><span class="dot labs"></span>🧪 From the Labs</a><a href="#sec-3" data-target="sec-3"><span class="dot pm"></span>🎯 AI Product Management</a><a href="#sec-4" data-target="sec-4"><span class="dot risk"></span>⚠️ Watch Closely</a></nav>
 
   <main class="acontent">
     <div class="stat-row"><div class="stat-card"><div class="number">$1T</div><div class="label">Micron's market cap — now worth more than JPMorgan Chase</div></div><div class="stat-card"><div class="number">12 Jun</div><div class="label">SpaceX expected IPO date, with OpenAI to follow</div></div><div class="stat-card"><div class="number">$200</div><div class="label">Monthly price of Perplexity's Bloomberg-terminal challenger</div></div></div>
@@ -119,11 +122,11 @@ a{color:inherit;text-decoration:none}
         <section class="section sec reveal" id="sec-0">
           <div class="sec-banner" style="background-image:url('../assets/img/img7.jpg')">
             <div class="sec-scrim"></div>
-            <div class="sec-head"><span class="dot markets"></span><h2>AI in Public Markets</h2></div>
+            <div class="sec-head"><span class="sec-emoji">📈</span><span class="dot markets"></span><h2>AI in Public Markets</h2></div>
           </div>
           <div class="stories">
             <article class="story reveal">
-              <span class="tag markets"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg>Equities</span>
+              <span class="tag markets">Equities</span>
               <h3>Micron Tops $1 Trillion as the Memory Trade Becomes the AI Trade</h3>
               <p>The market is surging — and it's still all about AI, but the leadership has rotated.
           Micron crossed $1 trillion in market value this week, now worth more than JPMorgan
@@ -139,7 +142,7 @@ a{color:inherit;text-decoration:none}
               <a class="source" href="https://www.cnn.com/2026/06/02/investing/stocks-memory-ai-boom" target="_blank" rel="noopener">Read at CNN Business →</a>
             </article>
             <article class="story reveal">
-              <span class="tag markets"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg>IPO Watch</span>
+              <span class="tag markets">IPO Watch</span>
               <h3>The Trillion-Dollar IPO Window Gets a Date: SpaceX on 12 June, OpenAI Next</h3>
               <p>SpaceX is expected to go public on 12 June, with OpenAI lined up to follow, days
           after Anthropic confidentially filed its own paperwork. All three are expected to
@@ -158,11 +161,11 @@ a{color:inherit;text-decoration:none}
         <section class="section sec reveal" id="sec-1">
           <div class="sec-banner" style="background-image:url('../assets/img/img4.jpg')">
             <div class="sec-scrim"></div>
-            <div class="sec-head"><span class="dot tools"></span><h2>Tools for Analysts & PMs</h2></div>
+            <div class="sec-head"><span class="sec-emoji">🛠️</span><span class="dot tools"></span><h2>Tools for Analysts & PMs</h2></div>
           </div>
           <div class="stories">
             <article class="story reveal">
-              <span class="tag tools"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>Buy-Side Stack</span>
+              <span class="tag tools">Buy-Side Stack</span>
               <h3>Perplexity vs. Bloomberg: the Fight for the Analyst's Desktop Goes Agentic</h3>
               <p>Two visions of the research workstation are colliding. Bloomberg's <strong>ASKB</strong>
           — billed as the biggest rethink of the terminal in its history — runs a coordinated
@@ -182,11 +185,11 @@ a{color:inherit;text-decoration:none}
         <section class="section sec reveal" id="sec-2">
           <div class="sec-banner" style="background-image:url('../assets/img/img3.jpg')">
             <div class="sec-scrim"></div>
-            <div class="sec-head"><span class="dot labs"></span><h2>From the Labs</h2></div>
+            <div class="sec-head"><span class="sec-emoji">🧪</span><span class="dot labs"></span><h2>From the Labs</h2></div>
           </div>
           <div class="stories">
             <article class="story reveal">
-              <span class="tag labs"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v5L5 17a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg>Frontier Models</span>
+              <span class="tag labs">Frontier Models</span>
               <h3>Microsoft and Google Crash the AI-Coding Party — Anthropic's Stronghold</h3>
               <p>Anthropic has zoomed ahead of the field in generative AI largely on the back of
           Claude Code, its coding assistant — and just shipped Claude Opus 4.8. Now Microsoft
@@ -204,11 +207,11 @@ a{color:inherit;text-decoration:none}
         <section class="section sec reveal" id="sec-3">
           <div class="sec-banner" style="background-image:url('../assets/img/img8.jpg')">
             <div class="sec-scrim"></div>
-            <div class="sec-head"><span class="dot pm"></span><h2>AI Product Management</h2></div>
+            <div class="sec-head"><span class="sec-emoji">🎯</span><span class="dot pm"></span><h2>AI Product Management</h2></div>
           </div>
           <div class="stories">
             <article class="story reveal">
-              <span class="tag pm"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 3 21 8 12 13 3 8 12 3"/><polyline points="3 14 12 19 21 14"/></svg>Unit Economics</span>
+              <span class="tag pm">Unit Economics</span>
               <h3>GitHub Copilot Moves to Usage-Based Pricing — the Reckoning Reaches the Bestseller</h3>
               <p>GitHub Copilot is shifting to usage-based pricing in June 2026. The reason is brutally
           simple: flat-fee seats stopped working once agentic features ran up real inference
@@ -226,11 +229,11 @@ a{color:inherit;text-decoration:none}
         <section class="section sec reveal" id="sec-4">
           <div class="sec-banner" style="background-image:url('../assets/img/img1.jpg')">
             <div class="sec-scrim"></div>
-            <div class="sec-head"><span class="dot risk"></span><h2>Watch Closely</h2></div>
+            <div class="sec-head"><span class="sec-emoji">⚠️</span><span class="dot risk"></span><h2>Watch Closely</h2></div>
           </div>
           <div class="stories">
             <article class="story reveal">
-              <span class="tag risk"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2 20h20L12 4z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg>Systemic Risk</span>
+              <span class="tag risk">Systemic Risk</span>
               <h3>The Circular Deals Underwriting the Boom Draw Sharper Scrutiny</h3>
               <p>Bloomberg's tracker of "AI circular deals" lays out how Microsoft, OpenAI and Nvidia
           keep paying each other — Nvidia invests in OpenAI, which buys Nvidia GPUs to fill

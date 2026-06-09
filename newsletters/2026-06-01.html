@@ -8,11 +8,11 @@
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--ink:#14142b;--ink-2:#1d1d3a;--paper:#f6f3ec;--gold:#c9a96e;--gold-soft:#e3cfa6;--muted:#8a8fa8;--muted-d:#5b5f78;--line:#e8e3d8;--card:#fff}
+:root{--ink:#14142b;--ink-2:#1d1d3a;--paper:#f6f3ec;--gold:#c9a96e;--gold-soft:#e3cfa6;--muted:#8a8fa8;--muted-d:#5b5f78;--line:#e8e3d8;--card:#fff;--pop:#ff6f5e}
 html{scroll-behavior:smooth}
 body{background:var(--paper);font-family:'Inter',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-.progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:90;background:linear-gradient(90deg,var(--gold),var(--gold-soft))}
+.progress{position:fixed;top:0;left:0;height:4px;width:0;z-index:90;background:linear-gradient(90deg,var(--pop),var(--gold))}
 .anav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:13px 24px;background:rgba(20,20,43,.78);backdrop-filter:saturate(160%) blur(14px);-webkit-backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid rgba(201,169,110,.18)}
 .anav .back{font-family:'Playfair Display',serif;font-weight:800;font-size:17px;color:var(--paper)}
 .anav .back span{color:var(--gold)}
@@ -28,7 +28,8 @@ a{color:inherit;text-decoration:none}
 .ahero .eyebrow{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
 .ahero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(46px,9vw,88px);line-height:.95;letter-spacing:-1.5px}
 .ahero h1 span{background:linear-gradient(120deg,var(--gold),var(--gold-soft));-webkit-background-clip:text;background-clip:text;color:transparent}
-.ahero .tag{margin-top:18px;font-size:14px;font-weight:300;letter-spacing:.5px;color:#d4d6e4}
+.ahero .edition{margin-top:16px;font-family:'Playfair Display',serif;font-style:italic;font-weight:600;font-size:clamp(20px,3.4vw,30px);color:var(--gold-soft);letter-spacing:-.3px}
+.ahero .tag{margin-top:14px;font-size:14px;font-weight:300;letter-spacing:.5px;color:#d4d6e4}
 .date-bar{margin:26px auto 0;max-width:520px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;align-items:center;padding-top:18px;border-top:1px solid rgba(255,255,255,.16)}
 .date-bar span{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#c2c5d8}
 .date-bar .issue{background:var(--gold);color:var(--ink);padding:3px 11px;border-radius:999px;font-weight:700}
@@ -49,18 +50,19 @@ a{color:inherit;text-decoration:none}
 .section{padding-top:52px}
 .sec-banner{position:relative;height:128px;border-radius:14px;overflow:hidden;background-size:cover;background-position:center;display:flex;align-items:flex-end}
 .sec-banner .sec-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,43,.3),rgba(20,20,43,.8))}
-.sec-banner .sec-head{position:relative;z-index:2;display:flex;align-items:center;gap:12px;padding:20px 24px}
+.sec-banner .sec-head{position:relative;z-index:2;display:flex;align-items:center;gap:11px;padding:20px 24px}
+.sec-banner .sec-emoji{font-size:22px;line-height:1}
 .sec-banner .dot{width:10px;height:10px;border-radius:50%}
-.sec-banner h2{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#fff}
+.sec-banner h2{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#fff}
 .dot.markets{background:#3a9bcf}.dot.tools{background:#5aa83a}.dot.labs{background:#b54a9e}.dot.pm{background:#cf9a3a}.dot.risk{background:#cf524a}
 .stories{margin-top:22px;display:flex;flex-direction:column;gap:22px}
-.story{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:30px 32px;transition:transform .2s,box-shadow .2s,border-color .2s}
-.story:hover{transform:translateY(-3px);box-shadow:0 22px 44px -26px rgba(20,20,43,.4);border-color:transparent}
-.story .tag{display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 10px;border-radius:999px;margin-bottom:14px}
-.story .tag .ic{width:12px;height:12px}
+.story{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px 32px;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s,border-color .3s}
+.story:hover{transform:translateY(-5px) scale(1.008);box-shadow:0 26px 48px -26px rgba(20,20,43,.45);border-color:transparent}
+.story .tag{display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 11px;border-radius:999px;margin-bottom:14px}
 .tag.markets{background:#e8f4f8;color:#2a7fa8}.tag.tools{background:#eef8e6;color:#4a8a2a}.tag.labs{background:#f8e8f4;color:#8a2a7a}.tag.pm{background:#f8f0e8;color:#8a5a2a}.tag.risk{background:#f8e8e8;color:#8a2a2a}
-.story h3{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;line-height:1.25;letter-spacing:-.3px;margin-bottom:12px}
-.story > p{font-size:15px;line-height:1.8;color:#42445a}
+.tag.markets::before{content:"📈 "}.tag.tools::before{content:"🛠️ "}.tag.labs::before{content:"🧪 "}.tag.pm::before{content:"🎯 "}.tag.risk::before{content:"⚠️ "}
+.story h3{font-family:'Playfair Display',serif;font-size:25px;font-weight:700;line-height:1.25;letter-spacing:-.3px;margin-bottom:12px}
+.story > p{font-size:16px;line-height:1.8;color:#3c3c50}
 .story > p strong{color:var(--ink);font-weight:600}
 .why-it-matters{margin-top:16px;padding:16px 20px;background:#faf7f0;border-left:3px solid var(--gold);border-radius:0 8px 8px 0}
 .why-it-matters p{font-size:13px;line-height:1.7;color:#5a5a6e;font-style:italic}
@@ -94,8 +96,9 @@ a{color:inherit;text-decoration:none}
     <div class="bg" style="background-image:url('../assets/img/img2.jpg')"></div>
     <div class="scrim"></div>
     <div class="inner">
-      <div class="eyebrow">Your Weekly Intelligence Brief</div>
+      <div class="eyebrow">Your Weekly Intelligence Brief · ☕ 5 min read</div>
       <h1>The <span>Signal</span></h1>
+      <p class="edition">“The Trillion-Dollar Test”</p>
       <p class="tag">AI · Public Markets · Product Management</p>
       <div class="date-bar">
         <span>01 June 2026</span>
@@ -110,7 +113,7 @@ a{color:inherit;text-decoration:none}
       OpenAI, the buy-side AI stack settles into distinct layers, and the bubble debate gets
       louder. <strong>Five stories. One brief. Everything you need to stay sharp.</strong></p></div>
 
-  <nav class="toc" id="toc"><a href="#sec-0" data-target="sec-0"><span class="dot markets"></span>AI in Public Markets</a><a href="#sec-1" data-target="sec-1"><span class="dot tools"></span>Tools for Analysts & PMs</a><a href="#sec-2" data-target="sec-2"><span class="dot labs"></span>From the Labs</a><a href="#sec-3" data-target="sec-3"><span class="dot pm"></span>AI Product Management</a><a href="#sec-4" data-target="sec-4"><span class="dot risk"></span>Watch Closely</a></nav>
+  <nav class="toc" id="toc"><a href="#sec-0" data-target="sec-0"><span class="dot markets"></span>📈 AI in Public Markets</a><a href="#sec-1" data-target="sec-1"><span class="dot tools"></span>🛠️ Tools for Analysts & PMs</a><a href="#sec-2" data-target="sec-2"><span class="dot labs"></span>🧪 From the Labs</a><a href="#sec-3" data-target="sec-3"><span class="dot pm"></span>🎯 AI Product Management</a><a href="#sec-4" data-target="sec-4"><span class="dot risk"></span>⚠️ Watch Closely</a></nav>
 
   <main class="acontent">
     <div class="stat-row"><div class="stat-card"><div class="number">$965B</div><div class="label">Anthropic valuation after its $65B raise — past OpenAI</div></div><div class="stat-card"><div class="number">$175–185B</div><div class="label">Alphabet's planned 2026 capex — roughly double 2025</div></div><div class="stat-card"><div class="number">$3T</div><div class="label">Morgan Stanley estimate for global data-center spend, 2025–28</div></div></div>
@@ -118,11 +121,11 @@ a{color:inherit;text-decoration:none}
         <section class="section sec reveal" id="sec-0">
           <div class="sec-banner" style="background-image:url('../assets/img/img7.jpg')">
             <div class="sec-scrim"></div>
-            <div class="sec-head"><span class="dot markets"></span><h2>AI in Public Markets</h2></div>
+            <div class="sec-head"><span class="sec-emoji">📈</span><span class="dot markets"></span><h2>AI in Public Markets</h2></div>
           </div>
           <div class="stories">
             <article class="story reveal">
-              <span class="tag markets"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg>IPO Watch</span>
+              <span class="tag markets">IPO Watch</span>
               <h3>The Trillion-Dollar IPO Test: SpaceX Files, OpenAI Lines Up Behind It</h3>
               <p>SpaceX's S-1 went public on 20 May, with a roadshow expected the week of 4 June
           and a first trade targeted for mid-month. OpenAI is reportedly preparing to file
@@ -136,7 +139,7 @@ a{color:inherit;text-decoration:none}
               <a class="source" href="https://www.investing.com/analysis/the-trilliondollar-ipo-test-spacex-and-openai-face-public-markets-200680688" target="_blank" rel="noopener">Read at Investing.com →</a>
             </article>
             <article class="story reveal">
-              <span class="tag markets"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg>Capex</span>
+              <span class="tag markets">Capex</span>
               <h3>Alphabet's $175–185B Capex Plan Triggers a Sell-Off</h3>
               <p>Alphabet guided to $175–185B of capital expenditure in 2026 — roughly double
           2025's level — and investors responded by selling, questioning whether record AI
@@ -152,11 +155,11 @@ a{color:inherit;text-decoration:none}
         <section class="section sec reveal" id="sec-1">
           <div class="sec-banner" style="background-image:url('../assets/img/img4.jpg')">
             <div class="sec-scrim"></div>
-            <div class="sec-head"><span class="dot tools"></span><h2>Tools for Analysts & PMs</h2></div>
+            <div class="sec-head"><span class="sec-emoji">🛠️</span><span class="dot tools"></span><h2>Tools for Analysts & PMs</h2></div>
           </div>
           <div class="stories">
             <article class="story reveal">
-              <span class="tag tools"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>Buy-Side Stack</span>
+              <span class="tag tools">Buy-Side Stack</span>
               <h3>The Hedge-Fund AI Stack Splits Into Three Layers</h3>
               <p>A clear pattern emerged in this year's buy-side tooling round-ups: the funds getting
           real value aren't asking one platform to do everything. The stack now separates into
@@ -176,11 +179,11 @@ a{color:inherit;text-decoration:none}
         <section class="section sec reveal" id="sec-2">
           <div class="sec-banner" style="background-image:url('../assets/img/img3.jpg')">
             <div class="sec-scrim"></div>
-            <div class="sec-head"><span class="dot labs"></span><h2>From the Labs</h2></div>
+            <div class="sec-head"><span class="sec-emoji">🧪</span><span class="dot labs"></span><h2>From the Labs</h2></div>
           </div>
           <div class="stories">
             <article class="story reveal">
-              <span class="tag labs"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v5L5 17a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg>Anthropic</span>
+              <span class="tag labs">Anthropic</span>
               <h3>Anthropic Ships Claude Opus 4.8 — and Passes OpenAI in Value</h3>
               <p>Anthropic shipped Claude Opus 4.8, claiming it tops OpenAI's GPT-5.5 and Google's
           Gemini 3.1 Pro on agentic coding, <strong>financial analysis</strong>, and computer
@@ -195,7 +198,7 @@ a{color:inherit;text-decoration:none}
               <a class="source" href="https://www.thestreet.com/technology/anthropic-drops-new-claude-model-as-openai-ipo-race-heats-up" target="_blank" rel="noopener">Read at TheStreet →</a>
             </article>
             <article class="story reveal">
-              <span class="tag labs"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v5L5 17a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg>Google I/O</span>
+              <span class="tag labs">Google I/O</span>
               <h3>Google's Gemini Spark Pushes From Assistants to Agents</h3>
               <p>At I/O, Google paired Gemini 3.5 Flash with Gemini Spark — a general-purpose agent
           that reasons across your connected apps rather than just answering prompts. The framing
@@ -211,11 +214,11 @@ a{color:inherit;text-decoration:none}
         <section class="section sec reveal" id="sec-3">
           <div class="sec-banner" style="background-image:url('../assets/img/img8.jpg')">
             <div class="sec-scrim"></div>
-            <div class="sec-head"><span class="dot pm"></span><h2>AI Product Management</h2></div>
+            <div class="sec-head"><span class="sec-emoji">🎯</span><span class="dot pm"></span><h2>AI Product Management</h2></div>
           </div>
           <div class="stories">
             <article class="story reveal">
-              <span class="tag pm"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 3 21 8 12 13 3 8 12 3"/><polyline points="3 14 12 19 21 14"/></svg>Career & Role</span>
+              <span class="tag pm">Career & Role</span>
               <h3>CPO Report: The "Product Builder" Is Up 10x as Generalist PMs Decline</h3>
               <p>A 2026 CPO Insights report makes a blunt prediction: traditional product managers
           could "disappear" by 2030. Its data shows the number of <strong>Product Builders</strong>
@@ -232,11 +235,11 @@ a{color:inherit;text-decoration:none}
         <section class="section sec reveal" id="sec-4">
           <div class="sec-banner" style="background-image:url('../assets/img/img1.jpg')">
             <div class="sec-scrim"></div>
-            <div class="sec-head"><span class="dot risk"></span><h2>Watch Closely</h2></div>
+            <div class="sec-head"><span class="sec-emoji">⚠️</span><span class="dot risk"></span><h2>Watch Closely</h2></div>
           </div>
           <div class="stories">
             <article class="story reveal">
-              <span class="tag risk"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2 20h20L12 4z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg>Bubble Risk</span>
+              <span class="tag risk">Bubble Risk</span>
               <h3>Circular AI Financing Draws Dot-Com Comparisons</h3>
               <p>The web of cross-investments and capacity commitments between Microsoft, OpenAI,
           Nvidia, Google, and Anthropic is drawing scrutiny for resembling the vendor-financing

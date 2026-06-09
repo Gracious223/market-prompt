@@ -28,6 +28,24 @@ SKIP_NAMES = {"index.html"}
 
 SECTION_LABELS = {"markets": "Markets", "tools": "Tools", "labs": "Labs", "pm": "Product", "risk": "Risk"}
 
+# Playful emoji per section, shown on chips, pills and section banners.
+SECTION_EMOJI = {"markets": "📈", "tools": "🛠️", "labs": "🧪", "pm": "🎯", "risk": "⚠️"}
+
+# Curated, playful name for each edition (keyed by date). Falls back to the
+# issue's lead headline when an entry is missing.
+EDITION_NAMES = {
+    "2026-05-30": "AI Eats Wall Street",
+    "2026-06-01": "The Trillion-Dollar Test",
+    "2026-06-02": "Anthropic Jumps the Queue",
+    "2026-06-03": "The Big Filing",
+    "2026-06-04": "Research at Warp Speed",
+    "2026-06-05": "The Memory Boom",
+    "2026-06-06": "Nvidia's Big Day",
+    "2026-06-07": "OpenAI Gets in Line",
+    "2026-06-08": "Wall Street Opens the Gates",
+    "2026-06-09": "The Trillion-Dollar Trio",
+}
+
 # Tiny line icons (24-viewbox stroke paths) for chips / pills.
 ICON_PATHS = {
     "markets": '<polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/>',
@@ -76,7 +94,7 @@ def icon_svg(key, cls="ic"):
 
 
 def chip_html(key):
-    return f'<span class="chip {key}">{icon_svg(key)}{SECTION_LABELS[key]}</span>'
+    return f'<span class="chip {key}">{SECTION_EMOJI[key]} {SECTION_LABELS[key]}</span>'
 
 
 # ──────────────────────────────────────────────────────────────────────────
@@ -103,6 +121,7 @@ def parse_issue(path: Path):
 
     title = _search(r"<title>(.*?)</title>", text)
     eyebrow = _search(r'class="eyebrow">(.*?)<', text) or "Your Intelligence Brief"
+    eyebrow = re.sub(r"\s*·\s*☕.*$", "", eyebrow).strip()  # drop any appended reading-time
     issue = _search(r'class="issue">\s*(.*?)\s*<', text) or "Issue"
     num = _search(r"(\d+)", issue, default="")
     date_label = _search(r'class="date-bar">\s*<span>\s*(.*?)\s*</span>', text)
@@ -153,6 +172,26 @@ def parse_issue(path: Path):
         if s["dot"] not in dots:
             dots.append(s["dot"])
 
+    # Edition name: curated override, else the lead story's headline.
+    if sectionlist and sectionlist[0]["stories"]:
+        lead_headline = sectionlist[0]["stories"][0]["title"]
+    elif external:
+        lead_headline = _search(r'class="featured-inner">.*?<h2[^>]*>(.*?)</h2>', text) or lead
+    else:
+        lead_headline = "The Signal"
+    lead_headline = html.unescape(re.sub(r"<[^>]+>", "", lead_headline)).strip()
+    name = EDITION_NAMES.get(path.stem) or lead_headline or "The Signal"
+
+    # Rough reading time from the prose only (not markup/CSS).
+    if external:
+        prose = " ".join(re.findall(r'class="story-body"[^>]*>(.*?)</div>', text, re.S))
+    else:
+        prose = intro_html + " " + " ".join(
+            st["body"] + " " + st["why"] for sec in sectionlist for st in sec["stories"]
+        )
+    words = len(re.sub(r"<[^>]+>", " ", prose).split())
+    read_min = max(1, round(words / 180))
+
     m = re.match(r"(\d{4})-(\d{2})-(\d{2})", path.stem)
     sort_dt = datetime(*map(int, m.groups())) if m else datetime.fromtimestamp(path.stat().st_mtime)
 
@@ -161,6 +200,7 @@ def parse_issue(path: Path):
         "date_label": date_label or sort_dt.strftime("%d %B %Y"), "intro_html": intro_html,
         "summary": summary, "stat_cards": stat_cards, "sectionlist": sectionlist,
         "sections": dots, "sort_dt": sort_dt, "external": external, "lead": lead,
+        "name": name, "read_min": read_min,
     }
 
 
@@ -181,7 +221,7 @@ def collect():
 INDEX_CSS = """
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--ink:#14142b;--ink-2:#1d1d3a;--paper:#f6f3ec;--gold:#c9a96e;--gold-soft:#e3cfa6;--muted:#8a8fa8;--muted-d:#5b5f78;--line:#e8e3d8;--card:#fff;--r:14px}
+:root{--ink:#14142b;--ink-2:#1d1d3a;--paper:#f6f3ec;--gold:#c9a96e;--gold-soft:#e3cfa6;--muted:#8a8fa8;--muted-d:#5b5f78;--line:#e8e3d8;--card:#fff;--pop:#ff6f5e;--r:18px}
 html{scroll-behavior:smooth}
 body{background:var(--paper);font-family:'Inter',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
@@ -227,7 +267,8 @@ a{color:inherit;text-decoration:none}
 .feat-cover .ov .big{font-family:'Playfair Display',serif;font-weight:800;font-size:60px;color:var(--paper);line-height:1;margin:4px 0}
 .feat-cover .ov .lbl-date{font-family:'Space Mono',monospace;font-size:11px;color:#dfe1ee;letter-spacing:.5px}
 .feat-body{align-self:center}
-.feat-body .ey{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.feat-body .feat-name{font-family:'Playfair Display',serif;font-size:27px;font-weight:800;line-height:1.08;letter-spacing:-.5px;color:var(--ink);margin-bottom:10px}
+.feat-body .ey{display:inline-block;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--pop);background:#fff2f0;border-radius:999px;padding:5px 11px;margin-bottom:12px}
 .feat-body p{font-size:15.5px;line-height:1.65;color:#44475e}
 .feat-body .chips{margin-top:14px}
 .feat-cta{align-self:center;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink);border:1.5px solid var(--ink);border-radius:999px;padding:12px 20px;white-space:nowrap;transition:background .15s,color .15s}
@@ -245,9 +286,9 @@ a{color:inherit;text-decoration:none}
 .pill.active{background:var(--ink);color:var(--gold);border-color:var(--ink)}
 .pill .ic{width:13px;height:13px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:24px;padding-bottom:90px}
-.card{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:0;display:flex;flex-direction:column;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
-.card-rule{position:absolute;top:0;left:0;right:0;height:3px;z-index:4;background:linear-gradient(90deg,var(--gold),var(--gold-soft));transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
-.card:hover{transform:translateY(-5px);box-shadow:0 22px 44px -22px rgba(20,20,43,.45);border-color:transparent}
+.card{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:0;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease,border-color .3s ease}
+.card-rule{position:absolute;top:0;left:0;right:0;height:4px;z-index:4;background:linear-gradient(90deg,var(--pop),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.card:hover{transform:translateY(-8px) scale(1.015);box-shadow:0 28px 52px -22px rgba(20,20,43,.5);border-color:transparent}
 .card:hover .card-rule{transform:scaleX(1)}
 .cover{position:relative;height:172px;overflow:hidden}
 .cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
@@ -263,7 +304,9 @@ a{color:inherit;text-decoration:none}
 .card-summary{font-size:13.5px;line-height:1.66;color:#56566a;margin-top:13px;flex:1;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 .card-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;padding-top:16px;border-top:1px solid #f0ede6}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
-.chip{font-family:'Space Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:4px 8px;border-radius:999px;display:inline-flex;align-items:center;gap:4px}
+.chip{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:5px 9px;border-radius:999px;display:inline-flex;align-items:center;gap:4px}
+.card:hover .card-title{color:var(--pop)}
+.card-title{transition:color .2s ease}
 .chip .ic{width:11px;height:11px}
 .chip.markets{background:#e8f4f8;color:#2a7fa8}.chip.tools{background:#eef8e6;color:#4a8a2a}.chip.labs{background:#f8e8f4;color:#8a2a7a}.chip.pm{background:#f8f0e8;color:#8a5a2a}.chip.risk{background:#f8e8e8;color:#8a2a2a}
 .read{font-size:12px;font-weight:700;color:var(--gold);white-space:nowrap;display:inline-flex;gap:6px}
@@ -352,10 +395,10 @@ def render_card(issue, index=0):
     href = f'newsletters/{issue["file"]}'
     num = html.escape(issue["num"] or "—")
     img = issue_image(issue["num"], index, "") or ""
-    lead = issue["lead"]
+    emoji = SECTION_EMOJI.get(issue["sections"][0], "📰") if issue["sections"] else "📰"
     secs_attr = " ".join(issue["sections"])
     haystack = html.escape(
-        f'{issue["title"]} {issue["issue"]} {issue["summary"]} '
+        f'{issue["name"]} {issue["title"]} {issue["issue"]} {issue["summary"]} '
         + " ".join(SECTION_LABELS[s] for s in issue["sections"]),
         quote=True,
     )
@@ -363,14 +406,14 @@ def render_card(issue, index=0):
           <span class="card-rule"></span>
           <div class="cover">
             <img src="{img}" alt="" loading="lazy" />
-            <span class="cover-num">Issue No.<b>{num}</b></span>
+            <span class="cover-num">{emoji} Issue No.<b>{num}</b></span>
           </div>
           <div class="card-body">
             <div class="card-top">
-              <span class="card-tag">{html.escape(lead)}</span>
-              <span class="card-date">{html.escape(issue["date_label"])}</span>
+              <span class="card-tag">The Signal</span>
+              <span class="card-date">{html.escape(issue["date_label"])} · {issue["read_min"]} min</span>
             </div>
-            <h3 class="card-title">The&nbsp;Signal</h3>
+            <h3 class="card-title">{html.escape(issue["name"])}</h3>
             <p class="card-summary">{html.escape(issue["summary"])}</p>
             <div class="card-foot">
               <div class="chips">{chips}</div>
@@ -392,10 +435,12 @@ def render(issues):
     latest_href = f'newsletters/{latest["file"]}' if latest else "#"
     latest_chips = "".join(chip_html(s) for s in latest["sections"]) if latest else ""
     latest_img = issue_image(latest["num"], 0, "") if latest else ""
+    latest_name = html.escape(latest["name"]) if latest else "The Signal"
+    latest_read = latest["read_min"] if latest else 1
 
     present = [k for k in SECTION_LABELS if any(k in i["sections"] for i in issues)]
-    pills = '<button class="pill active" data-section="all">All Issues</button>' + "".join(
-        f'<button class="pill" data-section="{k}">{icon_svg(k)}{SECTION_LABELS[k]}</button>' for k in present
+    pills = '<button class="pill active" data-section="all">✨ All Issues</button>' + "".join(
+        f'<button class="pill" data-section="{k}">{SECTION_EMOJI[k]} {SECTION_LABELS[k]}</button>' for k in present
     )
 
     return f"""<!DOCTYPE html>
@@ -420,13 +465,13 @@ def render(issues):
 
   <header class="hero" id="top">
     <div class="grid-bg"></div>
-    <div class="kicker"><span class="dot"></span> Updated Daily · {built}</div>
+    <div class="kicker"><span class="dot"></span> 📰 Fresh every morning · {built}</div>
     <h1>The <span>Signal</span></h1>
-    <p class="tagline">AI · Public Markets · Product Management</p>
-    <p class="sub">A daily intelligence brief decoding the AI market for analysts and product leaders — five stories, one read, every morning.</p>
+    <p class="tagline">AI · Public Markets · Product — minus the jargon</p>
+    <p class="sub">Your daily 5-minute catch-up on the AI news that actually moves markets. Plain English, no fluff, one quick read.</p>
     <div class="actions">
-      <a class="btn btn-gold" href="{latest_href}">Read the latest issue</a>
-      <a class="btn btn-ghost" href="#issues">Browse the archive</a>
+      <a class="btn btn-gold" href="{latest_href}">Read today's issue →</a>
+      <a class="btn btn-ghost" href="#issues">Browse all issues</a>
     </div>
   </header>
   <svg class="hero-wave" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true">
@@ -445,7 +490,8 @@ def render(issues):
           </div>
         </div>
         <div class="feat-body">
-          <div class="ey">★ Latest Dispatch</div>
+          <div class="ey">🔥 Hot off the press · {latest_read} min read</div>
+          <h3 class="feat-name">{latest_name}</h3>
           <p>{latest_summary}</p>
           <div class="chips">{latest_chips}</div>
         </div>
@@ -514,11 +560,11 @@ def render(issues):
 ARTICLE_CSS = """
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--ink:#14142b;--ink-2:#1d1d3a;--paper:#f6f3ec;--gold:#c9a96e;--gold-soft:#e3cfa6;--muted:#8a8fa8;--muted-d:#5b5f78;--line:#e8e3d8;--card:#fff}
+:root{--ink:#14142b;--ink-2:#1d1d3a;--paper:#f6f3ec;--gold:#c9a96e;--gold-soft:#e3cfa6;--muted:#8a8fa8;--muted-d:#5b5f78;--line:#e8e3d8;--card:#fff;--pop:#ff6f5e}
 html{scroll-behavior:smooth}
 body{background:var(--paper);font-family:'Inter',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-.progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:90;background:linear-gradient(90deg,var(--gold),var(--gold-soft))}
+.progress{position:fixed;top:0;left:0;height:4px;width:0;z-index:90;background:linear-gradient(90deg,var(--pop),var(--gold))}
 .anav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:13px 24px;background:rgba(20,20,43,.78);backdrop-filter:saturate(160%) blur(14px);-webkit-backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid rgba(201,169,110,.18)}
 .anav .back{font-family:'Playfair Display',serif;font-weight:800;font-size:17px;color:var(--paper)}
 .anav .back span{color:var(--gold)}
@@ -534,7 +580,8 @@ a{color:inherit;text-decoration:none}
 .ahero .eyebrow{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
 .ahero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(46px,9vw,88px);line-height:.95;letter-spacing:-1.5px}
 .ahero h1 span{background:linear-gradient(120deg,var(--gold),var(--gold-soft));-webkit-background-clip:text;background-clip:text;color:transparent}
-.ahero .tag{margin-top:18px;font-size:14px;font-weight:300;letter-spacing:.5px;color:#d4d6e4}
+.ahero .edition{margin-top:16px;font-family:'Playfair Display',serif;font-style:italic;font-weight:600;font-size:clamp(20px,3.4vw,30px);color:var(--gold-soft);letter-spacing:-.3px}
+.ahero .tag{margin-top:14px;font-size:14px;font-weight:300;letter-spacing:.5px;color:#d4d6e4}
 .date-bar{margin:26px auto 0;max-width:520px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;align-items:center;padding-top:18px;border-top:1px solid rgba(255,255,255,.16)}
 .date-bar span{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#c2c5d8}
 .date-bar .issue{background:var(--gold);color:var(--ink);padding:3px 11px;border-radius:999px;font-weight:700}
@@ -555,18 +602,19 @@ a{color:inherit;text-decoration:none}
 .section{padding-top:52px}
 .sec-banner{position:relative;height:128px;border-radius:14px;overflow:hidden;background-size:cover;background-position:center;display:flex;align-items:flex-end}
 .sec-banner .sec-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,43,.3),rgba(20,20,43,.8))}
-.sec-banner .sec-head{position:relative;z-index:2;display:flex;align-items:center;gap:12px;padding:20px 24px}
+.sec-banner .sec-head{position:relative;z-index:2;display:flex;align-items:center;gap:11px;padding:20px 24px}
+.sec-banner .sec-emoji{font-size:22px;line-height:1}
 .sec-banner .dot{width:10px;height:10px;border-radius:50%}
-.sec-banner h2{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#fff}
+.sec-banner h2{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#fff}
 .dot.markets{background:#3a9bcf}.dot.tools{background:#5aa83a}.dot.labs{background:#b54a9e}.dot.pm{background:#cf9a3a}.dot.risk{background:#cf524a}
 .stories{margin-top:22px;display:flex;flex-direction:column;gap:22px}
-.story{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:30px 32px;transition:transform .2s,box-shadow .2s,border-color .2s}
-.story:hover{transform:translateY(-3px);box-shadow:0 22px 44px -26px rgba(20,20,43,.4);border-color:transparent}
-.story .tag{display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 10px;border-radius:999px;margin-bottom:14px}
-.story .tag .ic{width:12px;height:12px}
+.story{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px 32px;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s,border-color .3s}
+.story:hover{transform:translateY(-5px) scale(1.008);box-shadow:0 26px 48px -26px rgba(20,20,43,.45);border-color:transparent}
+.story .tag{display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 11px;border-radius:999px;margin-bottom:14px}
 .tag.markets{background:#e8f4f8;color:#2a7fa8}.tag.tools{background:#eef8e6;color:#4a8a2a}.tag.labs{background:#f8e8f4;color:#8a2a7a}.tag.pm{background:#f8f0e8;color:#8a5a2a}.tag.risk{background:#f8e8e8;color:#8a2a2a}
-.story h3{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;line-height:1.25;letter-spacing:-.3px;margin-bottom:12px}
-.story > p{font-size:15px;line-height:1.8;color:#42445a}
+.tag.markets::before{content:"📈 "}.tag.tools::before{content:"🛠️ "}.tag.labs::before{content:"🧪 "}.tag.pm::before{content:"🎯 "}.tag.risk::before{content:"⚠️ "}
+.story h3{font-family:'Playfair Display',serif;font-size:25px;font-weight:700;line-height:1.25;letter-spacing:-.3px;margin-bottom:12px}
+.story > p{font-size:16px;line-height:1.8;color:#3c3c50}
 .story > p strong{color:var(--ink);font-weight:600}
 .why-it-matters{margin-top:16px;padding:16px 20px;background:#faf7f0;border-left:3px solid var(--gold);border-radius:0 8px 8px 0}
 .why-it-matters p{font-size:13px;line-height:1.7;color:#5a5a6e;font-style:italic}
@@ -610,28 +658,29 @@ def render_article(d, idx=0):
     num = html.escape(d["num"] or str(idx + 1))
     hero = issue_image(d["num"], idx, "../") or ""
     title = d["title"] or "The Signal"
+    name = html.escape(d["name"])
 
     toc_links = ""
     secs_html = ""
     for si, s in enumerate(d["sectionlist"]):
         secimg = section_image(s["dot"]) or ""
         stories_html = ""
+        emoji = SECTION_EMOJI.get(s["dot"], "")
         for st in s["stories"]:
-            ic = icon_svg(st["tagcls"])
             stories_html += f"""
             <article class="story reveal">
-              <span class="tag {st['tagcls']}">{ic}{st['tag']}</span>
+              <span class="tag {st['tagcls']}">{st['tag']}</span>
               <h3>{st['title']}</h3>
               <p>{st['body']}</p>
               <div class="why-it-matters"><p>{st['why']}</p></div>
               <a class="source" href="{st['href']}" target="_blank" rel="noopener">{st['link']}</a>
             </article>"""
-        toc_links += f"""<a href="#sec-{si}" data-target="sec-{si}"><span class="dot {s['dot']}"></span>{s['name']}</a>"""
+        toc_links += f"""<a href="#sec-{si}" data-target="sec-{si}"><span class="dot {s['dot']}"></span>{emoji} {s['name']}</a>"""
         secs_html += f"""
         <section class="section sec reveal" id="sec-{si}">
           <div class="sec-banner" style="background-image:url('{secimg}')">
             <div class="sec-scrim"></div>
-            <div class="sec-head"><span class="dot {s['dot']}"></span><h2>{s['name']}</h2></div>
+            <div class="sec-head"><span class="sec-emoji">{emoji}</span><span class="dot {s['dot']}"></span><h2>{s['name']}</h2></div>
           </div>
           <div class="stories">{stories_html}</div>
         </section>"""
@@ -664,8 +713,9 @@ def render_article(d, idx=0):
     <div class="bg" style="background-image:url('{hero}')"></div>
     <div class="scrim"></div>
     <div class="inner">
-      <div class="eyebrow">{d['eyebrow']}</div>
+      <div class="eyebrow">{d['eyebrow']} · ☕ {d['read_min']} min read</div>
       <h1>The <span>Signal</span></h1>
+      <p class="edition">“{name}”</p>
       <p class="tag">AI · Public Markets · Product Management</p>
       <div class="date-bar">
         <span>{d['date_label']}</span>
