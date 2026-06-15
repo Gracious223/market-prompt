@@ -14,7 +14,9 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 permissions:
-  contents: write
+  contents: write          # commit/push the generated issue
+  id-token: write          # claude-code-action authenticates via OIDC
+  pull-requests: write     # required by claude-code-action
 
 jobs:
   generate:
