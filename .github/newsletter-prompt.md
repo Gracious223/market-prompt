@@ -1,49 +1,70 @@
 # Market Prompt — daily generation brief
 
-You are producing one issue of **Market Prompt**, a daily plain-English brief on
-AI, public markets, and product management for analysts and portfolio managers.
+You are producing one issue of **Market Prompt**, a daily plain-English brief for
+busy executives and curious beginners. Write `newsletters/<YYYY-MM-DD>.html` for
+today's date, matching the structure of the most recent file already in
+`newsletters/` (same `<head>`/CSS, hero, `intro`, five `section` blocks, `story`
+cards with a `tag`, `h3`, body `<p>`, a `why-it-matters` block, and a `source`
+link). Copy the latest dated issue as your template and replace the content.
 
-Write `newsletters/<YYYY-MM-DD>.html` for today's date. **Match the structure of
-the most recent file already in `newsletters/`** (same `<head>`/CSS, hero,
-`intro`, five `section` blocks, `story` cards with a `tag`, `h3`, body `<p>`, a
-`why-it-matters` block, and a `source` link). Do not invent the layout — copy the
-latest dated issue as your template and replace the content.
+## 1. What to cover — relevance bar (most important first)
 
-## Sourcing
+Lead with the stories that matter most to **AI in public markets**, then AI +
+finance more broadly. For every candidate story, ask: *"Does this change how a
+public-market investor, analyst, or AI product manager should think or act?"* If
+not, drop it. Prioritise, in order:
 
-Ground **every** story in a real, recent, linkable source. Scan these feeds and
-pick the items that genuinely move markets:
+1. **AI in public markets** — AI-company IPOs and earnings (OpenAI, Anthropic,
+   Nvidia, Microsoft, Google), AI-driven moves in stocks/indices, valuations,
+   chip/infrastructure supply, AI's effect on specific sectors (software, banks).
+2. **AI + finance** — AI in trading, research, risk, banking, regulation (SEC,
+   EU AI Act, FSB), and money flowing into AI (funding, capex).
+3. **Frontier AI that will hit markets next** — major model releases and
+   capabilities, but only with a clear "why this matters to markets" angle.
 
-- **The Rundown AI** (https://www.therundown.ai/) and its sister feed
-  **The Rundown Tech** — scan for AI/tech/macro items.
-- Primary/reputable outlets: Bloomberg, Reuters, Axios, the FT, CNBC, PBS, and
-  company/lab posts (OpenAI, Anthropic, Google, Nvidia, etc.).
-- Regulators and standards bodies where relevant (SEC, EU, FSB, etc.).
+Skip generic consumer-gadget or hobbyist AI news with no market relevance.
 
-### Rules for using The Rundown AI
+## 2. Who you're writing for — assume zero background
 
-- **Do not copy or republish their text.** Use them only as a *lead* — a pointer
-  to a development — then write your own original summary in Market Prompt's
-  voice from the underlying primary source.
-- **Attribute and link.** When a story originates from The Rundown AI/Tech, link
-  to them (or to the primary source they point to) in the `source` link.
-- **De-duplicate.** When The Rundown and another feed cover the same development,
-  merge them into a single story; prefer the most authoritative primary source
-  for the link, and don't run the same story twice across sections.
+Write so someone who knows **nothing about AI and nothing about finance** can
+follow every sentence. This is the most important rule.
 
-## Sections (use the five the template already defines)
+- **Explain every term the first time it appears**, in a short parenthetical in
+  plain words. Examples: "an IPO (the first time a company sells its shares to
+  the public)", "tokens (the small chunks of text an AI is billed by)", "a
+  buyback (when a company uses spare cash to buy its own shares, which usually
+  nudges the price up)", "market cap (the total value of all a company's
+  shares)".
+- No unexplained jargon, acronyms, or insider shorthand. If you must use a term,
+  define it.
+- Short sentences. Concrete words over abstract ones. Active voice.
+- Use a real, recent, linkable source for every story; attribute and link it.
 
-Public Markets · Tools for Analysts & PMs · From the Labs · AI Product
-Management · Watch Closely (risk/regulation).
+## 3. Sourcing
 
-## House style
+Scan these and pick the few items that clear the relevance bar above:
 
-- Plain English, no jargon. Define any unavoidable term inline.
-- Each story: a clear headline, 2–4 sentence body, and a **"Why this matters to
-  you"** paragraph aimed at an AI PM in public markets.
-- 6–11 short stories total. Keep the intro to a few sentences.
-- Three stat cards up top (number + one-line label) when you have good figures.
+- **The Rundown AI** (https://www.therundown.ai/) and **The Rundown Tech** — as
+  *leads* only. Do **not** copy or republish their wording; follow them to the
+  primary source and write your own original, beginner-friendly summary. Link to
+  them or the primary source, and **de-duplicate** when feeds overlap (one story,
+  best primary source).
+- Primary/reputable outlets: Bloomberg, Reuters, the FT, CNBC, Axios, PBS, and
+  company/lab/regulator posts.
 
-After writing the file, the workflow runs `python3 build.py`, which renders the
-issue into the site template and rebuilds the index — so you only need to produce
-the source HTML in the established structure.
+## 4. Format & length — built for executive skimming
+
+- **6–8 stories total** (quality over volume). Use the five sections the
+  template defines: Public Markets · Tools for Analysts & PMs · From the Labs ·
+  AI Product Management · Watch Closely.
+- Each story: a clear headline; a **2–3 sentence** body (short!); and a **"Why
+  this matters to you"** line of 1–2 sentences in plain English.
+- The card preview is built automatically from your `intro`, so write the intro
+  as **2–3 very short, punchy sentences** — each one a single, scannable idea an
+  executive can read in seconds.
+- Three stat cards up top (a number + a one-line plain-English label) when you
+  have solid figures.
+
+After you write the file, the workflow runs `python3 build.py`, which renders it
+into the site template and rebuilds the index — so you only produce the source
+HTML in the established structure.
