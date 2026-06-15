@@ -116,6 +116,62 @@ def _search(pattern, text, default=""):
     return m.group(1).strip() if m else default
 
 
+# The scheduled agent emits a richer "bespoke" layout (section-header pills,
+# featured + grid stories, a glossary box, pull-quotes, practice exercises).
+# We extract just the core stories so every issue renders through the one
+# Issue 6 template. Section pills map to our five dots; unmapped sections
+# (e.g. the "Public Markets 101" glossary) are dropped.
+PILL_DOT = {
+    "Public Markets": "markets",
+    "Agentic AI": "tools",
+    "From the Labs": "labs",
+    "AI Product Management": "pm",
+    "Regulation": "risk",
+}
+
+BESPOKE_STORY_RE = re.compile(
+    r'<div class="kicker[^"]*">(.*?)</div>\s*'
+    r'<h[23][^>]*>(.*?)</h[23]>\s*'
+    r'<p[^>]*>(.*?)</p>'
+    r'.*?<div class="wim">.*?<p[^>]*>(.*?)</p>'
+    r'.*?<a[^>]*href="(.*?)"[^>]*>(.*?)</a>',
+    re.S,
+)
+
+
+def parse_bespoke(text):
+    """Pull sections/stories/stats/intro out of the agent's bespoke layout.
+
+    Returns (sectionlist, stat_cards, intro_html, date_label). Only the core
+    news stories survive; glossary boxes, pull-quotes and "Research & Think
+    About" exercises have no slot in the Issue 6 template and are dropped.
+    """
+    sectionlist = []
+    for part in re.split(r'<div class="section-header"', text)[1:]:
+        name = _search(r'class="pill \w+">\s*(.*?)\s*<', part)
+        dot = PILL_DOT.get(name)
+        if not dot:
+            continue
+        stories = []
+        for m in BESPOKE_STORY_RE.finditer(part):
+            stories.append({
+                "tagcls": dot,
+                "tag": re.sub(r"<[^>]+>", "", m.group(1)).strip(),
+                "title": m.group(2).strip(),
+                "body": m.group(3).strip(),
+                "why": m.group(4).strip(),
+                "href": m.group(5).strip(),
+                "link": m.group(6).strip(),
+            })
+        if stories:
+            sectionlist.append({"name": name, "dot": dot, "stories": stories})
+
+    stats = re.findall(r'<div class="num">(.*?)</div>\s*<div class="desc">(.*?)</div>', text, re.S)
+    stat_cards = [(n.strip(), l.strip()) for n, l in stats][:3]
+    intro_html = _search(r'class="opening-band">\s*<p[^>]*>(.*?)</p>', text)
+    return sectionlist, stat_cards, intro_html
+
+
 def parse_issue(path: Path):
     text = path.read_text(encoding="utf-8")
 
@@ -151,8 +207,20 @@ def parse_issue(path: Path):
             })
         sectionlist.append({"name": name, "dot": dot, "stories": stories})
 
-    # Files we can't parse into our template (e.g. the scheduled agent's richer
-    # bespoke layout) are kept as-is and only indexed — never overwritten.
+    # If the standard template yielded nothing, this is the scheduled agent's
+    # bespoke layout — parse its stories so it renders through the same Issue 6
+    # template (and so future agent files normalise automatically on build).
+    if not sectionlist:
+        b_sections, b_stats, b_intro = parse_bespoke(text)
+        if b_sections:
+            sectionlist = b_sections
+            if b_stats:
+                stat_cards = b_stats
+            if b_intro:
+                intro_html = b_intro
+                summary = html.unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", intro_html))).strip()
+
+    # Anything we still can't parse is kept as-is and only indexed.
     external = len(sectionlist) == 0
     if not num:
         num = _search(r"Issue No\.\s*(\d+)", text, default="")
@@ -197,7 +265,7 @@ def parse_issue(path: Path):
 
     return {
         "file": path.name, "title": title, "eyebrow": eyebrow, "issue": issue, "num": num,
-        "date_label": date_label or sort_dt.strftime("%d %B %Y"), "intro_html": intro_html,
+        "date_label": sort_dt.strftime("%d %B %Y"), "intro_html": intro_html,
         "summary": summary, "stat_cards": stat_cards, "sectionlist": sectionlist,
         "sections": dots, "sort_dt": sort_dt, "external": external, "lead": lead,
         "name": name, "read_min": read_min,
@@ -382,7 +450,7 @@ q&&q.addEventListener('input',apply);
 pills.forEach(p=>p.addEventListener('click',()=>{pills.forEach(x=>x.classList.remove('active'));p.classList.add('active');activeSection=p.dataset.section;apply();}));
 const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-const SUBSCRIBE_TO='EfiaAmankwa@outlook.com';
+const SUBSCRIBE_TO='subscribe@thesignal.news';
 const modal=document.getElementById('subModal');
 const subForm=document.getElementById('subForm');
 const subDone=document.getElementById('subDone');
@@ -531,7 +599,7 @@ def render(issues):
 
   <footer class="site-footer">
     <div class="ft">The <span>Signal</span></div>
-    <p>Curated by Efia Amankwa · AI Product Manager, Public Markets</p>
+    <p>The Signal · AI in Public Markets, for analysts &amp; portfolio managers</p>
     <div><button class="foot-sub" type="button" data-subscribe>Subscribe for the daily brief →</button></div>
     <div class="meta">{count} ISSUES · SITE REBUILT {built.upper()}</div>
   </footer>
@@ -732,7 +800,7 @@ def render_article(d, idx=0):
       <div class="date-bar">
         <span>{d['date_label']}</span>
         <span class="issue">{d['issue']}</span>
-        <span>Curated for Efia</span>
+        <span>Intelligence Brief</span>
       </div>
     </div>
   </header>
@@ -748,7 +816,7 @@ def render_article(d, idx=0):
 
   <footer class="afooter">
     <div class="ft">The <span>Signal</span></div>
-    <p>Curated for Efia Amankwa · AI Product Manager, Public Markets<br/>{d['issue']} · {d['date_label']}</p>
+    <p>The Signal · AI in Public Markets<br/>{d['issue']} · {d['date_label']}</p>
     <div class="actions">
       <a class="b gold" href="../index.html">← Back to all issues</a>
       <button class="b" type="button" data-subscribe>Subscribe</button>

@@ -1,4 +1,4 @@
-# Claude Briefing — Efia Amankwa
+# Claude Briefing
 
 ## Who You Are
 
