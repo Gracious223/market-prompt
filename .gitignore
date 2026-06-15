@@ -1,1 +1,6 @@
 .DS_Store
+
+# Stray nested clones — must never be committed as gitlinks (breaks the
+# GitHub Pages checkout, which runs `submodules: recursive`).
+/data-vscode-project/
+/awesome-generative-ai-guide/
