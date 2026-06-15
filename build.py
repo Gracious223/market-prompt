@@ -211,6 +211,18 @@ def collect():
             continue
         issues.append(parse_issue(path))
     issues.sort(key=lambda i: i["sort_dt"], reverse=True)
+
+    # Issue numbers are derived here, not authored in the files. Any number
+    # hard-coded in a source file (by hand or by the scheduled agent) is
+    # ignored and replaced with its chronological rank — oldest = No. 1. This
+    # keeps numbering gap-free and consistent no matter who adds a file, and
+    # avoids the drift/collisions that happen when two sources pick numbers
+    # independently. Same-date files simply take adjacent numbers.
+    total = len(issues)
+    for idx, d in enumerate(issues):
+        n = total - idx  # list is newest-first, so the last entry is No. 1
+        d["num"] = f"{n:02d}"
+        d["issue"] = f"Issue No. {n:02d}"
     return issues
 
 
@@ -753,8 +765,16 @@ def main():
     issues = collect()
     OUTPUT.write_text(render(issues), encoding="utf-8")
     for idx, d in enumerate(issues):
-        if not d.get("external"):
-            (NEWSLETTERS / d["file"]).write_text(render_article(d, idx), encoding="utf-8")
+        path = NEWSLETTERS / d["file"]
+        if d.get("external"):
+            # Bespoke layouts aren't re-rendered, but their visible issue
+            # number is still kept in sync with the chronological numbering.
+            text = path.read_text(encoding="utf-8")
+            synced = re.sub(r"Issue No\.\s*\d+", d["issue"], text)
+            if synced != text:
+                path.write_text(synced, encoding="utf-8")
+        else:
+            path.write_text(render_article(d, idx), encoding="utf-8")
     print(f"Built index.html + {len(issues)} article page(s) from {len(_IMAGES)} image(s):")
     for i in issues:
         n_stories = sum(len(s["stories"]) for s in i["sectionlist"])
