@@ -1,0 +1,61 @@
+name: Generate daily brief (Market Prompt)
+
+# Generates a fresh, web-grounded issue each weekday morning and commits it.
+# Requires repo secret ANTHROPIC_API_KEY. Trigger manually from the Actions tab
+# (workflow_dispatch) to test before relying on the schedule.
+
+on:
+  schedule:
+    - cron: '0 6 * * 1-5'   # 06:00 UTC, Mon–Fri
+  workflow_dispatch:
+
+# Future-proof against the Node 20 runner deprecation.
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - name: Compute today's date
+        id: date
+        run: echo "today=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+
+      - name: Generate the brief with Claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Today's date is ${{ steps.date.outputs.today }}.
+            Read .github/newsletter-prompt.md and follow it exactly to produce
+            newsletters/${{ steps.date.outputs.today }}.html. Use WebSearch to
+            ground every story in a real, recent source (always include The
+            Rundown AI and The Rundown Tech among the feeds you scan), attribute
+            and link each story, and match the structure of the most recent file
+            already in the newsletters/ folder.
+          claude_args: |
+            --max-turns 40
+            --model claude-sonnet-4-6
+            --allowedTools WebSearch,WebFetch,Read,Glob,Write
+
+      - name: Rebuild index + article pages
+        run: python3 build.py
+
+      - name: Commit the new issue
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add newsletters/*.html index.html
+          if git diff --cached --quiet; then
+            echo "No new issue generated — nothing to commit."
+          else
+            git commit -m "Add Market Prompt — ${{ steps.date.outputs.today }}"
+            git push
+          fi

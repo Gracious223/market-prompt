@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-The Signal — site builder.
+Market Prompt — site builder.
 
   python3 build.py
 
 Does two things:
   1. Regenerates index.html (the landing page) from the newsletters/ folder.
   2. Re-renders each newsletter into a modern, interactive article page,
-     reusing the same navy/gold brand. Content is parsed out of each file and
+     reusing the same ink/electric-blue brand. Content is parsed out of each file and
      re-emitted, so the step is idempotent (safe to run repeatedly).
 
 Real cover/hero images live in assets/img/ (downloaded once). No other deps.
@@ -231,7 +231,7 @@ def parse_issue(path: Path):
             dek = _search(r'class="story-body"[^>]*>.*?<p[^>]*>(.*?)</p>', text)
         summary = html.unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", dek))).strip()
         if not summary:
-            summary = _search(r'class="subtitle">(.*?)<', text) or "Daily edition of The Signal."
+            summary = _search(r'class="subtitle">(.*?)<', text) or "Daily edition of Market Prompt."
     else:
         lead = sectionlist[0]["name"]
 
@@ -246,9 +246,9 @@ def parse_issue(path: Path):
     elif external:
         lead_headline = _search(r'class="featured-inner">.*?<h2[^>]*>(.*?)</h2>', text) or lead
     else:
-        lead_headline = "The Signal"
+        lead_headline = "Market Prompt"
     lead_headline = html.unescape(re.sub(r"<[^>]+>", "", lead_headline)).strip()
-    name = EDITION_NAMES.get(path.stem) or lead_headline or "The Signal"
+    name = EDITION_NAMES.get(path.stem) or lead_headline or "Market Prompt"
 
     # Rough reading time from the prose only (not markup/CSS).
     if external:
@@ -262,6 +262,10 @@ def parse_issue(path: Path):
 
     m = re.match(r"(\d{4})-(\d{2})-(\d{2})", path.stem)
     sort_dt = datetime(*map(int, m.groups())) if m else datetime.fromtimestamp(path.stat().st_mtime)
+
+    # Title is generated from the brand, not echoed from the source file's
+    # stale <title>, so the rebrand applies everywhere (page titles + search).
+    title = f"Market Prompt — {name} · {sort_dt.strftime('%d %B %Y')}"
 
     return {
         "file": path.name, "title": title, "eyebrow": eyebrow, "issue": issue, "num": num,
@@ -301,45 +305,61 @@ def collect():
 INDEX_CSS = """
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--ink:#14142b;--ink-2:#1d1d3a;--paper:#f6f3ec;--gold:#c9a96e;--gold-soft:#e3cfa6;--muted:#8a8fa8;--muted-d:#5b5f78;--line:#e8e3d8;--card:#fff;--pop:#ff6f5e;--r:18px}
+/* Market Prompt — Ink & Electric Blue. --gold holds the electric-blue accent. */
+:root{--ink:#0f172a;--ink-2:#1e293b;--paper:#f8fafc;--gold:#2563eb;--gold-soft:#60a5fa;--muted:#94a3b8;--muted-d:#64748b;--line:#e2e8f0;--card:#fff;--pop:#0ea5e9;--r:18px}
 html{scroll-behavior:smooth}
 body{background:var(--paper);font-family:'Inter',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 .mono{font-family:'Space Mono',monospace}
-.nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:rgba(20,20,43,.72);backdrop-filter:saturate(160%) blur(14px);-webkit-backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid rgba(201,169,110,.18)}
+.nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:rgba(15,23,42,.72);backdrop-filter:saturate(160%) blur(14px);-webkit-backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid rgba(37,99,235,.18)}
 .nav .brand{font-family:'Playfair Display',serif;font-weight:800;font-size:19px;color:var(--paper)}
 .nav .brand span{color:var(--gold)}
 .nav .links{display:flex;align-items:center;gap:26px}
 .nav .links a{font-size:12px;font-weight:500;letter-spacing:.3px;color:#b9bcd0;transition:color .15s}
 .nav .links a:hover{color:var(--gold)}
 .nav .cta{border:none;cursor:pointer;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:8px 15px;border-radius:999px;transition:transform .15s,box-shadow .15s}
-.nav .cta:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(201,169,110,.4)}
+.nav .cta:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(37,99,235,.4)}
 @media (max-width:640px){.nav .links a:not(.cta){display:none}}
 .hero{position:relative;overflow:hidden;background:var(--ink);color:var(--paper);padding:96px 24px 104px;text-align:center;isolation:isolate}
 .hero::before,.hero::after{content:"";position:absolute;z-index:-2;border-radius:50%;filter:blur(70px);opacity:.55}
-.hero::before{width:560px;height:560px;top:-220px;left:50%;transform:translateX(-60%);background:radial-gradient(circle,rgba(201,169,110,.55),transparent 65%);animation:float1 14s ease-in-out infinite}
+.hero::before{width:560px;height:560px;top:-220px;left:50%;transform:translateX(-60%);background:radial-gradient(circle,rgba(37,99,235,.55),transparent 65%);animation:float1 14s ease-in-out infinite}
 .hero::after{width:520px;height:520px;bottom:-260px;right:50%;transform:translateX(60%);background:radial-gradient(circle,rgba(90,110,200,.42),transparent 65%);animation:float2 18s ease-in-out infinite}
 .hero .grid-bg{position:absolute;inset:0;z-index:-1;opacity:.5;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:52px 52px;mask-image:radial-gradient(ellipse 75% 70% at 50% 35%,#000 40%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 35%,#000 40%,transparent 100%)}
 @keyframes float1{0%,100%{transform:translateX(-60%) translateY(0)}50%{transform:translateX(-55%) translateY(26px)}}
 @keyframes float2{0%,100%{transform:translateX(60%) translateY(0)}50%{transform:translateX(54%) translateY(-30px)}}
-.hero .kicker{display:inline-flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,169,110,.35);border-radius:999px;padding:7px 16px;margin-bottom:30px;background:rgba(201,169,110,.06)}
+.hero .kicker{display:inline-flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(37,99,235,.35);border-radius:999px;padding:7px 16px;margin-bottom:30px;background:rgba(37,99,235,.06)}
 .hero .dot{width:7px;height:7px;border-radius:50%;background:#5ad17a;box-shadow:0 0 0 0 rgba(90,209,122,.7);animation:pulse 2s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(90,209,122,.6)}70%{box-shadow:0 0 0 8px rgba(90,209,122,0)}100%{box-shadow:0 0 0 0 rgba(90,209,122,0)}}
 .hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(54px,11vw,104px);line-height:.94;letter-spacing:-2px}
 .hero h1 span{background:linear-gradient(120deg,var(--gold),var(--gold-soft));-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero .tagline{margin-top:22px;font-size:clamp(14px,2.3vw,17px);font-weight:300;letter-spacing:.4px;color:#c2c5d8}
 .hero .sub{margin:14px auto 0;max-width:520px;font-size:14px;line-height:1.7;color:var(--muted)}
-.hero .actions{margin-top:38px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.hero-sub{margin:34px auto 0;max-width:540px;width:100%}
+.hero-sub-label{display:block;font-size:14px;font-weight:600;color:var(--paper);margin-bottom:12px}
+.hero-sub-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.hero-sub-row input{flex:1;min-width:220px;padding:13px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:var(--paper);font-size:14px;font-family:inherit}
+.hero-sub-row input::placeholder{color:rgba(255,255,255,.5)}
+.hero-sub-row input:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,.14)}
+.hero-sub-row .btn{white-space:nowrap}
+.hero-sub-fine{margin-top:12px;font-size:11.5px;letter-spacing:.3px;color:var(--muted)}
+.hero-sub-fine.ok{color:#34d399}.hero-sub-fine.err{color:#f87171}
+.card-points{list-style:none;margin:13px 0 0;padding:0;display:flex;flex-direction:column;gap:7px;flex:1}
+.card-points li{position:relative;padding-left:16px;font-size:13px;line-height:1.55;color:#475569}
+.card-points li::before{content:"\\25B8";position:absolute;left:0;top:0;color:var(--gold);font-size:12px}
+.feat-points{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.feat-points li{position:relative;padding-left:18px;font-size:14.5px;line-height:1.55;color:#44475e}
+.feat-points li::before{content:"\\25B8";position:absolute;left:0;color:var(--gold)}
+.hero .actions{margin-top:20px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 .btn{font-size:13px;font-weight:600;letter-spacing:.3px;padding:13px 26px;border-radius:999px;transition:transform .15s,box-shadow .15s,background .15s}
-.btn-gold{background:var(--gold);color:var(--ink)}
-.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(201,169,110,.42)}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(37,99,235,.42)}
 .btn-ghost{border:1px solid rgba(255,255,255,.22);color:var(--paper)}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
 .hero-wave{display:block;width:100%;height:40px;margin-top:-1px}
 .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
 .featured{margin:-48px auto 0;position:relative;z-index:5}
-.feat-card{display:grid;grid-template-columns:230px 1fr auto;align-items:stretch;gap:30px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 24px 20px 20px;box-shadow:0 30px 60px -28px rgba(20,20,43,.4);transition:transform .2s,box-shadow .2s}
-.feat-card:hover{transform:translateY(-3px);box-shadow:0 38px 70px -28px rgba(20,20,43,.5)}
+.feat-card{display:grid;grid-template-columns:230px 1fr auto;align-items:stretch;gap:30px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 24px 20px 20px;box-shadow:0 30px 60px -28px rgba(15,23,42,.4);transition:transform .2s,box-shadow .2s}
+.feat-card:hover{transform:translateY(-3px);box-shadow:0 38px 70px -28px rgba(15,23,42,.5)}
 .feat-cover{position:relative;border-radius:13px;overflow:hidden;min-height:184px}
 .feat-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .feat-cover .ov{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;background:linear-gradient(180deg,rgba(19,19,42,.35),rgba(19,19,42,.72))}
@@ -359,7 +379,7 @@ a{color:inherit;text-decoration:none}
 .toolbar h2{font-family:'Playfair Display',serif;font-size:36px;font-weight:800;margin-top:4px;letter-spacing:-.5px}
 .toolbar .count{color:var(--muted-d);font-size:14px;font-weight:400;margin-left:10px}
 .search input{font-family:'Inter',sans-serif;font-size:14px;padding:13px 18px 13px 42px;width:300px;max-width:78vw;border:1px solid var(--line);border-radius:999px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%238a8fa8' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E") no-repeat 16px center;color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s}
-.search input:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(201,169,110,.14)}
+.search input:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(37,99,235,.14)}
 .filters{display:flex;gap:9px;flex-wrap:wrap;margin:0 0 28px}
 .pill{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:9px 15px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--muted-d);cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:7px}
 .pill:hover{border-color:var(--gold);color:var(--ink)}
@@ -368,12 +388,12 @@ a{color:inherit;text-decoration:none}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:24px;padding-bottom:90px}
 .card{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:0;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease,border-color .3s ease}
 .card-rule{position:absolute;top:0;left:0;right:0;height:4px;z-index:4;background:linear-gradient(90deg,var(--pop),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
-.card:hover{transform:translateY(-8px) scale(1.015);box-shadow:0 28px 52px -22px rgba(20,20,43,.5);border-color:transparent}
+.card:hover{transform:translateY(-8px) scale(1.015);box-shadow:0 28px 52px -22px rgba(15,23,42,.5);border-color:transparent}
 .card:hover .card-rule{transform:scaleX(1)}
 .cover{position:relative;height:172px;overflow:hidden}
 .cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
 .card:hover .cover img{transform:scale(1.07)}
-.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,43,.05) 40%,rgba(20,20,43,.62))}
+.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,23,42,.05) 40%,rgba(15,23,42,.62))}
 .cover-num{position:absolute;left:16px;bottom:12px;z-index:2;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1px;color:#fff;text-transform:uppercase}
 .cover-num b{color:var(--gold);margin-left:4px}
 .card-body{padding:20px 26px 24px;display:flex;flex-direction:column;flex:1}
@@ -409,16 +429,16 @@ a{color:inherit;text-decoration:none}
 @keyframes fade{from{opacity:0}}
 @keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}}
 .modal .top{background:var(--ink);color:var(--paper);padding:32px 30px 26px;text-align:center;position:relative;overflow:hidden}
-.modal .top::after{content:"";position:absolute;width:260px;height:260px;top:-160px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(201,169,110,.5),transparent 65%);filter:blur(40px)}
+.modal .top::after{content:"";position:absolute;width:260px;height:260px;top:-160px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(37,99,235,.5),transparent 65%);filter:blur(40px)}
 .modal .top .ey{position:relative;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold)}
 .modal .top h3{position:relative;font-family:'Playfair Display',serif;font-size:28px;font-weight:800;margin-top:8px}
 .modal .top p{position:relative;font-size:13px;color:#c2c5d8;margin-top:8px;line-height:1.6}
 .modal .body{padding:26px 30px 30px}
 .modal form{display:flex;flex-direction:column;gap:12px}
 .modal input{font-family:'Inter',sans-serif;font-size:14px;padding:14px 16px;border:1px solid var(--line);border-radius:10px;outline:none;transition:border-color .15s,box-shadow .15s}
-.modal input:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(201,169,110,.14)}
+.modal input:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(37,99,235,.14)}
 .modal button.sub{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:var(--gold);color:var(--ink);border:none;border-radius:10px;padding:14px;cursor:pointer;transition:transform .15s,box-shadow .15s}
-.modal button.sub:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(201,169,110,.4)}
+.modal button.sub:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(37,99,235,.4)}
 .modal .fine{font-size:11px;color:var(--muted);text-align:center;margin-top:2px}
 .modal .x{position:absolute;top:14px;right:16px;z-index:2;background:rgba(255,255,255,.12);color:var(--paper);border:none;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:18px;line-height:1;transition:background .15s}
 .modal .x:hover{background:rgba(255,255,255,.25)}
@@ -450,7 +470,40 @@ q&&q.addEventListener('input',apply);
 pills.forEach(p=>p.addEventListener('click',()=>{pills.forEach(x=>x.classList.remove('active'));p.classList.add('active');activeSection=p.dataset.section;apply();}));
 const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-const SUBSCRIBE_TO='subscribe@thesignal.news';
+// Where subscribe requests are delivered until an API handler is wired up.
+const SUBSCRIBE_TO='EfiaAmankwa@outlook.com';
+// Set this to your Loops.so / Resend (or other) endpoint to capture leads via
+// API. While empty, the forms fall back to opening the visitor's mail client.
+const SUBSCRIBE_ENDPOINT='';
+
+// Shared subscribe handler: POST to the API if configured, else mailto fallback.
+async function submitSubscribe(email){
+  if(!email||!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(email)){return {ok:false,msg:'Please enter a valid email.'};}
+  if(SUBSCRIBE_ENDPOINT){
+    try{
+      const r=await fetch(SUBSCRIBE_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,source:'market-prompt'})});
+      if(r.ok){return {ok:true,msg:"You're on the list — tomorrow's brief lands at 7:00 AM."};}
+      return {ok:false,msg:'Something went wrong. Please try again.'};
+    }catch(_){return {ok:false,msg:'Network error. Please try again.'};}
+  }
+  const subject=encodeURIComponent('Subscribe me to Market Prompt');
+  const body=encodeURIComponent('Please add this address to the Market Prompt daily brief:\\n\\n'+email);
+  window.location.href='mailto:'+SUBSCRIBE_TO+'?subject='+subject+'&body='+body;
+  return {ok:true,msg:'Almost there — your email app will open. Hit send to confirm.'};
+}
+
+// Hero inline form.
+const heroForm=document.getElementById('heroSubForm');
+const heroMsg=document.getElementById('heroSubMsg');
+heroForm&&heroForm.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const email=document.getElementById('heroEmail').value.trim();
+  const res=await submitSubscribe(email);
+  heroMsg.textContent=res.msg;
+  heroMsg.className='hero-sub-fine '+(res.ok?'ok':'err');
+  if(res.ok)heroForm.reset();
+});
+
 const modal=document.getElementById('subModal');
 const subForm=document.getElementById('subForm');
 const subDone=document.getElementById('subDone');
@@ -459,15 +512,28 @@ function closeModal(){modal.hidden=true;document.body.style.overflow='';subForm.
 document.querySelectorAll('[data-subscribe]').forEach(b=>b.addEventListener('click',openModal));
 modal.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',closeModal));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)closeModal();});
-subForm&&subForm.addEventListener('submit',e=>{
+subForm&&subForm.addEventListener('submit',async e=>{
   e.preventDefault();
   const email=document.getElementById('subEmail').value.trim();
-  const subject=encodeURIComponent('Subscribe me to The Signal');
-  const body=encodeURIComponent('Please add this address to The Signal daily brief:\\n\\n'+email);
-  window.location.href='mailto:'+SUBSCRIBE_TO+'?subject='+subject+'&body='+body;
-  subForm.hidden=true;subDone.hidden=false;
+  const res=await submitSubscribe(email);
+  if(res.ok){subForm.hidden=true;subDone.hidden=false;}
 });
 """
+
+
+def summary_points(summary, n=3):
+    """Split a summary into up to n short sentences for skimmable bullets."""
+    parts = re.split(r"(?<=[.!?])\s+", (summary or "").strip())
+    parts = [p.strip() for p in parts if p.strip()]
+    return parts[:n]
+
+
+def points_html(summary, cls="card-points", n=3):
+    pts = summary_points(summary, n)
+    if not pts:
+        return ""
+    lis = "".join(f"<li>{html.escape(p)}</li>" for p in pts)
+    return f'<ul class="{cls}">{lis}</ul>'
 
 
 def render_card(issue, index=0):
@@ -490,11 +556,11 @@ def render_card(issue, index=0):
           </div>
           <div class="card-body">
             <div class="card-top">
-              <span class="card-tag">The Signal</span>
+              <span class="card-tag">Market Prompt</span>
               <span class="card-date">{html.escape(issue["date_label"])} · {issue["read_min"]} min</span>
             </div>
             <h3 class="card-title">{html.escape(issue["name"])}</h3>
-            <p class="card-summary">{html.escape(issue["summary"])}</p>
+            {points_html(issue["summary"], "card-points")}
             <div class="card-foot">
               <div class="chips">{chips}</div>
               <span class="read">Read<span class="arr">→</span></span>
@@ -505,7 +571,9 @@ def render_card(issue, index=0):
 
 def render(issues):
     latest = issues[0] if issues else None
-    cards = "\n".join(render_card(i, n) for n, i in enumerate(issues))
+    # The most recent issue is shown in the "Latest" hero card above the grid,
+    # so skip index 0 here to avoid duplicating it in the All Issues archive.
+    cards = "\n".join(render_card(i, n) for n, i in enumerate(issues) if n >= 1)
     count = len(issues)
     built = datetime.now().strftime("%d %B %Y")
 
@@ -515,7 +583,7 @@ def render(issues):
     latest_href = f'newsletters/{latest["file"]}' if latest else "#"
     latest_chips = "".join(chip_html(s) for s in latest["sections"]) if latest else ""
     latest_img = issue_image(latest["num"], 0, "") if latest else ""
-    latest_name = html.escape(latest["name"]) if latest else "The Signal"
+    latest_name = html.escape(latest["name"]) if latest else "Market Prompt"
     latest_read = latest["read_min"] if latest else 1
 
     present = [k for k in SECTION_LABELS if any(k in i["sections"] for i in issues)]
@@ -528,14 +596,14 @@ def render(issues):
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Signal — AI · Public Markets · Product</title>
-  <meta name="description" content="The Signal — a daily intelligence brief on AI, public markets, and product management." />
+  <title>Market Prompt — AI · Public Markets · Product</title>
+  <meta name="description" content="Market Prompt — a daily intelligence brief on AI, public markets, and product management." />
   <script>document.documentElement.className = 'js';</script>
   <style>{INDEX_CSS}</style>
 </head>
 <body>
   <nav class="nav">
-    <a class="brand" href="#top">The <span>Signal</span></a>
+    <a class="brand" href="#top">Market <span>Prompt</span></a>
     <div class="links">
       <a href="#issues">Issues</a>
       <a href="{latest_href}">Latest</a>
@@ -546,16 +614,24 @@ def render(issues):
   <header class="hero" id="top">
     <div class="grid-bg"></div>
     <div class="kicker"><span class="dot"></span> 📰 Fresh every morning · {built}</div>
-    <h1>The <span>Signal</span></h1>
+    <h1>Market <span>Prompt</span></h1>
     <p class="tagline">AI · Public Markets · Product — minus the jargon</p>
     <p class="sub">Your daily 5-minute catch-up on the AI news that actually moves markets. Plain English, no fluff, one quick read.</p>
+    <form class="hero-sub" id="heroSubForm" novalidate>
+      <label class="hero-sub-label" for="heroEmail">Enter your email to get tomorrow's brief at 7:00&nbsp;AM.</label>
+      <div class="hero-sub-row">
+        <input id="heroEmail" name="email" type="email" required placeholder="you@company.com" aria-label="Email address" autocomplete="email" />
+        <button class="btn btn-gold" type="submit">Get the brief →</button>
+      </div>
+      <div class="hero-sub-fine" id="heroSubMsg">Free · delivered 7:00&nbsp;AM daily · unsubscribe anytime</div>
+    </form>
     <div class="actions">
-      <a class="btn btn-gold" href="{latest_href}">Read today's issue →</a>
+      <a class="btn btn-ghost" href="{latest_href}">Read today's issue →</a>
       <a class="btn btn-ghost" href="#issues">Browse all issues</a>
     </div>
   </header>
   <svg class="hero-wave" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0,40 L0,18 C240,40 480,40 720,24 C960,8 1200,8 1440,22 L1440,40 Z" fill="#14142b"/>
+    <path d="M0,40 L0,18 C240,40 480,40 720,24 C960,8 1200,8 1440,22 L1440,40 Z" fill="#0f172a"/>
   </svg>
 
   <div class="wrap">
@@ -572,7 +648,7 @@ def render(issues):
         <div class="feat-body">
           <div class="ey">🔥 Hot off the press · {latest_read} min read</div>
           <h3 class="feat-name">{latest_name}</h3>
-          <p>{latest_summary}</p>
+          {points_html(latest["summary"] if latest else "", "feat-points")}
           <div class="chips">{latest_chips}</div>
         </div>
         <span class="feat-cta">Read now →</span>
@@ -598,18 +674,18 @@ def render(issues):
   </div>
 
   <footer class="site-footer">
-    <div class="ft">The <span>Signal</span></div>
-    <p>The Signal · AI in Public Markets, for analysts &amp; portfolio managers</p>
+    <div class="ft">Market <span>Prompt</span></div>
+    <p>Market Prompt · AI in Public Markets, for analysts &amp; portfolio managers</p>
     <div><button class="foot-sub" type="button" data-subscribe>Subscribe for the daily brief →</button></div>
     <div class="meta">{count} ISSUES · SITE REBUILT {built.upper()}</div>
   </footer>
 
-  <div class="modal" id="subModal" hidden role="dialog" aria-modal="true" aria-label="Subscribe to The Signal">
+  <div class="modal" id="subModal" hidden role="dialog" aria-modal="true" aria-label="Subscribe to Market Prompt">
     <div class="backdrop" data-close></div>
     <div class="dialog">
       <div class="top">
         <button class="x" type="button" data-close aria-label="Close">×</button>
-        <div class="ey">The Signal · Daily Brief</div>
+        <div class="ey">Market Prompt · Daily Brief</div>
         <h3>Never miss the signal.</h3>
         <p>One sharp read each morning — AI, public markets, and product — straight to your inbox.</p>
       </div>
@@ -640,12 +716,13 @@ def render(issues):
 ARTICLE_CSS = """
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--ink:#14142b;--ink-2:#1d1d3a;--paper:#f6f3ec;--gold:#c9a96e;--gold-soft:#e3cfa6;--muted:#8a8fa8;--muted-d:#5b5f78;--line:#e8e3d8;--card:#fff;--pop:#ff6f5e}
+/* Market Prompt — Ink & Electric Blue. --gold holds the electric-blue accent. */
+:root{--ink:#0f172a;--ink-2:#1e293b;--paper:#f8fafc;--gold:#2563eb;--gold-soft:#60a5fa;--muted:#94a3b8;--muted-d:#64748b;--line:#e2e8f0;--card:#fff;--pop:#0ea5e9}
 html{scroll-behavior:smooth}
 body{background:var(--paper);font-family:'Inter',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 .progress{position:fixed;top:0;left:0;height:4px;width:0;z-index:90;background:linear-gradient(90deg,var(--pop),var(--gold))}
-.anav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:13px 24px;background:rgba(20,20,43,.78);backdrop-filter:saturate(160%) blur(14px);-webkit-backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid rgba(201,169,110,.18)}
+.anav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:13px 24px;background:rgba(15,23,42,.78);backdrop-filter:saturate(160%) blur(14px);-webkit-backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid rgba(37,99,235,.18)}
 .anav .back{font-family:'Playfair Display',serif;font-weight:800;font-size:17px;color:var(--paper)}
 .anav .back span{color:var(--gold)}
 .anav .back:hover{opacity:.85}
@@ -655,7 +732,7 @@ a{color:inherit;text-decoration:none}
 .anav .sub:hover{transform:translateY(-1px)}
 .ahero{position:relative;min-height:64vh;display:flex;align-items:flex-end;color:var(--paper);overflow:hidden;isolation:isolate}
 .ahero .bg{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center;transform:scale(1.05)}
-.ahero .scrim{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(20,20,43,.45) 0%,rgba(20,20,43,.6) 45%,rgba(20,20,43,.92) 100%)}
+.ahero .scrim{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(15,23,42,.45) 0%,rgba(15,23,42,.6) 45%,rgba(15,23,42,.92) 100%)}
 .ahero .inner{max-width:820px;margin:0 auto;width:100%;padding:48px 24px 56px;text-align:center}
 .ahero .eyebrow{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
 .ahero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(46px,9vw,88px);line-height:.95;letter-spacing:-1.5px}
@@ -671,7 +748,7 @@ a{color:inherit;text-decoration:none}
 .acontent{max-width:820px;margin:0 auto;padding:8px 24px 40px;position:relative}
 .stat-row{display:flex;gap:14px;margin:40px 0 8px;flex-wrap:wrap}
 .stat-card{flex:1;min-width:150px;background:var(--ink);border-radius:12px;padding:24px 18px;text-align:center;transition:transform .2s,box-shadow .2s}
-.stat-card:hover{transform:translateY(-3px);box-shadow:0 18px 36px -20px rgba(20,20,43,.6)}
+.stat-card:hover{transform:translateY(-3px);box-shadow:0 18px 36px -20px rgba(15,23,42,.6)}
 .stat-card .number{font-family:'Playfair Display',serif;font-size:36px;font-weight:800;color:var(--gold);line-height:1}
 .stat-card .label{font-size:10px;font-weight:500;color:#a7abc4;letter-spacing:.8px;text-transform:uppercase;margin-top:10px;line-height:1.5}
 .toc{position:fixed;top:50%;right:max(16px,calc((100vw - 820px)/2 - 150px));transform:translateY(-50%);z-index:40;display:none;flex-direction:column;gap:10px}
@@ -681,7 +758,7 @@ a{color:inherit;text-decoration:none}
 .toc a.active{opacity:1;color:var(--ink);font-weight:700}
 .section{padding-top:52px}
 .sec-banner{position:relative;height:128px;border-radius:14px;overflow:hidden;background-size:cover;background-position:center;display:flex;align-items:flex-end}
-.sec-banner .sec-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,43,.3),rgba(20,20,43,.8))}
+.sec-banner .sec-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,23,42,.3),rgba(15,23,42,.8))}
 .sec-banner .sec-head{position:relative;z-index:2;display:flex;align-items:center;gap:11px;padding:20px 24px}
 .sec-banner .sec-emoji{font-size:22px;line-height:1}
 .sec-banner .dot{width:10px;height:10px;border-radius:50%}
@@ -689,7 +766,7 @@ a{color:inherit;text-decoration:none}
 .dot.markets{background:#3a9bcf}.dot.tools{background:#5aa83a}.dot.labs{background:#b54a9e}.dot.pm{background:#cf9a3a}.dot.risk{background:#cf524a}
 .stories{margin-top:22px;display:flex;flex-direction:column;gap:22px}
 .story{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px 32px;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s,border-color .3s}
-.story:hover{transform:translateY(-5px) scale(1.008);box-shadow:0 26px 48px -26px rgba(20,20,43,.45);border-color:transparent}
+.story:hover{transform:translateY(-5px) scale(1.008);box-shadow:0 26px 48px -26px rgba(15,23,42,.45);border-color:transparent}
 .story .tag{display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 11px;border-radius:999px;margin-bottom:14px}
 .tag.markets{background:#e8f4f8;color:#2a7fa8}.tag.tools{background:#eef8e6;color:#4a8a2a}.tag.labs{background:#f8e8f4;color:#8a2a7a}.tag.pm{background:#f8f0e8;color:#8a5a2a}.tag.risk{background:#f8e8e8;color:#8a2a2a}
 .tag.markets::before{content:"📈 "}.tag.tools::before{content:"🛠️ "}.tag.labs::before{content:"🧪 "}.tag.pm::before{content:"🎯 "}.tag.risk::before{content:"⚠️ "}
@@ -737,7 +814,7 @@ ARTICLE_JS = """
 def render_article(d, idx=0):
     num = html.escape(d["num"] or str(idx + 1))
     hero = issue_image(d["num"], idx, "../") or ""
-    title = d["title"] or "The Signal"
+    title = d["title"] or "Market Prompt"
     name = html.escape(d["name"])
 
     toc_links = ""
@@ -784,7 +861,7 @@ def render_article(d, idx=0):
   <div class="progress" id="progress"></div>
 
   <nav class="anav">
-    <a class="back" href="../index.html">← The <span>Signal</span></a>
+    <a class="back" href="../index.html">← Market <span>Prompt</span></a>
     <span class="meta">{d['issue']} · {d['date_label']}</span>
     <button class="sub" type="button" data-subscribe>Subscribe</button>
   </nav>
@@ -794,7 +871,7 @@ def render_article(d, idx=0):
     <div class="scrim"></div>
     <div class="inner">
       <div class="eyebrow">{d['eyebrow']} · ☕ {d['read_min']} min read</div>
-      <h1>The <span>Signal</span></h1>
+      <h1>Market <span>Prompt</span></h1>
       <p class="edition">“{name}”</p>
       <p class="tag">AI · Public Markets · Product Management</p>
       <div class="date-bar">
@@ -815,8 +892,8 @@ def render_article(d, idx=0):
   </main>
 
   <footer class="afooter">
-    <div class="ft">The <span>Signal</span></div>
-    <p>The Signal · AI in Public Markets<br/>{d['issue']} · {d['date_label']}</p>
+    <div class="ft">Market <span>Prompt</span></div>
+    <p>Market Prompt · AI in Public Markets<br/>{d['issue']} · {d['date_label']}</p>
     <div class="actions">
       <a class="b gold" href="../index.html">← Back to all issues</a>
       <button class="b" type="button" data-subscribe>Subscribe</button>

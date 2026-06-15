@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Create a new daily issue of The Signal and rebuild the site.
+# Create a new daily issue of Market Prompt and rebuild the site.
 #
 #   ./new-issue.sh              -> uses today's date
 #   ./new-issue.sh 2026-06-07   -> uses the date you pass

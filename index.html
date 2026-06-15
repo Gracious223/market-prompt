@@ -3,51 +3,67 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Signal — AI · Public Markets · Product</title>
-  <meta name="description" content="The Signal — a daily intelligence brief on AI, public markets, and product management." />
+  <title>Market Prompt — AI · Public Markets · Product</title>
+  <meta name="description" content="Market Prompt — a daily intelligence brief on AI, public markets, and product management." />
   <script>document.documentElement.className = 'js';</script>
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--ink:#14142b;--ink-2:#1d1d3a;--paper:#f6f3ec;--gold:#c9a96e;--gold-soft:#e3cfa6;--muted:#8a8fa8;--muted-d:#5b5f78;--line:#e8e3d8;--card:#fff;--pop:#ff6f5e;--r:18px}
+/* Market Prompt — Ink & Electric Blue. --gold holds the electric-blue accent. */
+:root{--ink:#0f172a;--ink-2:#1e293b;--paper:#f8fafc;--gold:#2563eb;--gold-soft:#60a5fa;--muted:#94a3b8;--muted-d:#64748b;--line:#e2e8f0;--card:#fff;--pop:#0ea5e9;--r:18px}
 html{scroll-behavior:smooth}
 body{background:var(--paper);font-family:'Inter',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 .mono{font-family:'Space Mono',monospace}
-.nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:rgba(20,20,43,.72);backdrop-filter:saturate(160%) blur(14px);-webkit-backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid rgba(201,169,110,.18)}
+.nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:rgba(15,23,42,.72);backdrop-filter:saturate(160%) blur(14px);-webkit-backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid rgba(37,99,235,.18)}
 .nav .brand{font-family:'Playfair Display',serif;font-weight:800;font-size:19px;color:var(--paper)}
 .nav .brand span{color:var(--gold)}
 .nav .links{display:flex;align-items:center;gap:26px}
 .nav .links a{font-size:12px;font-weight:500;letter-spacing:.3px;color:#b9bcd0;transition:color .15s}
 .nav .links a:hover{color:var(--gold)}
 .nav .cta{border:none;cursor:pointer;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:8px 15px;border-radius:999px;transition:transform .15s,box-shadow .15s}
-.nav .cta:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(201,169,110,.4)}
+.nav .cta:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(37,99,235,.4)}
 @media (max-width:640px){.nav .links a:not(.cta){display:none}}
 .hero{position:relative;overflow:hidden;background:var(--ink);color:var(--paper);padding:96px 24px 104px;text-align:center;isolation:isolate}
 .hero::before,.hero::after{content:"";position:absolute;z-index:-2;border-radius:50%;filter:blur(70px);opacity:.55}
-.hero::before{width:560px;height:560px;top:-220px;left:50%;transform:translateX(-60%);background:radial-gradient(circle,rgba(201,169,110,.55),transparent 65%);animation:float1 14s ease-in-out infinite}
+.hero::before{width:560px;height:560px;top:-220px;left:50%;transform:translateX(-60%);background:radial-gradient(circle,rgba(37,99,235,.55),transparent 65%);animation:float1 14s ease-in-out infinite}
 .hero::after{width:520px;height:520px;bottom:-260px;right:50%;transform:translateX(60%);background:radial-gradient(circle,rgba(90,110,200,.42),transparent 65%);animation:float2 18s ease-in-out infinite}
 .hero .grid-bg{position:absolute;inset:0;z-index:-1;opacity:.5;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:52px 52px;mask-image:radial-gradient(ellipse 75% 70% at 50% 35%,#000 40%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 35%,#000 40%,transparent 100%)}
 @keyframes float1{0%,100%{transform:translateX(-60%) translateY(0)}50%{transform:translateX(-55%) translateY(26px)}}
 @keyframes float2{0%,100%{transform:translateX(60%) translateY(0)}50%{transform:translateX(54%) translateY(-30px)}}
-.hero .kicker{display:inline-flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,169,110,.35);border-radius:999px;padding:7px 16px;margin-bottom:30px;background:rgba(201,169,110,.06)}
+.hero .kicker{display:inline-flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(37,99,235,.35);border-radius:999px;padding:7px 16px;margin-bottom:30px;background:rgba(37,99,235,.06)}
 .hero .dot{width:7px;height:7px;border-radius:50%;background:#5ad17a;box-shadow:0 0 0 0 rgba(90,209,122,.7);animation:pulse 2s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(90,209,122,.6)}70%{box-shadow:0 0 0 8px rgba(90,209,122,0)}100%{box-shadow:0 0 0 0 rgba(90,209,122,0)}}
 .hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(54px,11vw,104px);line-height:.94;letter-spacing:-2px}
 .hero h1 span{background:linear-gradient(120deg,var(--gold),var(--gold-soft));-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero .tagline{margin-top:22px;font-size:clamp(14px,2.3vw,17px);font-weight:300;letter-spacing:.4px;color:#c2c5d8}
 .hero .sub{margin:14px auto 0;max-width:520px;font-size:14px;line-height:1.7;color:var(--muted)}
-.hero .actions{margin-top:38px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.hero-sub{margin:34px auto 0;max-width:540px;width:100%}
+.hero-sub-label{display:block;font-size:14px;font-weight:600;color:var(--paper);margin-bottom:12px}
+.hero-sub-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.hero-sub-row input{flex:1;min-width:220px;padding:13px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:var(--paper);font-size:14px;font-family:inherit}
+.hero-sub-row input::placeholder{color:rgba(255,255,255,.5)}
+.hero-sub-row input:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,.14)}
+.hero-sub-row .btn{white-space:nowrap}
+.hero-sub-fine{margin-top:12px;font-size:11.5px;letter-spacing:.3px;color:var(--muted)}
+.hero-sub-fine.ok{color:#34d399}.hero-sub-fine.err{color:#f87171}
+.card-points{list-style:none;margin:13px 0 0;padding:0;display:flex;flex-direction:column;gap:7px;flex:1}
+.card-points li{position:relative;padding-left:16px;font-size:13px;line-height:1.55;color:#475569}
+.card-points li::before{content:"\25B8";position:absolute;left:0;top:0;color:var(--gold);font-size:12px}
+.feat-points{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.feat-points li{position:relative;padding-left:18px;font-size:14.5px;line-height:1.55;color:#44475e}
+.feat-points li::before{content:"\25B8";position:absolute;left:0;color:var(--gold)}
+.hero .actions{margin-top:20px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 .btn{font-size:13px;font-weight:600;letter-spacing:.3px;padding:13px 26px;border-radius:999px;transition:transform .15s,box-shadow .15s,background .15s}
-.btn-gold{background:var(--gold);color:var(--ink)}
-.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(201,169,110,.42)}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(37,99,235,.42)}
 .btn-ghost{border:1px solid rgba(255,255,255,.22);color:var(--paper)}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
 .hero-wave{display:block;width:100%;height:40px;margin-top:-1px}
 .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
 .featured{margin:-48px auto 0;position:relative;z-index:5}
-.feat-card{display:grid;grid-template-columns:230px 1fr auto;align-items:stretch;gap:30px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 24px 20px 20px;box-shadow:0 30px 60px -28px rgba(20,20,43,.4);transition:transform .2s,box-shadow .2s}
-.feat-card:hover{transform:translateY(-3px);box-shadow:0 38px 70px -28px rgba(20,20,43,.5)}
+.feat-card{display:grid;grid-template-columns:230px 1fr auto;align-items:stretch;gap:30px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 24px 20px 20px;box-shadow:0 30px 60px -28px rgba(15,23,42,.4);transition:transform .2s,box-shadow .2s}
+.feat-card:hover{transform:translateY(-3px);box-shadow:0 38px 70px -28px rgba(15,23,42,.5)}
 .feat-cover{position:relative;border-radius:13px;overflow:hidden;min-height:184px}
 .feat-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .feat-cover .ov{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;background:linear-gradient(180deg,rgba(19,19,42,.35),rgba(19,19,42,.72))}
@@ -67,7 +83,7 @@ a{color:inherit;text-decoration:none}
 .toolbar h2{font-family:'Playfair Display',serif;font-size:36px;font-weight:800;margin-top:4px;letter-spacing:-.5px}
 .toolbar .count{color:var(--muted-d);font-size:14px;font-weight:400;margin-left:10px}
 .search input{font-family:'Inter',sans-serif;font-size:14px;padding:13px 18px 13px 42px;width:300px;max-width:78vw;border:1px solid var(--line);border-radius:999px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%238a8fa8' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E") no-repeat 16px center;color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s}
-.search input:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(201,169,110,.14)}
+.search input:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(37,99,235,.14)}
 .filters{display:flex;gap:9px;flex-wrap:wrap;margin:0 0 28px}
 .pill{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:9px 15px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--muted-d);cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:7px}
 .pill:hover{border-color:var(--gold);color:var(--ink)}
@@ -76,12 +92,12 @@ a{color:inherit;text-decoration:none}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:24px;padding-bottom:90px}
 .card{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:0;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease,border-color .3s ease}
 .card-rule{position:absolute;top:0;left:0;right:0;height:4px;z-index:4;background:linear-gradient(90deg,var(--pop),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
-.card:hover{transform:translateY(-8px) scale(1.015);box-shadow:0 28px 52px -22px rgba(20,20,43,.5);border-color:transparent}
+.card:hover{transform:translateY(-8px) scale(1.015);box-shadow:0 28px 52px -22px rgba(15,23,42,.5);border-color:transparent}
 .card:hover .card-rule{transform:scaleX(1)}
 .cover{position:relative;height:172px;overflow:hidden}
 .cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
 .card:hover .cover img{transform:scale(1.07)}
-.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,43,.05) 40%,rgba(20,20,43,.62))}
+.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,23,42,.05) 40%,rgba(15,23,42,.62))}
 .cover-num{position:absolute;left:16px;bottom:12px;z-index:2;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1px;color:#fff;text-transform:uppercase}
 .cover-num b{color:var(--gold);margin-left:4px}
 .card-body{padding:20px 26px 24px;display:flex;flex-direction:column;flex:1}
@@ -117,16 +133,16 @@ a{color:inherit;text-decoration:none}
 @keyframes fade{from{opacity:0}}
 @keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}}
 .modal .top{background:var(--ink);color:var(--paper);padding:32px 30px 26px;text-align:center;position:relative;overflow:hidden}
-.modal .top::after{content:"";position:absolute;width:260px;height:260px;top:-160px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(201,169,110,.5),transparent 65%);filter:blur(40px)}
+.modal .top::after{content:"";position:absolute;width:260px;height:260px;top:-160px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(37,99,235,.5),transparent 65%);filter:blur(40px)}
 .modal .top .ey{position:relative;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold)}
 .modal .top h3{position:relative;font-family:'Playfair Display',serif;font-size:28px;font-weight:800;margin-top:8px}
 .modal .top p{position:relative;font-size:13px;color:#c2c5d8;margin-top:8px;line-height:1.6}
 .modal .body{padding:26px 30px 30px}
 .modal form{display:flex;flex-direction:column;gap:12px}
 .modal input{font-family:'Inter',sans-serif;font-size:14px;padding:14px 16px;border:1px solid var(--line);border-radius:10px;outline:none;transition:border-color .15s,box-shadow .15s}
-.modal input:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(201,169,110,.14)}
+.modal input:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(37,99,235,.14)}
 .modal button.sub{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:var(--gold);color:var(--ink);border:none;border-radius:10px;padding:14px;cursor:pointer;transition:transform .15s,box-shadow .15s}
-.modal button.sub:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(201,169,110,.4)}
+.modal button.sub:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(37,99,235,.4)}
 .modal .fine{font-size:11px;color:var(--muted);text-align:center;margin-top:2px}
 .modal .x{position:absolute;top:14px;right:16px;z-index:2;background:rgba(255,255,255,.12);color:var(--paper);border:none;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:18px;line-height:1;transition:background .15s}
 .modal .x:hover{background:rgba(255,255,255,.25)}
@@ -138,7 +154,7 @@ a{color:inherit;text-decoration:none}
 </head>
 <body>
   <nav class="nav">
-    <a class="brand" href="#top">The <span>Signal</span></a>
+    <a class="brand" href="#top">Market <span>Prompt</span></a>
     <div class="links">
       <a href="#issues">Issues</a>
       <a href="newsletters/2026-06-15.html">Latest</a>
@@ -149,16 +165,24 @@ a{color:inherit;text-decoration:none}
   <header class="hero" id="top">
     <div class="grid-bg"></div>
     <div class="kicker"><span class="dot"></span> 📰 Fresh every morning · 15 June 2026</div>
-    <h1>The <span>Signal</span></h1>
+    <h1>Market <span>Prompt</span></h1>
     <p class="tagline">AI · Public Markets · Product — minus the jargon</p>
     <p class="sub">Your daily 5-minute catch-up on the AI news that actually moves markets. Plain English, no fluff, one quick read.</p>
+    <form class="hero-sub" id="heroSubForm" novalidate>
+      <label class="hero-sub-label" for="heroEmail">Enter your email to get tomorrow's brief at 7:00&nbsp;AM.</label>
+      <div class="hero-sub-row">
+        <input id="heroEmail" name="email" type="email" required placeholder="you@company.com" aria-label="Email address" autocomplete="email" />
+        <button class="btn btn-gold" type="submit">Get the brief →</button>
+      </div>
+      <div class="hero-sub-fine" id="heroSubMsg">Free · delivered 7:00&nbsp;AM daily · unsubscribe anytime</div>
+    </form>
     <div class="actions">
-      <a class="btn btn-gold" href="newsletters/2026-06-15.html">Read today's issue →</a>
+      <a class="btn btn-ghost" href="newsletters/2026-06-15.html">Read today's issue →</a>
       <a class="btn btn-ghost" href="#issues">Browse all issues</a>
     </div>
   </header>
   <svg class="hero-wave" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0,40 L0,18 C240,40 480,40 720,24 C960,8 1200,8 1440,22 L1440,40 Z" fill="#14142b"/>
+    <path d="M0,40 L0,18 C240,40 480,40 720,24 C960,8 1200,8 1440,22 L1440,40 Z" fill="#0f172a"/>
   </svg>
 
   <div class="wrap">
@@ -175,7 +199,7 @@ a{color:inherit;text-decoration:none}
         <div class="feat-body">
           <div class="ey">🔥 Hot off the press · 6 min read</div>
           <h3 class="feat-name">SpaceX&#x27;s $1.77 Trillion Debut Becomes the Blueprint for the OpenAI and Anthropic IPOs</h3>
-          <p>SpaceX&#x27;s record $1.77 trillion Nasdaq debut on Friday became the dress rehearsal for OpenAI and Anthropic&#x27;s own IPOs — then, less than a day later, the US government ordered Anthropic to pull its two most capable models for every foreign user over a jailbreak concern, a sharp reminder that model access is now a geopolitical lever. The Financial Stability Board wants banks to start treating AI agents as &quot;synthetic employees,&quot; Anthropic doubled down on regulated industries with new TCS and DXC alliances, and the Data + AI Summit&#x27;s financial-services track goes live today in San Francisco.</p>
+          <ul class="feat-points"><li>SpaceX&#x27;s record $1.77 trillion Nasdaq debut on Friday became the dress rehearsal for OpenAI and Anthropic&#x27;s own IPOs — then, less than a day later, the US government ordered Anthropic to pull its two most capable models for every foreign user over a jailbreak concern, a sharp reminder that model access is now a geopolitical lever.</li><li>The Financial Stability Board wants banks to start treating AI agents as &quot;synthetic employees,&quot; Anthropic doubled down on regulated industries with new TCS and DXC alliances, and the Data + AI Summit&#x27;s financial-services track goes live today in San Francisco.</li></ul>
           <div class="chips"><span class="chip markets">📈 Markets</span><span class="chip tools">🛠️ Tools</span><span class="chip risk">⚠️ Risk</span><span class="chip labs">🧪 Labs</span><span class="chip pm">🎯 Product</span></div>
         </div>
         <span class="feat-cta">Read now →</span>
@@ -195,26 +219,7 @@ a{color:inherit;text-decoration:none}
     <div class="filters" id="filters"><button class="pill active" data-section="all">✨ All Issues</button><button class="pill" data-section="markets">📈 Markets</button><button class="pill" data-section="tools">🛠️ Tools</button><button class="pill" data-section="labs">🧪 Labs</button><button class="pill" data-section="pm">🎯 Product</button><button class="pill" data-section="risk">⚠️ Risk</button></div>
 
     <section class="grid" id="grid">
-        <a class="card reveal" href="newsletters/2026-06-15.html" data-text="SpaceX&#x27;s $1.77 Trillion Debut Becomes the Blueprint for the OpenAI and Anthropic IPOs The Signal — Issue No. 13 — 15 June 2026 Issue No. 13 SpaceX&#x27;s record $1.77 trillion Nasdaq debut on Friday became the dress rehearsal for OpenAI and Anthropic&#x27;s own IPOs — then, less than a day later, the US government ordered Anthropic to pull its two most capable models for every foreign user over a jailbreak concern, a sharp reminder that model access is now a geopolitical lever. The Financial Stability Board wants banks to start treating AI agents as &quot;synthetic employees,&quot; Anthropic doubled down on regulated industries with new TCS and DXC alliances, and the Data + AI Summit&#x27;s financial-services track goes live today in San Francisco. Markets Tools Risk Labs Product" data-sections="markets tools risk labs pm" style="--i:0">
-          <span class="card-rule"></span>
-          <div class="cover">
-            <img src="assets/img/img5.jpg" alt="" loading="lazy" />
-            <span class="cover-num">📈 Issue No.<b>13</b></span>
-          </div>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-tag">The Signal</span>
-              <span class="card-date">15 June 2026 · 6 min</span>
-            </div>
-            <h3 class="card-title">SpaceX&#x27;s $1.77 Trillion Debut Becomes the Blueprint for the OpenAI and Anthropic IPOs</h3>
-            <p class="card-summary">SpaceX&#x27;s record $1.77 trillion Nasdaq debut on Friday became the dress rehearsal for OpenAI and Anthropic&#x27;s own IPOs — then, less than a day later, the US government ordered Anthropic to pull its two most capable models for every foreign user over a jailbreak concern, a sharp reminder that model access is now a geopolitical lever. The Financial Stability Board wants banks to start treating AI agents as &quot;synthetic employees,&quot; Anthropic doubled down on regulated industries with new TCS and DXC alliances, and the Data + AI Summit&#x27;s financial-services track goes live today in San Francisco.</p>
-            <div class="card-foot">
-              <div class="chips"><span class="chip markets">📈 Markets</span><span class="chip tools">🛠️ Tools</span><span class="chip risk">⚠️ Risk</span><span class="chip labs">🧪 Labs</span><span class="chip pm">🎯 Product</span></div>
-              <span class="read">Read<span class="arr">→</span></span>
-            </div>
-          </div>
-        </a>
-        <a class="card reveal" href="newsletters/2026-06-14.html" data-text="Goldman and Morgan Stanley Wage a $7B Battle Over Who Banks the AI IPOs The Signal — Issue No. 12 — 14 June 2026 Issue No. 12 The AI trade got rough again this week — AMD and Intel each shed more than 10% in a single session, dragging the Nasdaq toward its worst week since April 2025. Underneath the volatility, the plumbing kept tightening: Apple struck a roughly $1B-a-year deal to put Gemini inside Siri, Morgan Stanley confirmed outside AI agents will soon log directly into its wealth platforms, and the fiercest AI competition this week wasn&#x27;t between labs at all — it was Goldman Sachs versus Morgan Stanley, racing to lead the IPOs of the year. Markets Tools Risk Labs Product" data-sections="markets tools risk labs pm" style="--i:1">
+        <a class="card reveal" href="newsletters/2026-06-14.html" data-text="Goldman and Morgan Stanley Wage a $7B Battle Over Who Banks the AI IPOs Market Prompt — Goldman and Morgan Stanley Wage a $7B Battle Over Who Banks the AI IPOs · 14 June 2026 Issue No. 12 The AI trade got rough again this week — AMD and Intel each shed more than 10% in a single session, dragging the Nasdaq toward its worst week since April 2025. Underneath the volatility, the plumbing kept tightening: Apple struck a roughly $1B-a-year deal to put Gemini inside Siri, Morgan Stanley confirmed outside AI agents will soon log directly into its wealth platforms, and the fiercest AI competition this week wasn&#x27;t between labs at all — it was Goldman Sachs versus Morgan Stanley, racing to lead the IPOs of the year. Markets Tools Risk Labs Product" data-sections="markets tools risk labs pm" style="--i:1">
           <span class="card-rule"></span>
           <div class="cover">
             <img src="assets/img/img4.jpg" alt="" loading="lazy" />
@@ -222,18 +227,18 @@ a{color:inherit;text-decoration:none}
           </div>
           <div class="card-body">
             <div class="card-top">
-              <span class="card-tag">The Signal</span>
+              <span class="card-tag">Market Prompt</span>
               <span class="card-date">14 June 2026 · 5 min</span>
             </div>
             <h3 class="card-title">Goldman and Morgan Stanley Wage a $7B Battle Over Who Banks the AI IPOs</h3>
-            <p class="card-summary">The AI trade got rough again this week — AMD and Intel each shed more than 10% in a single session, dragging the Nasdaq toward its worst week since April 2025. Underneath the volatility, the plumbing kept tightening: Apple struck a roughly $1B-a-year deal to put Gemini inside Siri, Morgan Stanley confirmed outside AI agents will soon log directly into its wealth platforms, and the fiercest AI competition this week wasn&#x27;t between labs at all — it was Goldman Sachs versus Morgan Stanley, racing to lead the IPOs of the year.</p>
+            <ul class="card-points"><li>The AI trade got rough again this week — AMD and Intel each shed more than 10% in a single session, dragging the Nasdaq toward its worst week since April 2025.</li><li>Underneath the volatility, the plumbing kept tightening: Apple struck a roughly $1B-a-year deal to put Gemini inside Siri, Morgan Stanley confirmed outside AI agents will soon log directly into its wealth platforms, and the fiercest AI competition this week wasn&#x27;t between labs at all — it was Goldman Sachs versus Morgan Stanley, racing to lead the IPOs of the year.</li></ul>
             <div class="card-foot">
               <div class="chips"><span class="chip markets">📈 Markets</span><span class="chip tools">🛠️ Tools</span><span class="chip risk">⚠️ Risk</span><span class="chip labs">🧪 Labs</span><span class="chip pm">🎯 Product</span></div>
               <span class="read">Read<span class="arr">→</span></span>
             </div>
           </div>
         </a>
-        <a class="card reveal" href="newsletters/2026-06-13.html" data-text="AI Chip Selloff Drags Nasdaq Into Its Worst Week Since April 2025 The Signal — Issue No. 11 — 13 June 2026 Issue No. 11 Two AI labs filed confidentially for trillion-dollar IPOs in the same week the chips underneath the AI trade got brutally repriced. Anthropic shipped its most capable public model yet, the first fully agentic hedge fund opened its doors, and the Bank of England started stress-testing what happens when AI agents all trade the same way at once. Markets Tools Risk Labs Product" data-sections="markets tools risk labs pm" style="--i:2">
+        <a class="card reveal" href="newsletters/2026-06-13.html" data-text="AI Chip Selloff Drags Nasdaq Into Its Worst Week Since April 2025 Market Prompt — AI Chip Selloff Drags Nasdaq Into Its Worst Week Since April 2025 · 13 June 2026 Issue No. 11 Two AI labs filed confidentially for trillion-dollar IPOs in the same week the chips underneath the AI trade got brutally repriced. Anthropic shipped its most capable public model yet, the first fully agentic hedge fund opened its doors, and the Bank of England started stress-testing what happens when AI agents all trade the same way at once. Markets Tools Risk Labs Product" data-sections="markets tools risk labs pm" style="--i:2">
           <span class="card-rule"></span>
           <div class="cover">
             <img src="assets/img/img3.jpg" alt="" loading="lazy" />
@@ -241,18 +246,18 @@ a{color:inherit;text-decoration:none}
           </div>
           <div class="card-body">
             <div class="card-top">
-              <span class="card-tag">The Signal</span>
+              <span class="card-tag">Market Prompt</span>
               <span class="card-date">13 June 2026 · 5 min</span>
             </div>
             <h3 class="card-title">AI Chip Selloff Drags Nasdaq Into Its Worst Week Since April 2025</h3>
-            <p class="card-summary">Two AI labs filed confidentially for trillion-dollar IPOs in the same week the chips underneath the AI trade got brutally repriced. Anthropic shipped its most capable public model yet, the first fully agentic hedge fund opened its doors, and the Bank of England started stress-testing what happens when AI agents all trade the same way at once.</p>
+            <ul class="card-points"><li>Two AI labs filed confidentially for trillion-dollar IPOs in the same week the chips underneath the AI trade got brutally repriced.</li><li>Anthropic shipped its most capable public model yet, the first fully agentic hedge fund opened its doors, and the Bank of England started stress-testing what happens when AI agents all trade the same way at once.</li></ul>
             <div class="card-foot">
               <div class="chips"><span class="chip markets">📈 Markets</span><span class="chip tools">🛠️ Tools</span><span class="chip risk">⚠️ Risk</span><span class="chip labs">🧪 Labs</span><span class="chip pm">🎯 Product</span></div>
               <span class="read">Read<span class="arr">→</span></span>
             </div>
           </div>
         </a>
-        <a class="card reveal" href="newsletters/2026-06-09.html" data-text="The Trillion-Dollar Trio The Signal — AI in Markets | 09 June 2026 Issue No. 10 Today, in plain English: OpenAI is also getting ready to sell shares to the public — so three giant AI companies are now heading to the stock market at once. Nvidia is handing cash back to shareholders for the first time in a big way. Google&#x27;s new AI can read about 15 novels&#x27; worth of text in one go. And the EU just delayed the AI rules banks were rushing to meet. Six quick reads. No jargon. Markets Tools Labs Product Risk" data-sections="markets tools labs pm risk" style="--i:3">
+        <a class="card reveal" href="newsletters/2026-06-09.html" data-text="The Trillion-Dollar Trio Market Prompt — The Trillion-Dollar Trio · 09 June 2026 Issue No. 10 Today, in plain English: OpenAI is also getting ready to sell shares to the public — so three giant AI companies are now heading to the stock market at once. Nvidia is handing cash back to shareholders for the first time in a big way. Google&#x27;s new AI can read about 15 novels&#x27; worth of text in one go. And the EU just delayed the AI rules banks were rushing to meet. Six quick reads. No jargon. Markets Tools Labs Product Risk" data-sections="markets tools labs pm risk" style="--i:3">
           <span class="card-rule"></span>
           <div class="cover">
             <img src="assets/img/img2.jpg" alt="" loading="lazy" />
@@ -260,18 +265,18 @@ a{color:inherit;text-decoration:none}
           </div>
           <div class="card-body">
             <div class="card-top">
-              <span class="card-tag">The Signal</span>
+              <span class="card-tag">Market Prompt</span>
               <span class="card-date">09 June 2026 · 5 min</span>
             </div>
             <h3 class="card-title">The Trillion-Dollar Trio</h3>
-            <p class="card-summary">Today, in plain English: OpenAI is also getting ready to sell shares to the public — so three giant AI companies are now heading to the stock market at once. Nvidia is handing cash back to shareholders for the first time in a big way. Google&#x27;s new AI can read about 15 novels&#x27; worth of text in one go. And the EU just delayed the AI rules banks were rushing to meet. Six quick reads. No jargon.</p>
+            <ul class="card-points"><li>Today, in plain English: OpenAI is also getting ready to sell shares to the public — so three giant AI companies are now heading to the stock market at once.</li><li>Nvidia is handing cash back to shareholders for the first time in a big way.</li><li>Google&#x27;s new AI can read about 15 novels&#x27; worth of text in one go.</li></ul>
             <div class="card-foot">
               <div class="chips"><span class="chip markets">📈 Markets</span><span class="chip tools">🛠️ Tools</span><span class="chip labs">🧪 Labs</span><span class="chip pm">🎯 Product</span><span class="chip risk">⚠️ Risk</span></div>
               <span class="read">Read<span class="arr">→</span></span>
             </div>
           </div>
         </a>
-        <a class="card reveal" href="newsletters/2026-06-08.html" data-text="Wall Street Opens the Gates The Signal — Issue No. 09 — 8 June 2026 Issue No. 09 Morgan Stanley hands a $1.2 trillion wealth funnel to outside AI agents while Apple lets users pick their own model entirely. Citadel starts paying rivals for trading ideas. The thread connecting all of it: incumbents are quietly redesigning who — or what — gets to sit at the table. Markets Tools Risk Labs Product" data-sections="markets tools risk labs pm" style="--i:4">
+        <a class="card reveal" href="newsletters/2026-06-08.html" data-text="Wall Street Opens the Gates Market Prompt — Wall Street Opens the Gates · 08 June 2026 Issue No. 09 Morgan Stanley hands a $1.2 trillion wealth funnel to outside AI agents while Apple lets users pick their own model entirely. Citadel starts paying rivals for trading ideas. The thread connecting all of it: incumbents are quietly redesigning who — or what — gets to sit at the table. Markets Tools Risk Labs Product" data-sections="markets tools risk labs pm" style="--i:4">
           <span class="card-rule"></span>
           <div class="cover">
             <img src="assets/img/img1.jpg" alt="" loading="lazy" />
@@ -279,18 +284,18 @@ a{color:inherit;text-decoration:none}
           </div>
           <div class="card-body">
             <div class="card-top">
-              <span class="card-tag">The Signal</span>
+              <span class="card-tag">Market Prompt</span>
               <span class="card-date">08 June 2026 · 4 min</span>
             </div>
             <h3 class="card-title">Wall Street Opens the Gates</h3>
-            <p class="card-summary">Morgan Stanley hands a $1.2 trillion wealth funnel to outside AI agents while Apple lets users pick their own model entirely. Citadel starts paying rivals for trading ideas. The thread connecting all of it: incumbents are quietly redesigning who — or what — gets to sit at the table.</p>
+            <ul class="card-points"><li>Morgan Stanley hands a $1.2 trillion wealth funnel to outside AI agents while Apple lets users pick their own model entirely.</li><li>Citadel starts paying rivals for trading ideas.</li><li>The thread connecting all of it: incumbents are quietly redesigning who — or what — gets to sit at the table.</li></ul>
             <div class="card-foot">
               <div class="chips"><span class="chip markets">📈 Markets</span><span class="chip tools">🛠️ Tools</span><span class="chip risk">⚠️ Risk</span><span class="chip labs">🧪 Labs</span><span class="chip pm">🎯 Product</span></div>
               <span class="read">Read<span class="arr">→</span></span>
             </div>
           </div>
         </a>
-        <a class="card reveal" href="newsletters/2026-06-07.html" data-text="OpenAI Gets in Line The Signal — AI in Markets | 07 June 2026 Issue No. 08 Today: OpenAI lines up an autumn IPO at up to $850B, Nvidia posts a blowout quarter yet slips while Marvell rockets 32%, OpenAI&#x27;s Codex turns into an always-on enterprise coworker, biodefense becomes the new frontier-model proving ground, and the agent reliability gap gets quantified. Six stories. One brief. Everything you need to stay sharp. Markets Tools Labs Product Risk" data-sections="markets tools labs pm risk" style="--i:5">
+        <a class="card reveal" href="newsletters/2026-06-07.html" data-text="OpenAI Gets in Line Market Prompt — OpenAI Gets in Line · 07 June 2026 Issue No. 08 Today: OpenAI lines up an autumn IPO at up to $850B, Nvidia posts a blowout quarter yet slips while Marvell rockets 32%, OpenAI&#x27;s Codex turns into an always-on enterprise coworker, biodefense becomes the new frontier-model proving ground, and the agent reliability gap gets quantified. Six stories. One brief. Everything you need to stay sharp. Markets Tools Labs Product Risk" data-sections="markets tools labs pm risk" style="--i:5">
           <span class="card-rule"></span>
           <div class="cover">
             <img src="assets/img/img8.jpg" alt="" loading="lazy" />
@@ -298,18 +303,18 @@ a{color:inherit;text-decoration:none}
           </div>
           <div class="card-body">
             <div class="card-top">
-              <span class="card-tag">The Signal</span>
+              <span class="card-tag">Market Prompt</span>
               <span class="card-date">07 June 2026 · 4 min</span>
             </div>
             <h3 class="card-title">OpenAI Gets in Line</h3>
-            <p class="card-summary">Today: OpenAI lines up an autumn IPO at up to $850B, Nvidia posts a blowout quarter yet slips while Marvell rockets 32%, OpenAI&#x27;s Codex turns into an always-on enterprise coworker, biodefense becomes the new frontier-model proving ground, and the agent reliability gap gets quantified. Six stories. One brief. Everything you need to stay sharp.</p>
+            <ul class="card-points"><li>Today: OpenAI lines up an autumn IPO at up to $850B, Nvidia posts a blowout quarter yet slips while Marvell rockets 32%, OpenAI&#x27;s Codex turns into an always-on enterprise coworker, biodefense becomes the new frontier-model proving ground, and the agent reliability gap gets quantified.</li><li>Six stories.</li><li>One brief.</li></ul>
             <div class="card-foot">
               <div class="chips"><span class="chip markets">📈 Markets</span><span class="chip tools">🛠️ Tools</span><span class="chip labs">🧪 Labs</span><span class="chip pm">🎯 Product</span><span class="chip risk">⚠️ Risk</span></div>
               <span class="read">Read<span class="arr">→</span></span>
             </div>
           </div>
         </a>
-        <a class="card reveal" href="newsletters/2026-06-06.html" data-text="Nvidia&#x27;s Big Day The Signal — AI in Markets | 06 June 2026 Issue No. 07 Today: Nvidia becomes the most valuable company on Earth at $5.4T — then slips on overhype warnings, Goldman sees a $160B IPO wave cresting, Microsoft ships its first coding models built without OpenAI, &quot;return on token&quot; emerges as a product metric, and the SaaSpocalypse keeps grinding software stocks. Six stories. One brief. Everything you need to stay sharp. Markets Tools Labs Product Risk" data-sections="markets tools labs pm risk" style="--i:6">
+        <a class="card reveal" href="newsletters/2026-06-06.html" data-text="Nvidia&#x27;s Big Day Market Prompt — Nvidia&#x27;s Big Day · 06 June 2026 Issue No. 07 Today: Nvidia becomes the most valuable company on Earth at $5.4T — then slips on overhype warnings, Goldman sees a $160B IPO wave cresting, Microsoft ships its first coding models built without OpenAI, &quot;return on token&quot; emerges as a product metric, and the SaaSpocalypse keeps grinding software stocks. Six stories. One brief. Everything you need to stay sharp. Markets Tools Labs Product Risk" data-sections="markets tools labs pm risk" style="--i:6">
           <span class="card-rule"></span>
           <div class="cover">
             <img src="assets/img/img7.jpg" alt="" loading="lazy" />
@@ -317,18 +322,18 @@ a{color:inherit;text-decoration:none}
           </div>
           <div class="card-body">
             <div class="card-top">
-              <span class="card-tag">The Signal</span>
+              <span class="card-tag">Market Prompt</span>
               <span class="card-date">06 June 2026 · 5 min</span>
             </div>
             <h3 class="card-title">Nvidia&#x27;s Big Day</h3>
-            <p class="card-summary">Today: Nvidia becomes the most valuable company on Earth at $5.4T — then slips on overhype warnings, Goldman sees a $160B IPO wave cresting, Microsoft ships its first coding models built without OpenAI, &quot;return on token&quot; emerges as a product metric, and the SaaSpocalypse keeps grinding software stocks. Six stories. One brief. Everything you need to stay sharp.</p>
+            <ul class="card-points"><li>Today: Nvidia becomes the most valuable company on Earth at $5.4T — then slips on overhype warnings, Goldman sees a $160B IPO wave cresting, Microsoft ships its first coding models built without OpenAI, &quot;return on token&quot; emerges as a product metric, and the SaaSpocalypse keeps grinding software stocks.</li><li>Six stories.</li><li>One brief.</li></ul>
             <div class="card-foot">
               <div class="chips"><span class="chip markets">📈 Markets</span><span class="chip tools">🛠️ Tools</span><span class="chip labs">🧪 Labs</span><span class="chip pm">🎯 Product</span><span class="chip risk">⚠️ Risk</span></div>
               <span class="read">Read<span class="arr">→</span></span>
             </div>
           </div>
         </a>
-        <a class="card reveal" href="newsletters/2026-06-05.html" data-text="The Memory Boom The Signal — AI in Markets | 05 June 2026 Issue No. 06 Today: the memory-chip rally pushes Micron past $1T, the trillion-dollar IPO window sets a hard date with SpaceX on 12 June, Perplexity and Bloomberg square off over the analyst&#x27;s desktop, the hyperscalers crash the AI-coding party, and the circular-deal math behind the boom draws fresh scrutiny. Six stories. One brief. Everything you need to stay sharp. Markets Tools Labs Product Risk" data-sections="markets tools labs pm risk" style="--i:7">
+        <a class="card reveal" href="newsletters/2026-06-05.html" data-text="The Memory Boom Market Prompt — The Memory Boom · 05 June 2026 Issue No. 06 Today: the memory-chip rally pushes Micron past $1T, the trillion-dollar IPO window sets a hard date with SpaceX on 12 June, Perplexity and Bloomberg square off over the analyst&#x27;s desktop, the hyperscalers crash the AI-coding party, and the circular-deal math behind the boom draws fresh scrutiny. Six stories. One brief. Everything you need to stay sharp. Markets Tools Labs Product Risk" data-sections="markets tools labs pm risk" style="--i:7">
           <span class="card-rule"></span>
           <div class="cover">
             <img src="assets/img/img6.jpg" alt="" loading="lazy" />
@@ -336,18 +341,18 @@ a{color:inherit;text-decoration:none}
           </div>
           <div class="card-body">
             <div class="card-top">
-              <span class="card-tag">The Signal</span>
+              <span class="card-tag">Market Prompt</span>
               <span class="card-date">05 June 2026 · 5 min</span>
             </div>
             <h3 class="card-title">The Memory Boom</h3>
-            <p class="card-summary">Today: the memory-chip rally pushes Micron past $1T, the trillion-dollar IPO window sets a hard date with SpaceX on 12 June, Perplexity and Bloomberg square off over the analyst&#x27;s desktop, the hyperscalers crash the AI-coding party, and the circular-deal math behind the boom draws fresh scrutiny. Six stories. One brief. Everything you need to stay sharp.</p>
+            <ul class="card-points"><li>Today: the memory-chip rally pushes Micron past $1T, the trillion-dollar IPO window sets a hard date with SpaceX on 12 June, Perplexity and Bloomberg square off over the analyst&#x27;s desktop, the hyperscalers crash the AI-coding party, and the circular-deal math behind the boom draws fresh scrutiny.</li><li>Six stories.</li><li>One brief.</li></ul>
             <div class="card-foot">
               <div class="chips"><span class="chip markets">📈 Markets</span><span class="chip tools">🛠️ Tools</span><span class="chip labs">🧪 Labs</span><span class="chip pm">🎯 Product</span><span class="chip risk">⚠️ Risk</span></div>
               <span class="read">Read<span class="arr">→</span></span>
             </div>
           </div>
         </a>
-        <a class="card reveal" href="newsletters/2026-06-04.html" data-text="Research at Warp Speed The Signal — Issue No. 05 — 4 June 2026 Issue No. 05 Anthropic files for IPO at a $965B valuation the same week it ships Claude Opus 4.8 — and Microsoft counters at Build with seven proprietary MAI models explicitly designed to cut OpenAI dependency. Meanwhile, the Bank of England, FCA and HM Treasury issued their sharpest joint warning yet: frontier AI cyber capabilities now exceed what a skilled practitioner can achieve, faster and cheaper. The infrastructure of AI competition and its risks are both crystallising at speed. Markets Tools Risk Labs Product" data-sections="markets tools risk labs pm" style="--i:8">
+        <a class="card reveal" href="newsletters/2026-06-04.html" data-text="Research at Warp Speed Market Prompt — Research at Warp Speed · 04 June 2026 Issue No. 05 Anthropic files for IPO at a $965B valuation the same week it ships Claude Opus 4.8 — and Microsoft counters at Build with seven proprietary MAI models explicitly designed to cut OpenAI dependency. Meanwhile, the Bank of England, FCA and HM Treasury issued their sharpest joint warning yet: frontier AI cyber capabilities now exceed what a skilled practitioner can achieve, faster and cheaper. The infrastructure of AI competition and its risks are both crystallising at speed. Markets Tools Risk Labs Product" data-sections="markets tools risk labs pm" style="--i:8">
           <span class="card-rule"></span>
           <div class="cover">
             <img src="assets/img/img5.jpg" alt="" loading="lazy" />
@@ -355,18 +360,18 @@ a{color:inherit;text-decoration:none}
           </div>
           <div class="card-body">
             <div class="card-top">
-              <span class="card-tag">The Signal</span>
+              <span class="card-tag">Market Prompt</span>
               <span class="card-date">04 June 2026 · 7 min</span>
             </div>
             <h3 class="card-title">Research at Warp Speed</h3>
-            <p class="card-summary">Anthropic files for IPO at a $965B valuation the same week it ships Claude Opus 4.8 — and Microsoft counters at Build with seven proprietary MAI models explicitly designed to cut OpenAI dependency. Meanwhile, the Bank of England, FCA and HM Treasury issued their sharpest joint warning yet: frontier AI cyber capabilities now exceed what a skilled practitioner can achieve, faster and cheaper. The infrastructure of AI competition and its risks are both crystallising at speed.</p>
+            <ul class="card-points"><li>Anthropic files for IPO at a $965B valuation the same week it ships Claude Opus 4.8 — and Microsoft counters at Build with seven proprietary MAI models explicitly designed to cut OpenAI dependency.</li><li>Meanwhile, the Bank of England, FCA and HM Treasury issued their sharpest joint warning yet: frontier AI cyber capabilities now exceed what a skilled practitioner can achieve, faster and cheaper.</li><li>The infrastructure of AI competition and its risks are both crystallising at speed.</li></ul>
             <div class="card-foot">
               <div class="chips"><span class="chip markets">📈 Markets</span><span class="chip tools">🛠️ Tools</span><span class="chip risk">⚠️ Risk</span><span class="chip labs">🧪 Labs</span><span class="chip pm">🎯 Product</span></div>
               <span class="read">Read<span class="arr">→</span></span>
             </div>
           </div>
         </a>
-        <a class="card reveal" href="newsletters/2026-06-03.html" data-text="The Big Filing The Signal — Issue No. 04 — 03 June 2026 Issue No. 04 Anthropic files its S-1 as the most valuable private AI company in history — the Wall Street reckoning for AI valuations has begun. A landmark Cambridge Judge report shows 81% of financial firms adopting AI but only 14% calling it transformational: the gap between adoption and real value is the product problem. Meanwhile Experian launches agentic infrastructure for the full lending lifecycle, and Microsoft bets on independent models to cut its OpenAI dependency. Markets Tools Risk Labs Product" data-sections="markets tools risk labs pm" style="--i:9">
+        <a class="card reveal" href="newsletters/2026-06-03.html" data-text="The Big Filing Market Prompt — The Big Filing · 03 June 2026 Issue No. 04 Anthropic files its S-1 as the most valuable private AI company in history — the Wall Street reckoning for AI valuations has begun. A landmark Cambridge Judge report shows 81% of financial firms adopting AI but only 14% calling it transformational: the gap between adoption and real value is the product problem. Meanwhile Experian launches agentic infrastructure for the full lending lifecycle, and Microsoft bets on independent models to cut its OpenAI dependency. Markets Tools Risk Labs Product" data-sections="markets tools risk labs pm" style="--i:9">
           <span class="card-rule"></span>
           <div class="cover">
             <img src="assets/img/img4.jpg" alt="" loading="lazy" />
@@ -374,18 +379,18 @@ a{color:inherit;text-decoration:none}
           </div>
           <div class="card-body">
             <div class="card-top">
-              <span class="card-tag">The Signal</span>
+              <span class="card-tag">Market Prompt</span>
               <span class="card-date">03 June 2026 · 5 min</span>
             </div>
             <h3 class="card-title">The Big Filing</h3>
-            <p class="card-summary">Anthropic files its S-1 as the most valuable private AI company in history — the Wall Street reckoning for AI valuations has begun. A landmark Cambridge Judge report shows 81% of financial firms adopting AI but only 14% calling it transformational: the gap between adoption and real value is the product problem. Meanwhile Experian launches agentic infrastructure for the full lending lifecycle, and Microsoft bets on independent models to cut its OpenAI dependency.</p>
+            <ul class="card-points"><li>Anthropic files its S-1 as the most valuable private AI company in history — the Wall Street reckoning for AI valuations has begun.</li><li>A landmark Cambridge Judge report shows 81% of financial firms adopting AI but only 14% calling it transformational: the gap between adoption and real value is the product problem.</li><li>Meanwhile Experian launches agentic infrastructure for the full lending lifecycle, and Microsoft bets on independent models to cut its OpenAI dependency.</li></ul>
             <div class="card-foot">
               <div class="chips"><span class="chip markets">📈 Markets</span><span class="chip tools">🛠️ Tools</span><span class="chip risk">⚠️ Risk</span><span class="chip labs">🧪 Labs</span><span class="chip pm">🎯 Product</span></div>
               <span class="read">Read<span class="arr">→</span></span>
             </div>
           </div>
         </a>
-        <a class="card reveal" href="newsletters/2026-06-02.html" data-text="Anthropic Jumps the Queue The Signal — AI in Markets | 02 June 2026 Issue No. 03 Today: Anthropic beats OpenAI to the IPO filing on a $47B revenue run-rate, SAP ships a full suite of agentic finance tools for CFOs, OpenAI buys its way into personal finance, and &quot;tokenmaxxing&quot; gives way to hard ROI questions. Five stories. One brief. Everything you need to stay sharp. Markets Tools Labs Product Risk" data-sections="markets tools labs pm risk" style="--i:10">
+        <a class="card reveal" href="newsletters/2026-06-02.html" data-text="Anthropic Jumps the Queue Market Prompt — Anthropic Jumps the Queue · 02 June 2026 Issue No. 03 Today: Anthropic beats OpenAI to the IPO filing on a $47B revenue run-rate, SAP ships a full suite of agentic finance tools for CFOs, OpenAI buys its way into personal finance, and &quot;tokenmaxxing&quot; gives way to hard ROI questions. Five stories. One brief. Everything you need to stay sharp. Markets Tools Labs Product Risk" data-sections="markets tools labs pm risk" style="--i:10">
           <span class="card-rule"></span>
           <div class="cover">
             <img src="assets/img/img3.jpg" alt="" loading="lazy" />
@@ -393,18 +398,18 @@ a{color:inherit;text-decoration:none}
           </div>
           <div class="card-body">
             <div class="card-top">
-              <span class="card-tag">The Signal</span>
+              <span class="card-tag">Market Prompt</span>
               <span class="card-date">02 June 2026 · 4 min</span>
             </div>
             <h3 class="card-title">Anthropic Jumps the Queue</h3>
-            <p class="card-summary">Today: Anthropic beats OpenAI to the IPO filing on a $47B revenue run-rate, SAP ships a full suite of agentic finance tools for CFOs, OpenAI buys its way into personal finance, and &quot;tokenmaxxing&quot; gives way to hard ROI questions. Five stories. One brief. Everything you need to stay sharp.</p>
+            <ul class="card-points"><li>Today: Anthropic beats OpenAI to the IPO filing on a $47B revenue run-rate, SAP ships a full suite of agentic finance tools for CFOs, OpenAI buys its way into personal finance, and &quot;tokenmaxxing&quot; gives way to hard ROI questions.</li><li>Five stories.</li><li>One brief.</li></ul>
             <div class="card-foot">
               <div class="chips"><span class="chip markets">📈 Markets</span><span class="chip tools">🛠️ Tools</span><span class="chip labs">🧪 Labs</span><span class="chip pm">🎯 Product</span><span class="chip risk">⚠️ Risk</span></div>
               <span class="read">Read<span class="arr">→</span></span>
             </div>
           </div>
         </a>
-        <a class="card reveal" href="newsletters/2026-06-01.html" data-text="The Trillion-Dollar Test The Signal — AI in Markets | 01 June 2026 Issue No. 02 This week: Anthropic overtakes OpenAI as the world&#x27;s most valuable AI startup on the back of Claude Opus 4.8, the trillion-dollar IPO window cracks open with SpaceX and OpenAI, the buy-side AI stack settles into distinct layers, and the bubble debate gets louder. Five stories. One brief. Everything you need to stay sharp. Markets Tools Labs Product Risk" data-sections="markets tools labs pm risk" style="--i:11">
+        <a class="card reveal" href="newsletters/2026-06-01.html" data-text="The Trillion-Dollar Test Market Prompt — The Trillion-Dollar Test · 01 June 2026 Issue No. 02 This week: Anthropic overtakes OpenAI as the world&#x27;s most valuable AI startup on the back of Claude Opus 4.8, the trillion-dollar IPO window cracks open with SpaceX and OpenAI, the buy-side AI stack settles into distinct layers, and the bubble debate gets louder. Five stories. One brief. Everything you need to stay sharp. Markets Tools Labs Product Risk" data-sections="markets tools labs pm risk" style="--i:11">
           <span class="card-rule"></span>
           <div class="cover">
             <img src="assets/img/img2.jpg" alt="" loading="lazy" />
@@ -412,18 +417,18 @@ a{color:inherit;text-decoration:none}
           </div>
           <div class="card-body">
             <div class="card-top">
-              <span class="card-tag">The Signal</span>
+              <span class="card-tag">Market Prompt</span>
               <span class="card-date">01 June 2026 · 5 min</span>
             </div>
             <h3 class="card-title">The Trillion-Dollar Test</h3>
-            <p class="card-summary">This week: Anthropic overtakes OpenAI as the world&#x27;s most valuable AI startup on the back of Claude Opus 4.8, the trillion-dollar IPO window cracks open with SpaceX and OpenAI, the buy-side AI stack settles into distinct layers, and the bubble debate gets louder. Five stories. One brief. Everything you need to stay sharp.</p>
+            <ul class="card-points"><li>This week: Anthropic overtakes OpenAI as the world&#x27;s most valuable AI startup on the back of Claude Opus 4.8, the trillion-dollar IPO window cracks open with SpaceX and OpenAI, the buy-side AI stack settles into distinct layers, and the bubble debate gets louder.</li><li>Five stories.</li><li>One brief.</li></ul>
             <div class="card-foot">
               <div class="chips"><span class="chip markets">📈 Markets</span><span class="chip tools">🛠️ Tools</span><span class="chip labs">🧪 Labs</span><span class="chip pm">🎯 Product</span><span class="chip risk">⚠️ Risk</span></div>
               <span class="read">Read<span class="arr">→</span></span>
             </div>
           </div>
         </a>
-        <a class="card reveal" href="newsletters/2026-05-30.html" data-text="AI Eats Wall Street The Signal — AI in Markets | 30 May 2026 Issue No. 01 This week: AI penetrates every layer of capital markets, Vanguard ships a production AI tool for advisors, Google bets on speed over scale, and the PM role continues to bifurcate. Five stories. One brief. Everything you need to stay sharp. Markets Tools Labs Product Risk" data-sections="markets tools labs pm risk" style="--i:12">
+        <a class="card reveal" href="newsletters/2026-05-30.html" data-text="AI Eats Wall Street Market Prompt — AI Eats Wall Street · 30 May 2026 Issue No. 01 This week: AI penetrates every layer of capital markets, Vanguard ships a production AI tool for advisors, Google bets on speed over scale, and the PM role continues to bifurcate. Five stories. One brief. Everything you need to stay sharp. Markets Tools Labs Product Risk" data-sections="markets tools labs pm risk" style="--i:12">
           <span class="card-rule"></span>
           <div class="cover">
             <img src="assets/img/img1.jpg" alt="" loading="lazy" />
@@ -431,11 +436,11 @@ a{color:inherit;text-decoration:none}
           </div>
           <div class="card-body">
             <div class="card-top">
-              <span class="card-tag">The Signal</span>
+              <span class="card-tag">Market Prompt</span>
               <span class="card-date">30 May 2026 · 4 min</span>
             </div>
             <h3 class="card-title">AI Eats Wall Street</h3>
-            <p class="card-summary">This week: AI penetrates every layer of capital markets, Vanguard ships a production AI tool for advisors, Google bets on speed over scale, and the PM role continues to bifurcate. Five stories. One brief. Everything you need to stay sharp.</p>
+            <ul class="card-points"><li>This week: AI penetrates every layer of capital markets, Vanguard ships a production AI tool for advisors, Google bets on speed over scale, and the PM role continues to bifurcate.</li><li>Five stories.</li><li>One brief.</li></ul>
             <div class="card-foot">
               <div class="chips"><span class="chip markets">📈 Markets</span><span class="chip tools">🛠️ Tools</span><span class="chip labs">🧪 Labs</span><span class="chip pm">🎯 Product</span><span class="chip risk">⚠️ Risk</span></div>
               <span class="read">Read<span class="arr">→</span></span>
@@ -447,18 +452,18 @@ a{color:inherit;text-decoration:none}
   </div>
 
   <footer class="site-footer">
-    <div class="ft">The <span>Signal</span></div>
-    <p>The Signal · AI in Public Markets, for analysts &amp; portfolio managers</p>
+    <div class="ft">Market <span>Prompt</span></div>
+    <p>Market Prompt · AI in Public Markets, for analysts &amp; portfolio managers</p>
     <div><button class="foot-sub" type="button" data-subscribe>Subscribe for the daily brief →</button></div>
     <div class="meta">13 ISSUES · SITE REBUILT 15 JUNE 2026</div>
   </footer>
 
-  <div class="modal" id="subModal" hidden role="dialog" aria-modal="true" aria-label="Subscribe to The Signal">
+  <div class="modal" id="subModal" hidden role="dialog" aria-modal="true" aria-label="Subscribe to Market Prompt">
     <div class="backdrop" data-close></div>
     <div class="dialog">
       <div class="top">
         <button class="x" type="button" data-close aria-label="Close">×</button>
-        <div class="ey">The Signal · Daily Brief</div>
+        <div class="ey">Market Prompt · Daily Brief</div>
         <h3>Never miss the signal.</h3>
         <p>One sharp read each morning — AI, public markets, and product — straight to your inbox.</p>
       </div>
@@ -498,7 +503,40 @@ q&&q.addEventListener('input',apply);
 pills.forEach(p=>p.addEventListener('click',()=>{pills.forEach(x=>x.classList.remove('active'));p.classList.add('active');activeSection=p.dataset.section;apply();}));
 const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-const SUBSCRIBE_TO='subscribe@thesignal.news';
+// Where subscribe requests are delivered until an API handler is wired up.
+const SUBSCRIBE_TO='EfiaAmankwa@outlook.com';
+// Set this to your Loops.so / Resend (or other) endpoint to capture leads via
+// API. While empty, the forms fall back to opening the visitor's mail client.
+const SUBSCRIBE_ENDPOINT='';
+
+// Shared subscribe handler: POST to the API if configured, else mailto fallback.
+async function submitSubscribe(email){
+  if(!email||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){return {ok:false,msg:'Please enter a valid email.'};}
+  if(SUBSCRIBE_ENDPOINT){
+    try{
+      const r=await fetch(SUBSCRIBE_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,source:'market-prompt'})});
+      if(r.ok){return {ok:true,msg:"You're on the list — tomorrow's brief lands at 7:00 AM."};}
+      return {ok:false,msg:'Something went wrong. Please try again.'};
+    }catch(_){return {ok:false,msg:'Network error. Please try again.'};}
+  }
+  const subject=encodeURIComponent('Subscribe me to Market Prompt');
+  const body=encodeURIComponent('Please add this address to the Market Prompt daily brief:\n\n'+email);
+  window.location.href='mailto:'+SUBSCRIBE_TO+'?subject='+subject+'&body='+body;
+  return {ok:true,msg:'Almost there — your email app will open. Hit send to confirm.'};
+}
+
+// Hero inline form.
+const heroForm=document.getElementById('heroSubForm');
+const heroMsg=document.getElementById('heroSubMsg');
+heroForm&&heroForm.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const email=document.getElementById('heroEmail').value.trim();
+  const res=await submitSubscribe(email);
+  heroMsg.textContent=res.msg;
+  heroMsg.className='hero-sub-fine '+(res.ok?'ok':'err');
+  if(res.ok)heroForm.reset();
+});
+
 const modal=document.getElementById('subModal');
 const subForm=document.getElementById('subForm');
 const subDone=document.getElementById('subDone');
@@ -507,13 +545,11 @@ function closeModal(){modal.hidden=true;document.body.style.overflow='';subForm.
 document.querySelectorAll('[data-subscribe]').forEach(b=>b.addEventListener('click',openModal));
 modal.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',closeModal));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)closeModal();});
-subForm&&subForm.addEventListener('submit',e=>{
+subForm&&subForm.addEventListener('submit',async e=>{
   e.preventDefault();
   const email=document.getElementById('subEmail').value.trim();
-  const subject=encodeURIComponent('Subscribe me to The Signal');
-  const body=encodeURIComponent('Please add this address to The Signal daily brief:\n\n'+email);
-  window.location.href='mailto:'+SUBSCRIBE_TO+'?subject='+subject+'&body='+body;
-  subForm.hidden=true;subDone.hidden=false;
+  const res=await submitSubscribe(email);
+  if(res.ok){subForm.hidden=true;subDone.hidden=false;}
 });
 </script>
 </body>
