@@ -44,6 +44,15 @@ follow every sentence. This is the most important rule.
 
 Scan these and pick the few items that clear the relevance bar above:
 
+- **MUST CHECK EVERY DAY — Anthropic Alignment Science Blog**
+  (https://alignment.anthropic.com). Fetch this page on every run and read the
+  latest posts. It publishes AI-safety / alignment research (interpretability,
+  AI monitoring, jailbreak defenses, deceptive-AI detection). Capture anything
+  new or relevant and translate it into plain English with a clear market/risk
+  angle — e.g. "what this means for whether AI systems can be trusted in
+  regulated finance." These items usually belong in **From the Labs** or
+  **Watch Closely**. If there are no genuinely new posts since yesterday, say so
+  and move on (don't manufacture a story). Link to the specific post.
 - **The Rundown AI** (https://www.therundown.ai/) and **The Rundown Tech** — as
   *leads* only. Do **not** copy or republish their wording; follow them to the
   primary source and write your own original, beginner-friendly summary. Link to
