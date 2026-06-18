@@ -109,3 +109,14 @@ jobs:
         if: steps.gate.outputs.proceed == 'true'
         id: deployment
         uses: actions/deploy-pages@v4
+
+      # Email the day's issue to subscribers (Resend). Skips itself cleanly
+      # until RESEND_API_KEY / RESEND_AUDIENCE_ID / MP_FROM secrets are set.
+      - name: Email the issue to subscribers
+        if: steps.gate.outputs.proceed == 'true'
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_AUDIENCE_ID: ${{ secrets.RESEND_AUDIENCE_ID }}
+          MP_FROM: ${{ secrets.MP_FROM }}
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: python3 send_email.py "${{ steps.gate.outputs.today }}"

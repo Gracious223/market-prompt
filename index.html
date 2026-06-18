@@ -564,7 +564,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 const SUBSCRIBE_TO='EfiaAmankwa@outlook.com';
 // Set this to your Loops.so / Resend (or other) endpoint to capture leads via
 // API. While empty, the forms fall back to opening the visitor's mail client.
-const SUBSCRIBE_ENDPOINT='';
+const SUBSCRIBE_ENDPOINT='/api/subscribe';
 
 // Shared subscribe handler: POST to the API if configured, else mailto fallback.
 async function submitSubscribe(email){
