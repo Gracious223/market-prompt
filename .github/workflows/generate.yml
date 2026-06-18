@@ -6,7 +6,7 @@ name: Generate daily brief (Market Prompt)
 
 on:
   schedule:
-    - cron: '0 6 * * 1-5'   # 06:00 UTC, Mon–Fri
+    - cron: '0 6 * * *'     # 06:00 UTC, every day
   workflow_dispatch:
 
 # Future-proof against the Node 20 runner deprecation.
@@ -61,5 +61,8 @@ jobs:
             echo "No new issue generated — nothing to commit."
           else
             git commit -m "Add Market Prompt — ${{ steps.date.outputs.today }}"
-            git push "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" HEAD:main
+            REMOTE="https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+            # Rebase on any concurrent pushes so the daily run never fails on a race.
+            git pull --rebase "$REMOTE" main || true
+            git push "$REMOTE" HEAD:main
           fi
