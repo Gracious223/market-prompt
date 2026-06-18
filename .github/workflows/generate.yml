@@ -1,12 +1,17 @@
 name: Generate daily brief (Market Prompt)
 
-# Generates a fresh, web-grounded issue each weekday morning and commits it.
-# Requires repo secret ANTHROPIC_API_KEY. Trigger manually from the Actions tab
-# (workflow_dispatch) to test before relying on the schedule.
+# Generates a fresh, web-grounded issue every day at 07:00 Europe/London and
+# commits it. Requires repo secret ANTHROPIC_API_KEY. Trigger manually from the
+# Actions tab (workflow_dispatch) to test any time.
+#
+# GitHub cron is UTC-only and can't follow daylight saving, so we fire at both
+# 06:00 and 07:00 UTC and the gate step below proceeds only when it is actually
+# 07:00 in London — giving true 7am London year-round (BST and GMT).
 
 on:
   schedule:
-    - cron: '0 6 * * *'     # 06:00 UTC, every day
+    - cron: '0 6 * * *'     # 07:00 London during BST (summer)
+    - cron: '0 7 * * *'     # 07:00 London during GMT (winter)
   workflow_dispatch:
 
 # Future-proof against the Node 20 runner deprecation.
@@ -26,18 +31,26 @@ jobs:
         with:
           submodules: false
 
-      - name: Compute today's date
-        id: date
-        run: echo "today=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+      - name: Gate to 07:00 Europe/London (manual runs always proceed)
+        id: gate
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "$(TZ=Europe/London date +%H)" = "07" ]; then
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Not 07:00 in London (now $(TZ=Europe/London date +%H:%M)); skipping this run."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+          fi
+          echo "today=$(TZ=Europe/London date +%F)" >> "$GITHUB_OUTPUT"
 
       - name: Generate the brief with Claude
+        if: steps.gate.outputs.proceed == 'true'
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: |
-            Today's date is ${{ steps.date.outputs.today }}.
+            Today's date is ${{ steps.gate.outputs.today }}.
             Read .github/newsletter-prompt.md and follow it exactly to produce
-            newsletters/${{ steps.date.outputs.today }}.html. Use WebSearch to
+            newsletters/${{ steps.gate.outputs.today }}.html. Use WebSearch to
             ground every story in a real, recent source (always include The
             Rundown AI and The Rundown Tech among the feeds you scan), attribute
             and link each story, and match the structure of the most recent file
@@ -48,9 +61,11 @@ jobs:
             --allowedTools WebSearch,WebFetch,Read,Glob,Write
 
       - name: Rebuild index + article pages
+        if: steps.gate.outputs.proceed == 'true'
         run: python3 build.py
 
       - name: Commit the new issue
+        if: steps.gate.outputs.proceed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -60,7 +75,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No new issue generated — nothing to commit."
           else
-            git commit -m "Add Market Prompt — ${{ steps.date.outputs.today }}"
+            git commit -m "Add Market Prompt — ${{ steps.gate.outputs.today }}"
             REMOTE="https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
             # Rebase on any concurrent pushes so the daily run never fails on a race.
             git pull --rebase "$REMOTE" main || true
