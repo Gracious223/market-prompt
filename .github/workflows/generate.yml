@@ -20,12 +20,23 @@ env:
 
 permissions:
   contents: write          # commit/push the generated issue
-  id-token: write          # claude-code-action authenticates via OIDC
+  id-token: write          # claude-code-action OIDC + Pages deploy
   pull-requests: write     # required by claude-code-action
+  pages: write             # deploy to GitHub Pages from this run
+
+# Share the Pages deploy lane with deploy.yml so the two never clash.
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   generate:
     runs-on: ubuntu-latest
+    # A workflow-token push doesn't trigger deploy.yml, so this job deploys
+    # the freshly generated site itself.
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -81,3 +92,20 @@ jobs:
             git pull --rebase "$REMOTE" main || true
             git push "$REMOTE" HEAD:main
           fi
+
+      # The bot push above can't trigger deploy.yml (workflow-token pushes don't
+      # start new workflows), so publish the freshly built site from this run.
+      - name: Configure Pages
+        if: steps.gate.outputs.proceed == 'true'
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        if: steps.gate.outputs.proceed == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        if: steps.gate.outputs.proceed == 'true'
+        id: deployment
+        uses: actions/deploy-pages@v4
