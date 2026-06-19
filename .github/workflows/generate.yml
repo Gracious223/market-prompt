@@ -84,6 +84,19 @@ jobs:
             --model claude-sonnet-4-6
             --allowedTools WebSearch,WebFetch,Read,Glob,Write
 
+      # Generation can fail transiently (API overload, flaky web search) and exit
+      # without writing the file. Fail loudly here rather than committing index
+      # churn under a misleading "Add Market Prompt" message and reporting success.
+      - name: Verify the issue was actually generated
+        if: steps.gate.outputs.proceed == 'true'
+        run: |
+          f="newsletters/${{ steps.gate.outputs.today }}.html"
+          if [ ! -f "$f" ]; then
+            echo "::error::Generation produced no $f — failing instead of committing an empty issue. Re-run to retry."
+            exit 1
+          fi
+          echo "✓ $f was created."
+
       - name: Rebuild index + article pages
         if: steps.gate.outputs.proceed == 'true'
         run: python3 build.py
