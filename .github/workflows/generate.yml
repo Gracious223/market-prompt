@@ -4,9 +4,10 @@ name: Generate daily brief (Market Prompt)
 # commits it. Requires repo secret ANTHROPIC_API_KEY. Trigger manually from the
 # Actions tab (workflow_dispatch) to test any time.
 #
-# GitHub cron is UTC-only and can't follow daylight saving, so we fire at both
-# 06:00 and 07:00 UTC and the gate step below proceeds only when it is actually
-# 07:00 in London — giving true 7am London year-round (BST and GMT).
+# GitHub cron is UTC-only and can't follow daylight saving, and scheduled runs
+# can fire hours late, so we fire at both 06:00 and 07:00 UTC and the gate below
+# proceeds on the first fire at/after 07:00 London with no issue yet for today —
+# delay-tolerant, idempotent, true 7am-or-later London year-round (BST and GMT).
 
 on:
   schedule:
@@ -42,16 +43,28 @@ jobs:
         with:
           submodules: false
 
-      - name: Gate to 07:00 Europe/London (manual runs always proceed)
+      - name: Gate — 07:00+ London, once per day (manual runs always proceed)
         id: gate
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "$(TZ=Europe/London date +%H)" = "07" ]; then
+          today="$(TZ=Europe/London date +%F)"
+          hour="$((10#$(TZ=Europe/London date +%H)))"   # 10# forces base-10 (no octal 08/09)
+          echo "today=$today" >> "$GITHUB_OUTPUT"
+          # Scheduled crons can fire hours late, so don't require an exact hour.
+          # Proceed on the first run at/after 07:00 London that finds no issue for
+          # today yet; later/duplicate fires see the committed file and skip.
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Manual run — proceeding."
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+          elif [ -f "newsletters/${today}.html" ]; then
+            echo "Issue for ${today} already exists — nothing to do."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+          elif [ "$hour" -ge 7 ]; then
+            echo "After 07:00 London (now $(TZ=Europe/London date +%H:%M)), no issue yet — proceeding."
             echo "proceed=true" >> "$GITHUB_OUTPUT"
           else
-            echo "Not 07:00 in London (now $(TZ=Europe/London date +%H:%M)); skipping this run."
+            echo "Before 07:00 London (now $(TZ=Europe/London date +%H:%M)); skipping."
             echo "proceed=false" >> "$GITHUB_OUTPUT"
           fi
-          echo "today=$(TZ=Europe/London date +%F)" >> "$GITHUB_OUTPUT"
 
       - name: Generate the brief with Claude
         if: steps.gate.outputs.proceed == 'true'
