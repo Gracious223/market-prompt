@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Market Prompt — Anthropic and OpenAI Are Racing to the Same Autumn IPO Window — at a Combined $1.8 Trillion · 20 June 2026</title>
+  <script>document.documentElement.className = 'js';</script>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+/* Market Prompt — navy & gold. */
+:root{--ink:#14142b;--ink-2:#1d1d3a;--paper:#f6f3ec;--gold:#c9a96e;--gold-soft:#e3cfa6;--muted:#8a8fa8;--muted-d:#5b5f78;--line:#e8e3d8;--card:#fff;--pop:#ff6f5e}
+html{scroll-behavior:smooth}
+body{background:var(--paper);font-family:'Inter',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.progress{position:fixed;top:0;left:0;height:4px;width:0;z-index:90;background:linear-gradient(90deg,var(--pop),var(--gold))}
+.anav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:13px 24px;background:rgba(20,20,43,.78);backdrop-filter:saturate(160%) blur(14px);-webkit-backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid rgba(201,169,110,.18)}
+.anav .back{font-family:'Playfair Display',serif;font-weight:800;font-size:17px;color:var(--paper)}
+.anav .back span{color:var(--gold)}
+.anav .back:hover{opacity:.85}
+.anav .meta{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#b9bcd0;display:none}
+@media (min-width:680px){.anav .meta{display:block}}
+.anav .sub{border:none;cursor:pointer;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:8px 14px;border-radius:999px}
+.anav .sub:hover{transform:translateY(-1px)}
+.ahero{position:relative;min-height:58vh;display:flex;align-items:flex-end;color:var(--paper);overflow:hidden;isolation:isolate}
+.ahero .bg{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center;transform:scale(1.05)}
+.ahero .scrim{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(20,20,43,.45) 0%,rgba(20,20,43,.6) 45%,rgba(20,20,43,.92) 100%)}
+.ahero .inner{max-width:820px;margin:0 auto;width:100%;padding:48px 24px 56px;text-align:center}
+.ahero .eyebrow{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.ahero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(46px,9vw,88px);line-height:.95;letter-spacing:-1.5px}
+.ahero h1 span{background:linear-gradient(120deg,var(--gold),var(--gold-soft));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ahero .edition{margin-top:16px;font-family:'Playfair Display',serif;font-style:italic;font-weight:600;font-size:clamp(20px,3.4vw,30px);color:var(--gold-soft);letter-spacing:-.3px}
+.ahero .tag{margin-top:14px;font-size:14px;font-weight:300;letter-spacing:.5px;color:#d4d6e4}
+.date-bar{margin:26px auto 0;max-width:520px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;align-items:center;padding-top:18px;border-top:1px solid rgba(255,255,255,.16)}
+.date-bar span{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#c2c5d8}
+.date-bar .issue{background:var(--gold);color:var(--ink);padding:3px 11px;border-radius:999px;font-weight:700}
+.intro{background:var(--gold);color:var(--ink)}
+.intro p{max-width:760px;margin:0 auto;padding:34px 24px;font-size:17px;line-height:1.85;font-weight:400}
+.intro p strong{font-weight:700}
+.intro p::first-letter{font-family:'Playfair Display',serif;font-size:3em;line-height:.82;float:left;margin:7px 12px 0 0;font-weight:800;color:var(--ink)}
+.acontent{max-width:820px;margin:0 auto;padding:8px 24px 40px;position:relative}
+.stat-row{display:flex;gap:14px;margin:40px 0 8px;flex-wrap:wrap}
+.stat-card{flex:1;min-width:150px;background:var(--ink);border-radius:16px;padding:26px 20px;text-align:center;transition:transform .2s,box-shadow .2s}
+.stat-card:hover{transform:translateY(-3px);box-shadow:0 18px 36px -20px rgba(20,20,43,.6)}
+.stat-card .number{font-family:'Playfair Display',serif;font-size:36px;font-weight:800;color:var(--gold);line-height:1}
+.stat-card .label{font-size:10px;font-weight:500;color:#a7abc4;letter-spacing:.8px;text-transform:uppercase;margin-top:10px;line-height:1.5}
+.toc{position:fixed;top:50%;right:max(16px,calc((100vw - 820px)/2 - 150px));transform:translateY(-50%);z-index:40;display:none;flex-direction:column;gap:10px}
+@media (min-width:1180px){.toc{display:flex}}
+.toc a{display:flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted-d);opacity:.6;transition:opacity .15s,color .15s}
+.toc a .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.toc a.active{opacity:1;color:var(--ink);font-weight:700}
+.section{padding-top:64px}
+.sec-banner{position:relative;height:128px;border-radius:14px;overflow:hidden;background-size:cover;background-position:center;display:flex;align-items:flex-end}
+.sec-banner .sec-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,43,.3),rgba(20,20,43,.8))}
+.sec-banner .sec-head{position:relative;z-index:2;display:flex;align-items:center;gap:11px;padding:20px 24px}
+.sec-banner .sec-emoji{font-size:22px;line-height:1}
+.sec-banner .dot{width:10px;height:10px;border-radius:50%}
+.sec-banner h2{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#fff}
+.dot.markets{background:#3a9bcf}.dot.tools{background:#5aa83a}.dot.labs{background:#b54a9e}.dot.pm{background:#cf9a3a}.dot.risk{background:#cf524a}
+.stories{margin-top:22px;display:flex;flex-direction:column;gap:22px}
+.story{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:34px 36px;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.story:hover{transform:translateY(-4px);box-shadow:0 22px 44px -28px rgba(20,20,43,.4);border-color:var(--gold-soft)}
+.story .tag{display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 11px;border-radius:999px;margin-bottom:14px}
+.tag.markets{background:#e8f4f8;color:#2a7fa8}.tag.tools{background:#eef8e6;color:#4a8a2a}.tag.labs{background:#f8e8f4;color:#8a2a7a}.tag.pm{background:#f8f0e8;color:#8a5a2a}.tag.risk{background:#f8e8e8;color:#8a2a2a}
+.tag.markets::before{content:"📈 "}.tag.tools::before{content:"🛠️ "}.tag.labs::before{content:"🧪 "}.tag.pm::before{content:"🎯 "}.tag.risk::before{content:"⚠️ "}
+.story h3{font-family:'Playfair Display',serif;font-size:27px;font-weight:700;line-height:1.22;letter-spacing:-.4px;margin-bottom:13px}
+.story > p{font-size:16.5px;line-height:1.85;color:#3a3a4e}
+.story > p strong{color:var(--ink);font-weight:600}
+.why-it-matters{margin-top:18px;padding:18px 22px;background:#faf7f0;border-left:3px solid var(--gold);border-radius:12px}
+.why-it-matters p{font-size:13px;line-height:1.7;color:#5a5a6e;font-style:italic}
+.why-it-matters strong{color:var(--ink);font-style:normal;font-weight:700}
+.source{display:inline-flex;align-items:center;gap:7px;margin-top:18px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--ink);border:1.5px solid var(--ink);border-radius:999px;padding:9px 16px;transition:background .15s,color .15s}
+.source:hover{background:var(--ink);color:var(--gold)}
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}.ahero .bg{transform:none}}
+.afooter{background:var(--ink);color:var(--muted);text-align:center;padding:54px 24px}
+.afooter .ft{font-family:'Playfair Display',serif;color:var(--paper);font-size:24px;font-weight:800;margin-bottom:6px}
+.afooter .ft span{color:var(--gold)}
+.afooter p{font-size:12px;line-height:1.9}
+.afooter .actions{margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.afooter .b{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:11px 20px;border-radius:999px;cursor:pointer;border:1px solid rgba(255,255,255,.2);color:var(--paper);background:none}
+.afooter .b.gold{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.afooter .b:hover{transform:translateY(-1px)}
+@media (max-width:560px){.story{padding:24px 22px}.ahero{min-height:56vh}}
+</style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+
+  <nav class="anav">
+    <a class="back" href="../index.html">← Market <span>Prompt</span></a>
+    <span class="meta">Issue No. 17 · 20 June 2026</span>
+    <button class="sub" type="button" data-subscribe>Subscribe</button>
+  </nav>
+
+  <header class="ahero">
+    <div class="bg" style="background-image:url('../assets/img/img1.jpg')"></div>
+    <div class="scrim"></div>
+    <div class="inner">
+      <div class="eyebrow">Your Intelligence Brief · ☕ 9 min read</div>
+      <h1>Market <span>Prompt</span></h1>
+      <p class="edition">“Anthropic and OpenAI Are Racing to the Same Autumn IPO Window — at a Combined $1.8 Trillion”</p>
+      <p class="tag">AI · Public Markets · Product Management</p>
+      <div class="date-bar">
+        <span>20 June 2026</span>
+        <span class="issue">Issue No. 17</span>
+        <span>Intelligence Brief</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="intro"><p>Anthropic is at the G7 summit in France discussing AI governance with world leaders while its flagship models, Fable 5 and Mythos 5, remain suspended at home — today marks eight days offline and is the refund deadline for affected subscribers. Both Anthropic and OpenAI have now filed confidentially for IPOs targeting the same autumn window, with a combined implied valuation above $1.8 trillion. More than 100 cybersecurity experts signed an open letter this week saying the ban hurts defenders more than attackers — and Chinese rival Zhipu AI's stock surged 33% to prove it.</p></div>
+
+  <nav class="toc" id="toc"><a href="#sec-0" data-target="sec-0"><span class="dot markets"></span>📈 Public Markets</a><a href="#sec-1" data-target="sec-1"><span class="dot risk"></span>⚠️ Regulation</a><a href="#sec-2" data-target="sec-2"><span class="dot risk"></span>⚠️ Watch Closely</a><a href="#sec-3" data-target="sec-3"><span class="dot labs"></span>🧪 From the Labs</a><a href="#sec-4" data-target="sec-4"><span class="dot pm"></span>🎯 AI Product Management</a></nav>
+
+  <main class="acontent">
+    <div class="stat-row"><div class="stat-card"><div class="number">$965B</div><div class="label">Anthropic's valuation at IPO filing — the highest-valued AI safety company ever to go public</div></div><div class="stat-card"><div class="number">Day 8</div><div class="label">Fable 5 and Mythos 5 suspended globally; today is the subscriber refund deadline</div></div><div class="stat-card"><div class="number">33%</div><div class="label">Zhipu AI stock surge after the US banned Anthropic's most capable models from global use</div></div></div>
+    
+        <section class="section sec reveal" id="sec-0">
+          <div class="sec-banner" style="background-image:url('../assets/img/img7.jpg')">
+            <div class="sec-scrim"></div>
+            <div class="sec-head"><span class="sec-emoji">📈</span><span class="dot markets"></span><h2>Public Markets</h2></div>
+          </div>
+          <div class="stories">
+            <article class="story reveal">
+              <span class="tag markets">Lead Story · IPO</span>
+              <h3>Anthropic and OpenAI Are Racing to the Same Autumn IPO Window — at a Combined $1.8 Trillion</h3>
+              <p>Anthropic confidentially filed its S-1 (the document a company submits to the US Securities and Exchange Commission — the main financial regulator — before selling shares to the public for the first time) with the SEC on June 1, at a last-known private valuation of <strong>$965 billion</strong>. OpenAI followed eight days later, targeting a late-2026 debut at a valuation of up to $850 billion, with Goldman Sachs and Morgan Stanley named as underwriters (the banks that manage the share sale and set the opening price) for both offerings. Anthropic's annual revenue run rate — the pace of sales projected over a full year — had surpassed $30 billion by April 2026. OpenAI has approximately 900 million weekly active users but faces heavier losses, projecting roughly $85 billion in annual compute spending by 2028. Both companies are on course to list in the same autumn window, forcing institutional investors to choose between them — or find room for both.</p>
+              <div class="why-it-matters"><p>Two AI companies that together could be worth more than $1.8 trillion are going public at the same time. Public-market investors — the pension funds, endowments, and asset managers who buy large blocks of shares — will be asked to value two structurally very different businesses simultaneously: Anthropic, which has fast-growing enterprise revenue and an AI safety brand, versus OpenAI, which has massive consumer scale but is burning cash at a rate no software company in history has matched. <strong>Pricing them both correctly will test every AI investment thesis on Wall Street — and the ongoing Fable 5 suspension makes Anthropic's risk profile harder to read heading into its roadshow.</strong></p></div>
+              <a class="source" href="https://techcrunch.com/2026/06/08/following-anthropic-openai-files-confidentially-for-ipo/" target="_blank" rel="noopener">Read at TechCrunch →</a>
+            </article>
+            <article class="story reveal">
+              <span class="tag markets">IPO Risk · Model Suspension</span>
+              <h3>Fable 5 and Mythos 5 Have Been Offline for Eight Days — and Today Is the Subscriber Refund Deadline</h3>
+              <p>Anthropic launched Claude Fable 5 and Mythos 5 on June 9 to strong reviews from enterprise customers and developers. Three days later — on June 12 at 5:21 PM ET — a US government export-control directive (a legal order restricting who can access sensitive technology, normally applied to weapons hardware or semiconductor chips) forced the company to disable both models for every user on Earth. Foreign nationals, including Anthropic's own staff, could no longer access the models under the terms of the order. Anthropic complied but publicly stated it disagrees with the action, calling the jailbreak that triggered it "relatively simple" and "widely available from other models." As of today, June 20, both models remain offline. The company says restoration is "within days." Subscribers who paid for access between June 9 and June 14 are entitled to a refund, and today is that deadline.</p>
+              <div class="why-it-matters"><p>An AI company with its two most capable models offline for eight consecutive days — while preparing for the largest IPO in the AI sector — is a material risk (a risk large enough to affect an investor's decision) that belongs in every investor's due diligence file. <strong>If the suspension extends into July, it starts to affect quarterly revenue numbers and enterprise contract retention, both of which will be scrutinised line by line when Anthropic's public S-1 filing lands.</strong></p></div>
+              <a class="source" href="https://www.bloomberg.com/news/articles/2026-06-13/anthropic-says-us-limits-foreign-access-to-fable-5-mythos-5" target="_blank" rel="noopener">Read at Bloomberg →</a>
+            </article></div>
+        </section>
+        <section class="section sec reveal" id="sec-1">
+          <div class="sec-banner" style="background-image:url('../assets/img/img1.jpg')">
+            <div class="sec-scrim"></div>
+            <div class="sec-head"><span class="sec-emoji">⚠️</span><span class="dot risk"></span><h2>Regulation</h2></div>
+          </div>
+          <div class="stories">
+            <article class="story reveal">
+              <span class="tag risk">AI Policy · National Security</span>
+              <h3>Inside the Mythos Deadlock — Leaked Messages, a South Korean Firm, and an "Impossible Ask" From Washington</h3>
+              <p>New reporting this week reveals why the Fable 5 suspension has lasted this long. The Commerce Secretary issued a written directive ordering Anthropic to block both models from "foreign persons" after US intelligence indicated that a South Korean company with suspected ties to China had gained access to Mythos. Leaked internal employee messages describe the situation as a "relationship problem" rather than a genuine safety issue — with staff characterising it as being "bullied based on bad vibes." The core impasse: the government is demanding Anthropic fully eliminate the jailbreak technique (the method used to bypass a model's built-in safety limits) that triggered the directive. Anthropic says this is "an impossible ask" that would "essentially halt all new model deployments for all frontier model providers." CEO Dario Amodei is currently at the G7 summit in France discussing global AI governance, while the domestic standoff remains unresolved.</p>
+              <div class="why-it-matters"><p>This is the first time a US government has compelled a commercial AI company to take a live, revenue-generating product offline for national security reasons. How it ends — government backs down, Anthropic patches and relaunches, or both sides agree on a testing framework — sets the precedent for every future dispute between AI labs and regulators worldwide. <strong>For investors tracking Anthropic's IPO, the outcome directly affects the company's ability to claim reliable global distribution as a selling point to institutional investors in its autumn roadshow.</strong></p></div>
+              <a class="source" href="https://www.therundown.ai/p/inside-the-deadlock-keeping-mythos-offline" target="_blank" rel="noopener">Read at The Rundown AI →</a>
+            </article></div>
+        </section>
+        <section class="section sec reveal" id="sec-2">
+          <div class="sec-banner" style="background-image:url('../assets/img/img1.jpg')">
+            <div class="sec-scrim"></div>
+            <div class="sec-head"><span class="sec-emoji">⚠️</span><span class="dot risk"></span><h2>Watch Closely</h2></div>
+          </div>
+          <div class="stories">
+            <article class="story reveal">
+              <span class="tag risk">Cybersecurity · Geopolitics</span>
+              <h3>100+ Security Experts Say the Fable 5 Ban Backfires — and Zhipu AI's Stock Jumped 33% to Prove It</h3>
+              <p>More than 100 cybersecurity professionals — including Alex Stamos (former chief security officer at Facebook and Yahoo), Katie Moussouris (CEO of Luta Security), and Joe Levy (CEO of Sophos, a major cybersecurity company) — signed an open letter this week urging the US government to reverse the Fable 5 and Mythos 5 ban. Their central argument: frontier AI models are primary tools that security defenders — the professionals protecting networks — use to find vulnerabilities before attackers exploit them. Banning the best US models does not stop adversaries, who can switch to OpenAI's GPT-5.5 or international alternatives without restriction. The geopolitical consequence arrived immediately: Chinese AI company Zhipu AI launched its GLM-5.2 model on June 13 — the day after the Fable 5 shutdown — and explicitly cited US AI unreliability in its marketing materials. Zhipu's stock surged 33%.</p>
+              <div class="why-it-matters"><p>The open letter frames the ban as self-defeating — removing the best tools from those protecting US institutions while leaving adversaries unaffected. Zhipu's 33% stock move is the market's real-time verdict on the export control: if US AI models are unreliable for global buyers, non-US alternatives gain market share fast. <strong>For investors pricing AI platform risk, this is the first clear data point on what US export restrictions cost American AI companies in global market share — and the answer arrived within 24 hours of the ban taking effect.</strong></p></div>
+              <a class="source" href="https://thenextweb.com/news/fable-5-ban-cybersecurity-defenders-open-letter" target="_blank" rel="noopener">Read at The Next Web →</a>
+            </article></div>
+        </section>
+        <section class="section sec reveal" id="sec-3">
+          <div class="sec-banner" style="background-image:url('../assets/img/img3.jpg')">
+            <div class="sec-scrim"></div>
+            <div class="sec-head"><span class="sec-emoji">🧪</span><span class="dot labs"></span><h2>From the Labs</h2></div>
+          </div>
+          <div class="stories">
+            <article class="story reveal">
+              <span class="tag labs">Anthropic Alignment · AI Safety</span>
+              <h3>No New Alignment Science Posts — But the Fable 5 Jailbreak Is the Field's Biggest Live Case Study</h3>
+              <p>The Anthropic Alignment Science blog (alignment.anthropic.com) has not published a new post since the SLEIGHT-Bench paper in May, which found that human attackers could bypass AI safety monitors roughly one-in-four times (covered in our June 18 issue). That finding has unexpected real-world relevance this week: the directive suspending Fable 5 was triggered by a jailbreak discovered by a government security testing partner — the exact category of adversarial attack SLEIGHT-Bench was designed to measure. Anthropic says the technique was "relatively simple" and "widely available from other models," echoing the SLEIGHT-Bench conclusion that no frontier model monitor is yet immune to adversarial attack. There are no new posts to report today; we check this page daily and will cover any new research here immediately.</p>
+              <div class="why-it-matters"><p>The same researchers studying theoretical blind spots in AI safety systems are now managing a real-world case where a theoretical jailbreak triggered an unprecedented regulatory shutdown. <strong>The gap between "a narrow, non-universal jailbreak" (Anthropic's description) and "a national security threat" (the government's description) is exactly the vocabulary problem alignment researchers must resolve before banks, healthcare systems, and defence contractors can write enforceable AI safety standards.</strong></p></div>
+              <a class="source" href="https://alignment.anthropic.com" target="_blank" rel="noopener">Read at Anthropic Alignment →</a>
+            </article></div>
+        </section>
+        <section class="section sec reveal" id="sec-4">
+          <div class="sec-banner" style="background-image:url('../assets/img/img8.jpg')">
+            <div class="sec-scrim"></div>
+            <div class="sec-head"><span class="sec-emoji">🎯</span><span class="dot pm"></span><h2>AI Product Management</h2></div>
+          </div>
+          <div class="stories">
+            <article class="story reveal">
+              <span class="tag tools">Tools for Analysts</span>
+              <h3>Perplexity Finance Now Pulls from 40+ Live Data Sources — Including the SEC, FactSet, and S&P Global</h3>
+              <p>Perplexity Finance — the AI research assistant that works like a search engine for financial data — has expanded its live data connections to more than 40 sources, including the US Securities and Exchange Commission (the regulator that requires public companies to disclose their financials), FactSet, S&P Global, LSEG (formerly Refinitiv, one of the world's largest financial data providers), and Coinbase. Users can now ask plain-English questions — "How does Nvidia's gross margin compare to AMD and Intel over the last four quarters?" — and receive sourced answers drawing on live data, without a Bloomberg Terminal (the professional data system most Wall Street analysts use, which costs roughly $25,000 per user per year). Perplexity's annual recurring revenue — the annualised pace of subscription payments — grew from $80 million in late 2024 to an estimated $200 million by February 2026.</p>
+              <div class="why-it-matters"><p>Institutional-quality financial data has historically been gated behind expensive subscriptions that small teams and individual analysts cannot afford. A tool that opens it up via plain-language queries changes who can do Wall Street-calibre research. <strong>For AI product managers building analyst tools, Perplexity Finance is now the benchmark to beat: any new analyst AI product needs a clear answer to "why is this better than just asking Perplexity?"</strong></p></div>
+              <a class="source" href="https://www.wealthmanagement.com/artificial-intelligence/perplexity-upgrades-finance-capabilities" target="_blank" rel="noopener">Read at Wealth Management →</a>
+            </article>
+            <article class="story reveal">
+              <span class="tag pm">Product Strategy</span>
+              <h3>The Fable 5 Outage Is the Case Study Every AI PM Needed — Build Multi-Provider or Accept the Risk</h3>
+              <p>The Fable 5 and Mythos 5 suspension arrived with no warning at 5:21 PM on a Thursday and is now in its eighth consecutive day with no confirmed end date. For any product team whose AI application was built exclusively on those models, those eight days meant zero functionality and no obvious path to recovery. The lesson is architectural: a multi-provider AI gateway — a routing layer that sits between your product and multiple AI model APIs (the programming interfaces that let software connect to AI systems) — eliminates single-provider dependency. The pattern is practical: use one primary model for quality, a fallback from a different provider for availability, and design your prompts (the instructions you send to the AI) to work reasonably well across both. The engineering overhead is real, but so is the outage risk, now demonstrated at production scale.</p>
+              <div class="why-it-matters"><p>The Fable 5 outage is the first major real-world test of AI infrastructure resilience, and it arrived with no warning and no certain end date. <strong>If your product carries an SLA — a service-level agreement, a written commitment about uptime you make to enterprise customers — a single-model dependency is now a contractual liability you will be asked to explain in every procurement review.</strong></p></div>
+              <a class="source" href="https://www.truefoundry.com/blog/fable-mythos-ban" target="_blank" rel="noopener">Read at TruFoundry →</a>
+            </article></div>
+        </section>
+  </main>
+
+  <footer class="afooter">
+    <div class="ft">Market <span>Prompt</span></div>
+    <p>Market Prompt · AI in Public Markets<br/>Issue No. 17 · 20 June 2026</p>
+    <div class="actions">
+      <a class="b gold" href="../index.html">← Back to all issues</a>
+      <button class="b" type="button" data-subscribe>Subscribe</button>
+    </div>
+  </footer>
+
+  <script>
+(function(){
+  const prog=document.getElementById('progress');
+  function onScroll(){var h=document.documentElement;var sc=h.scrollTop||document.body.scrollTop;var max=h.scrollHeight-h.clientHeight;prog.style.width=(max>0?(sc/max*100):0)+'%';}
+  document.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  var toc=document.getElementById('toc');
+  if(toc){
+    var links=[].slice.call(toc.querySelectorAll('a'));
+    var map={};links.forEach(function(l){map[l.dataset.target]=l;});
+    var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(x){x.classList.remove('active');});var a=map[e.target.id];if(a)a.classList.add('active');}});},{rootMargin:'-40% 0px -55% 0px'});
+    document.querySelectorAll('.section').forEach(function(s){so.observe(s);});
+  }
+  document.querySelectorAll('[data-subscribe]').forEach(function(b){b.addEventListener('click',function(){window.location.href='../index.html#top';});});
+})();
+</script>
+</body>
+</html>
