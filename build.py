@@ -921,20 +921,38 @@ def render_article(d, idx=0):
 """
 
 
+# --- Analytics ---------------------------------------------------------------
+# GoatCounter: free, privacy-friendly, no cookies, no consent banner. Register
+# this exact site code (free) at https://www.goatcounter.com — your stats then
+# live at https://<code>.goatcounter.com. Set GOATCOUNTER_CODE = "" to disable.
+GOATCOUNTER_CODE = "marketprompt"
+GOATCOUNTER = (
+    f'<script data-goatcounter="https://{GOATCOUNTER_CODE}.goatcounter.com/count"'
+    ' async src="//gc.zgo.at/count.js"></script>'
+)
+
+
+def with_analytics(html):
+    """Inject the GoatCounter snippet before </body>. Idempotent; no-op if disabled."""
+    if not GOATCOUNTER_CODE or GOATCOUNTER in html:
+        return html
+    return html.replace("</body>", f"  {GOATCOUNTER}\n</body>", 1)
+
+
 def main():
     issues = collect()
-    OUTPUT.write_text(render(issues), encoding="utf-8")
+    OUTPUT.write_text(with_analytics(render(issues)), encoding="utf-8")
     for idx, d in enumerate(issues):
         path = NEWSLETTERS / d["file"]
         if d.get("external"):
             # Bespoke layouts aren't re-rendered, but their visible issue
             # number is still kept in sync with the chronological numbering.
             text = path.read_text(encoding="utf-8")
-            synced = re.sub(r"Issue No\.\s*\d+", d["issue"], text)
+            synced = with_analytics(re.sub(r"Issue No\.\s*\d+", d["issue"], text))
             if synced != text:
                 path.write_text(synced, encoding="utf-8")
         else:
-            path.write_text(render_article(d, idx), encoding="utf-8")
+            path.write_text(with_analytics(render_article(d, idx)), encoding="utf-8")
     print(f"Built index.html + {len(issues)} article page(s) from {len(_IMAGES)} image(s):")
     for i in issues:
         n_stories = sum(len(s["stories"]) for s in i["sectionlist"])
