@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Market Prompt — Companies Are Hitting the AI Brakes After Blowing Their Budgets · 28 June 2026</title>
+  <script>document.documentElement.className = 'js';</script>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+/* Market Prompt — navy & gold. */
+:root{--ink:#14142b;--ink-2:#1d1d3a;--paper:#f6f3ec;--gold:#c9a96e;--gold-soft:#e3cfa6;--muted:#8a8fa8;--muted-d:#5b5f78;--line:#e8e3d8;--card:#fff;--pop:#ff6f5e}
+html{scroll-behavior:smooth}
+body{background:var(--paper);font-family:'Inter',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.progress{position:fixed;top:0;left:0;height:4px;width:0;z-index:90;background:linear-gradient(90deg,var(--pop),var(--gold))}
+.anav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:13px 24px;background:rgba(20,20,43,.78);backdrop-filter:saturate(160%) blur(14px);-webkit-backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid rgba(201,169,110,.18)}
+.anav .back{font-family:'Playfair Display',serif;font-weight:800;font-size:17px;color:var(--paper)}
+.anav .back span{color:var(--gold)}
+.anav .back:hover{opacity:.85}
+.anav .meta{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#b9bcd0;display:none}
+@media (min-width:680px){.anav .meta{display:block}}
+.anav .sub{border:none;cursor:pointer;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:8px 14px;border-radius:999px}
+.anav .sub:hover{transform:translateY(-1px)}
+.ahero{position:relative;min-height:58vh;display:flex;align-items:flex-end;color:var(--paper);overflow:hidden;isolation:isolate}
+.ahero .bg{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center;transform:scale(1.05)}
+.ahero .scrim{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(20,20,43,.45) 0%,rgba(20,20,43,.6) 45%,rgba(20,20,43,.92) 100%)}
+.ahero .inner{max-width:820px;margin:0 auto;width:100%;padding:48px 24px 56px;text-align:center}
+.ahero .eyebrow{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.ahero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(46px,9vw,88px);line-height:.95;letter-spacing:-1.5px}
+.ahero h1 span{background:linear-gradient(120deg,var(--gold),var(--gold-soft));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ahero .edition{margin-top:16px;font-family:'Playfair Display',serif;font-style:italic;font-weight:600;font-size:clamp(20px,3.4vw,30px);color:var(--gold-soft);letter-spacing:-.3px}
+.ahero .tag{margin-top:14px;font-size:14px;font-weight:300;letter-spacing:.5px;color:#d4d6e4}
+.date-bar{margin:26px auto 0;max-width:520px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;align-items:center;padding-top:18px;border-top:1px solid rgba(255,255,255,.16)}
+.date-bar span{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#c2c5d8}
+.date-bar .issue{background:var(--gold);color:var(--ink);padding:3px 11px;border-radius:999px;font-weight:700}
+.intro{background:var(--gold);color:var(--ink)}
+.intro p{max-width:760px;margin:0 auto;padding:34px 24px;font-size:17px;line-height:1.85;font-weight:400}
+.intro p strong{font-weight:700}
+.intro p::first-letter{font-family:'Playfair Display',serif;font-size:3em;line-height:.82;float:left;margin:7px 12px 0 0;font-weight:800;color:var(--ink)}
+.acontent{max-width:820px;margin:0 auto;padding:8px 24px 40px;position:relative}
+.stat-row{display:flex;gap:14px;margin:40px 0 8px;flex-wrap:wrap}
+.stat-card{flex:1;min-width:150px;background:var(--ink);border-radius:16px;padding:26px 20px;text-align:center;transition:transform .2s,box-shadow .2s}
+.stat-card:hover{transform:translateY(-3px);box-shadow:0 18px 36px -20px rgba(20,20,43,.6)}
+.stat-card .number{font-family:'Playfair Display',serif;font-size:36px;font-weight:800;color:var(--gold);line-height:1}
+.stat-card .label{font-size:10px;font-weight:500;color:#a7abc4;letter-spacing:.8px;text-transform:uppercase;margin-top:10px;line-height:1.5}
+.toc{position:fixed;top:50%;right:max(16px,calc((100vw - 820px)/2 - 150px));transform:translateY(-50%);z-index:40;display:none;flex-direction:column;gap:10px}
+@media (min-width:1180px){.toc{display:flex}}
+.toc a{display:flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted-d);opacity:.6;transition:opacity .15s,color .15s}
+.toc a .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.toc a.active{opacity:1;color:var(--ink);font-weight:700}
+.section{padding-top:64px}
+.sec-banner{position:relative;height:128px;border-radius:14px;overflow:hidden;background-size:cover;background-position:center;display:flex;align-items:flex-end}
+.sec-banner .sec-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,43,.3),rgba(20,20,43,.8))}
+.sec-banner .sec-head{position:relative;z-index:2;display:flex;align-items:center;gap:11px;padding:20px 24px}
+.sec-banner .sec-emoji{font-size:22px;line-height:1}
+.sec-banner .dot{width:10px;height:10px;border-radius:50%}
+.sec-banner h2{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#fff}
+.dot.markets{background:#3a9bcf}.dot.tools{background:#5aa83a}.dot.labs{background:#b54a9e}.dot.pm{background:#cf9a3a}.dot.risk{background:#cf524a}
+.stories{margin-top:22px;display:flex;flex-direction:column;gap:22px}
+.story{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:34px 36px;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.story:hover{transform:translateY(-4px);box-shadow:0 22px 44px -28px rgba(20,20,43,.4);border-color:var(--gold-soft)}
+.story .tag{display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 11px;border-radius:999px;margin-bottom:14px}
+.tag.markets{background:#e8f4f8;color:#2a7fa8}.tag.tools{background:#eef8e6;color:#4a8a2a}.tag.labs{background:#f8e8f4;color:#8a2a7a}.tag.pm{background:#f8f0e8;color:#8a5a2a}.tag.risk{background:#f8e8e8;color:#8a2a2a}
+.tag.markets::before{content:"📈 "}.tag.tools::before{content:"🛠️ "}.tag.labs::before{content:"🧪 "}.tag.pm::before{content:"🎯 "}.tag.risk::before{content:"⚠️ "}
+.story h3{font-family:'Playfair Display',serif;font-size:27px;font-weight:700;line-height:1.22;letter-spacing:-.4px;margin-bottom:13px}
+.story > p{font-size:16.5px;line-height:1.85;color:#3a3a4e}
+.story > p strong{color:var(--ink);font-weight:600}
+.why-it-matters{margin-top:18px;padding:18px 22px;background:#faf7f0;border-left:3px solid var(--gold);border-radius:12px}
+.why-it-matters p{font-size:13px;line-height:1.7;color:#5a5a6e;font-style:italic}
+.why-it-matters strong{color:var(--ink);font-style:normal;font-weight:700}
+.source{display:inline-flex;align-items:center;gap:7px;margin-top:18px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--ink);border:1.5px solid var(--ink);border-radius:999px;padding:9px 16px;transition:background .15s,color .15s}
+.source:hover{background:var(--ink);color:var(--gold)}
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}.ahero .bg{transform:none}}
+.afooter{background:var(--ink);color:var(--muted);text-align:center;padding:54px 24px}
+.afooter .ft{font-family:'Playfair Display',serif;color:var(--paper);font-size:24px;font-weight:800;margin-bottom:6px}
+.afooter .ft span{color:var(--gold)}
+.afooter p{font-size:12px;line-height:1.9}
+.afooter .actions{margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.afooter .b{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:11px 20px;border-radius:999px;cursor:pointer;border:1px solid rgba(255,255,255,.2);color:var(--paper);background:none}
+.afooter .b.gold{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.afooter .b:hover{transform:translateY(-1px)}
+@media (max-width:560px){.story{padding:24px 22px}.ahero{min-height:56vh}}
+</style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+
+  <nav class="anav">
+    <a class="back" href="../index.html">← Market <span>Prompt</span></a>
+    <span class="meta">Issue No. 25 · 28 June 2026</span>
+    <button class="sub" type="button" data-subscribe>Subscribe</button>
+  </nav>
+
+  <header class="ahero">
+    <div class="bg" style="background-image:url('../assets/img/img1.jpg')"></div>
+    <div class="scrim"></div>
+    <div class="inner">
+      <div class="eyebrow">Your Intelligence Brief · ☕ 7 min read</div>
+      <h1>Market <span>Prompt</span></h1>
+      <p class="edition">“Companies Are Hitting the AI Brakes After Blowing Their Budgets”</p>
+      <p class="tag">AI · Public Markets · Product Management</p>
+      <div class="date-bar">
+        <span>28 June 2026</span>
+        <span class="issue">Issue No. 25</span>
+        <span>Intelligence Brief</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="intro"><p>Companies that spent two years racing to use as much AI as possible are now getting the bill — and cutting back hard. Nvidia says its next chip will slash AI costs by 10x before 2027, arriving just as the market needs relief. And bank regulators have quietly turned every routine audit into an AI compliance test.</p></div>
+
+  <nav class="toc" id="toc"><a href="#sec-0" data-target="sec-0"><span class="dot markets"></span>📈 Public Markets</a><a href="#sec-1" data-target="sec-1"><span class="dot tools"></span>🛠️ Tools for Analysts &amp; PMs</a><a href="#sec-2" data-target="sec-2"><span class="dot labs"></span>🧪 From the Labs</a><a href="#sec-3" data-target="sec-3"><span class="dot pm"></span>🎯 AI Product Management</a><a href="#sec-4" data-target="sec-4"><span class="dot risk"></span>⚠️ Watch Closely</a></nav>
+
+  <main class="acontent">
+    <div class="stat-row"><div class="stat-card"><div class="number">4 mo.</div><div class="label">Time it took Uber to exhaust its entire annual AI budget, before imposing spending caps — one of several major firms now cutting back</div></div><div class="stat-card"><div class="number">10x</div><div class="label">Nvidia's claimed reduction in cost per AI token with its new Vera Rubin platform, arriving in the second half of 2026</div></div><div class="stat-card"><div class="number">55%</div><div class="label">Share of large financial institutions that say they cannot measure what they are actually getting from their AI investments, per Cambridge's 2026 global report</div></div></div>
+    
+        <section class="section sec reveal" id="sec-0">
+          <div class="sec-banner" style="background-image:url('../assets/img/img7.jpg')">
+            <div class="sec-scrim"></div>
+            <div class="sec-head"><span class="sec-emoji">📈</span><span class="dot markets"></span><h2>Public Markets</h2></div>
+          </div>
+          <div class="stories">
+            <article class="story reveal">
+              <span class="tag markets">AI Spending</span>
+              <h3>Companies Are Hitting the AI Brakes After Blowing Their Budgets</h3>
+              <p>For two years, corporations competed to burn through AI as fast as possible — a practice that spread so widely it earned its own name: <strong>tokenmaxxing</strong> (using AI tokens, the small units of text that AI services charge by, as aggressively as possible, tracked on internal leaderboards as a sign of innovation). The bills have now arrived. Uber exhausted its entire annual budget for Claude Code (Anthropic's AI coding assistant) in just four months, then capped spending at $1,500 per month per user. Amazon shut down its internal AI usage leaderboard. Microsoft revoked corporate Claude Code licenses. AT&amp;T and Meta both tightened AI spending simultaneously. Some companies are switching entirely to cheaper alternatives like DeepSeek (a lower-cost, open-weight Chinese AI model) and reporting similar results at a fraction of the price.</p>
+              <div class="why-it-matters"><p><strong>Why this matters to you:</strong> This spending correction is a direct headwind for OpenAI and Anthropic — both preparing for IPOs (first-time public stock offerings) in late 2026 and early 2027. If their most enthusiastic customers are cutting consumption and defecting to cheaper models, the revenue growth story those IPOs will be built on becomes harder to tell. Watch Microsoft's and Alphabet's Q2 earnings calls for the first public data on whether AI usage is genuinely growing or plateauing.</p></div>
+              <a class="source" href="https://www.cnbc.com/2026/06/26/openai-anthropic-new-ai-spending-reality-as-users-shift-to-efficiency.html" target="_blank" rel="noopener">Read at CNBC →</a>
+            </article>
+            <article class="story reveal">
+              <span class="tag markets">AI Infrastructure</span>
+              <h3>Nvidia's Next-Generation AI Chip Is Now in Production — and It Promises to Cut AI Costs by 10x</h3>
+              <p>Nvidia has moved its Vera Rubin AI platform into full manufacturing. The company claims it delivers up to <strong>10 times lower cost per AI token</strong> compared to its current Blackwell chips — meaning the same AI query could cost a tenth as much to run — and trains the largest AI models using one-quarter as many chips. AWS, Google Cloud, Microsoft Azure, and Oracle are all lined up to offer Vera Rubin-based cloud instances (rentable computing power) starting in the second half of 2026, with Dell, HPE, Cisco, and Lenovo manufacturing the servers.</p>
+              <div class="why-it-matters"><p><strong>Why this matters to you:</strong> If Nvidia's cost claims hold, the economics of AI products shift meaningfully before the end of 2026 — cheaper inference (running AI queries) makes always-on, high-volume AI features viable for a much wider set of business cases. Model this into any roadmap or business case you're writing for the next 12–18 months.</p></div>
+              <a class="source" href="https://nvidianews.nvidia.com/news/nvidia-vera-rubin-platform" target="_blank" rel="noopener">Read at NVIDIA Newsroom →</a>
+            </article></div>
+        </section>
+        <section class="section sec reveal" id="sec-1">
+          <div class="sec-banner" style="background-image:url('../assets/img/img4.jpg')">
+            <div class="sec-scrim"></div>
+            <div class="sec-head"><span class="sec-emoji">🛠️</span><span class="dot tools"></span><h2>Tools for Analysts &amp; PMs</h2></div>
+          </div>
+          <div class="stories">
+            <article class="story reveal">
+              <span class="tag tools">AI Governance</span>
+              <h3>Every U.S. Bank Audit Now Comes With an AI Questionnaire</h3>
+              <p>The Office of the Comptroller of the Currency (the main U.S. regulator for national banks), the Federal Reserve, and the FDIC (Federal Deposit Insurance Corporation, which insures bank deposits) have begun embedding AI-specific questions into every routine bank examination. Examiners are asking banks to map out how AI is used in lending, <strong>know-your-customer checks</strong> (verifying who a customer is and flagging suspicious activity), and sanctions screening; whether banks have <strong>kill switches</strong> (the ability to instantly shut an AI system down if something goes wrong); and how they ensure that outside AI vendors meet the same governance standards as the bank itself. A June survey found 72% of banks said they were least prepared on kill-switch protocols. The three agencies plan to issue a formal request for information on bank AI use — including <strong>agentic AI</strong> (systems that take autonomous actions without human approval at every step) — in the near future.</p>
+              <div class="why-it-matters"><p><strong>Why this matters to you:</strong> If you are building or deploying AI inside a bank or for a bank client, your product now needs a kill switch, a vendor governance paper trail, and an audit-ready control framework — not as nice-to-haves, but as examination requirements. Build that compliance layer into the product spec from day one.</p></div>
+              <a class="source" href="https://www.pymnts.com/legal/regulation/2026/bank-regulators-probe-industry-use-ai/" target="_blank" rel="noopener">Read at PYMNTS →</a>
+            </article></div>
+        </section>
+        <section class="section sec reveal" id="sec-2">
+          <div class="sec-banner" style="background-image:url('../assets/img/img3.jpg')">
+            <div class="sec-scrim"></div>
+            <div class="sec-head"><span class="sec-emoji">🧪</span><span class="dot labs"></span><h2>From the Labs</h2></div>
+          </div>
+          <div class="stories">
+            <article class="story reveal">
+              <span class="tag labs">Research</span>
+              <h3>80% of Financial Firms Are Using AI — But Most Cannot Prove It Is Working</h3>
+              <p>The Cambridge Centre for Alternative Finance (CCAF), working with the Bank for International Settlements, the IMF, and the World Economic Forum, published its <strong>2026 Global AI in Financial Services</strong> report, covering data from firms and regulators in 149 countries. Key findings: more than 80% of financial services firms are adopting AI, and 52% are already experimenting with <strong>agentic AI</strong> (systems that take autonomous actions — like executing trades or filing documents — without human sign-off at each step). But 55% of firms say they cannot measure the value of what they are deploying, a figure that rises to 76% among large financial institutions. Meanwhile, only 18% of financial regulators globally have actually scaled AI in their own operations; 48% are still in the exploration phase. No new posts have appeared on Anthropic's alignment science blog since yesterday's coverage of "Diffuse AI Control on Fuzzy Tasks."</p>
+              <div class="why-it-matters"><p><strong>Why this matters to you:</strong> The gap between industry adoption (fast, widespread) and regulatory oversight (slow, exploratory) is a structural risk. Firms building AI now into regulated financial workflows are operating ahead of the rules — which means the compliance requirements will be written around whatever the early movers built. Getting governance in place before regulation catches up is a competitive advantage, not just a legal box to check.</p></div>
+              <a class="source" href="https://www.jbs.cam.ac.uk/faculty-research/centres/alternative-finance/publications/2026-global-ai-in-financial-services-report/" target="_blank" rel="noopener">Read at Cambridge CCAF →</a>
+            </article></div>
+        </section>
+        <section class="section sec reveal" id="sec-3">
+          <div class="sec-banner" style="background-image:url('../assets/img/img8.jpg')">
+            <div class="sec-scrim"></div>
+            <div class="sec-head"><span class="sec-emoji">🎯</span><span class="dot pm"></span><h2>AI Product Management</h2></div>
+          </div>
+          <div class="stories">
+            <article class="story reveal">
+              <span class="tag pm">Market Dynamics</span>
+              <h3>ChatGPT's Share of the AI Market Has Fallen From 76.5% to 54.7% — While Google Gemini Nearly Doubled</h3>
+              <p>Eighteen months ago, ChatGPT captured nearly 77% of all worldwide web traffic across the major AI assistants. As of late June 2026, that share has dropped to 54.7% — still the largest, but a sharp reversal. Google Gemini has climbed to 27.4%, roughly doubling its share in six months, making it the fastest-growing large AI assistant by web traffic. The shift tracks with Google's moves: Gemini integrated into Workspace for three billion users, aggressive pricing cuts, and new platform partnerships that give Gemini reach OpenAI currently lacks.</p>
+              <div class="why-it-matters"><p><strong>Why this matters to you:</strong> In 2024, choosing which AI to build on was essentially a default — use OpenAI or fall behind. In mid-2026, Google Gemini is a credible primary choice. The platform you build on now shapes your switching costs, your pricing exposure, and your access to new capabilities for years. If your product strategy still treats OpenAI as the only option, that assumption is overdue for a review.</p></div>
+              <a class="source" href="https://llm-stats.com/llm-updates" target="_blank" rel="noopener">Read at LLM Stats →</a>
+            </article></div>
+        </section>
+        <section class="section sec reveal" id="sec-4">
+          <div class="sec-banner" style="background-image:url('../assets/img/img1.jpg')">
+            <div class="sec-scrim"></div>
+            <div class="sec-head"><span class="sec-emoji">⚠️</span><span class="dot risk"></span><h2>Watch Closely</h2></div>
+          </div>
+          <div class="stories">
+            <article class="story reveal">
+              <span class="tag risk">Regulation</span>
+              <h3>The SEC Is Now Charging Investment Firms for Lying About How They Use AI</h3>
+              <p>The U.S. Securities and Exchange Commission's 2026 examination priorities place significant focus on <strong>"AI washing"</strong> — overstating how much or how well a firm uses AI in marketing materials or regulatory filings. In 2024 the SEC charged two investment advisers (firms that manage money for clients and must register with regulators) for misleading investors about their AI capabilities; that precedent now sets the bar for every registered firm. Smaller advisers managing under $1.5 billion in assets faced a June 3, 2026 compliance deadline under updated Regulation S-P (data privacy and safeguards rules). Form ADV Part 2A — the standard disclosure document all advisers file — must now accurately describe whether and how AI is used in portfolio management, research, or client communications, without overstating what the AI can or cannot do.</p>
+              <div class="why-it-matters"><p><strong>Why this matters to you:</strong> If your firm's marketing, pitch decks, or SEC filings describe AI capabilities that have not been validated, you are now in enforcement territory. The June 3 deadline has passed — if your firm missed it, escalate to legal this week rather than next.</p></div>
+              <a class="source" href="https://www.wealthmanagement.com/regulation-compliance/sec-2026-examination-priorities-what-financial-services-firms-need-to-know" target="_blank" rel="noopener">Read at Wealth Management →</a>
+            </article>
+            <article class="story reveal">
+              <span class="tag risk">IPO Watch</span>
+              <h3>OpenAI Is Now Weighing a 2027 Delay as the Tokenmaxxing Correction Clouds Its Revenue Story</h3>
+              <p>Reuters reported in late June that OpenAI is now considering pushing its <strong>IPO</strong> (initial public offering — the first time a private company sells shares to the public) to 2027, after originally targeting late 2026. The consideration follows a shift in sentiment among enterprise customers, who are cutting AI spending and, in some cases, moving workloads to cheaper competitors. Anthropic, which filed its confidential IPO paperwork on June 1 at a reported $965 billion valuation, is still targeting a December 2026 listing, but faces the same headwind: investors will want to see durable revenue growth, not a tokenmaxxing peak followed by a pullback.</p>
+              <div class="why-it-matters"><p><strong>Why this matters to you:</strong> When OpenAI and Anthropic go public, their quarterly earnings calls become essential reading — they will be the most transparent window into whether AI infrastructure costs are falling, whether enterprise adoption is deepening, and whether the capabilities roadmap you depend on is on track. The timing of those IPOs now depends partly on whether the spending correction stabilizes before year end.</p></div>
+              <a class="source" href="https://smartasset.com/investing/openai-stock-ipo" target="_blank" rel="noopener">Read at SmartAsset →</a>
+            </article></div>
+        </section>
+  </main>
+
+  <footer class="afooter">
+    <div class="ft">Market <span>Prompt</span></div>
+    <p>Market Prompt · AI in Public Markets<br/>Issue No. 25 · 28 June 2026</p>
+    <div class="actions">
+      <a class="b gold" href="../index.html">← Back to all issues</a>
+      <button class="b" type="button" data-subscribe>Subscribe</button>
+    </div>
+  </footer>
+
+  <script>
+(function(){
+  const prog=document.getElementById('progress');
+  function onScroll(){var h=document.documentElement;var sc=h.scrollTop||document.body.scrollTop;var max=h.scrollHeight-h.clientHeight;prog.style.width=(max>0?(sc/max*100):0)+'%';}
+  document.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  var toc=document.getElementById('toc');
+  if(toc){
+    var links=[].slice.call(toc.querySelectorAll('a'));
+    var map={};links.forEach(function(l){map[l.dataset.target]=l;});
+    var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(x){x.classList.remove('active');});var a=map[e.target.id];if(a)a.classList.add('active');}});},{rootMargin:'-40% 0px -55% 0px'});
+    document.querySelectorAll('.section').forEach(function(s){so.observe(s);});
+  }
+  document.querySelectorAll('[data-subscribe]').forEach(function(b){b.addEventListener('click',function(){window.location.href='../index.html#top';});});
+})();
+</script>
+  <script data-goatcounter="https://marketprompt.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
