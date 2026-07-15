@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Market Prompt — Issue No. 42 — 15 July 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #e8e4d8;
+      font-family: 'Inter', sans-serif;
+      color: #1a1a2e;
+      padding: 40px 20px;
+    }
+
+    /* Square, bordered container */
+    .wrapper {
+      max-width: 680px;
+      margin: 0 auto;
+      border: 2px solid #1a1a2e;
+      box-shadow: 6px 6px 0px #1a1a2e;
+      background: #fffdf7;
+    }
+
+    /* ── MASTHEAD ── */
+    .masthead {
+      background: linear-gradient(160deg, #1a1a2e 0%, #2a2a4e 100%);
+      padding: 44px 48px 36px;
+      text-align: center;
+    }
+
+    .masthead::after {
+      content: '';
+      display: block;
+      width: 80px; height: 1px;
+      background: linear-gradient(to right, transparent, #c9a96e, transparent);
+      margin: 24px auto 0;
+    }
+
+    .masthead .overline {
+      font-size: 9px; font-weight: 600;
+      letter-spacing: 4px; text-transform: uppercase;
+      color: #c9a96e; margin-bottom: 14px;
+    }
+
+    .masthead h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 88px; color: #f9f5ec; line-height: 1;
+      text-shadow: 0 2px 20px rgba(201,169,110,0.25);
+    }
+
+    .masthead .subtitle {
+      font-size: 11px; font-weight: 500;
+      color: #d4d0e8;
+      letter-spacing: 3px; text-transform: uppercase; margin-top: 10px;
+    }
+
+    .masthead .meta-row {
+      display: flex; justify-content: center;
+      align-items: center; gap: 18px; margin-top: 20px;
+    }
+
+    .masthead .meta-row span {
+      font-size: 11px; font-weight: 500;
+      color: #c8c8e4;
+      letter-spacing: 1.5px; text-transform: uppercase;
+    }
+
+    .masthead .meta-row .sep {
+      width: 4px; height: 4px;
+      background: #c9a96e; border-radius: 50%;
+    }
+
+    /* ── DAILY BANNER ── */
+    .daily-banner {
+      background: #c9a96e;
+      padding: 11px 40px;
+      display: flex; align-items: center; gap: 12px;
+      border-bottom: 2px solid #1a1a2e;
+    }
+
+    .daily-banner p {
+      font-size: 12px; font-weight: 500; color: #1a1a2e; line-height: 1.4;
+    }
+
+    /* ── OPENING BAND ── */
+    .opening-band {
+      background: #ffffff;
+      padding: 24px 44px;
+      border-bottom: 1px solid #ddd9ce;
+      border-left: 5px solid #c9a96e;
+    }
+
+    .opening-band p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px; font-style: italic;
+      color: #1a1a2e; line-height: 1.65;
+    }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      background: #2a2a4e;
+      padding: 28px 44px;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-bottom: 2px solid #1a1a2e;
+    }
+
+    .stat-item { text-align: center; padding: 0 12px; position: relative; }
+
+    .stat-item + .stat-item::before {
+      content: ''; position: absolute;
+      left: 0; top: 10%; height: 80%; width: 1px; background: #3a3a6a;
+    }
+
+    .stat-item .num {
+      font-family: 'Great Vibes', cursive;
+      font-size: 40px; color: #c9a96e; line-height: 1.15;
+    }
+
+    .stat-item .desc {
+      font-size: 10px; color: #a8a8c8; line-height: 1.5; margin-top: 4px;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      padding: 32px 44px 0;
+      display: flex; align-items: center; gap: 14px;
+    }
+
+    .pill {
+      font-size: 8px; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase;
+      padding: 5px 12px; white-space: nowrap;
+    }
+
+    .section-header .rule { flex: 1; height: 1px; }
+
+    .pill.gold    { background: #c9a96e; color: #1a1a2e; }
+    .pill.navy    { background: #2a2a4e; color: #f0ecd8; }
+    .pill.sage    { background: #2a5a3a; color: #c8ead0; }
+    .pill.crimson { background: #6a1a2a; color: #f0c8d0; }
+    .pill.slate   { background: #1a3a6a; color: #c8d8f0; }
+    .pill.violet  { background: #3a1a6a; color: #d8c8f0; }
+    .pill.teal    { background: #1a5a5a; color: #c8eaea; }
+
+    .rule.gold    { background: linear-gradient(to right, #c9a96e50, transparent); }
+    .rule.navy    { background: linear-gradient(to right, #2a2a4e40, transparent); }
+    .rule.sage    { background: linear-gradient(to right, #2a5a3a30, transparent); }
+    .rule.crimson { background: linear-gradient(to right, #6a1a2a30, transparent); }
+    .rule.slate   { background: linear-gradient(to right, #1a3a6a30, transparent); }
+    .rule.violet  { background: linear-gradient(to right, #3a1a6a30, transparent); }
+    .rule.teal    { background: linear-gradient(to right, #1a5a5a30, transparent); }
+
+    /* ── FEATURED STORY ── */
+    .featured {
+      margin: 20px 44px;
+      border: 1.5px solid #1a1a2e;
+      border-top: 4px solid #c9a96e;
+      background: #ffffff;
+    }
+
+    .featured-inner { padding: 24px 28px 20px; }
+
+    .kicker {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 8px;
+    }
+
+    .featured h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; font-weight: 600;
+      color: #1a1a2e; line-height: 1.25; margin-bottom: 10px;
+    }
+
+    .featured > .featured-inner > p,
+    .story-body > p {
+      font-size: 13px; line-height: 1.75;
+      color: #2a2a3e;
+      font-weight: 400;
+    }
+
+    /* ── CALLOUT BLOCKS ── */
+    .callouts { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+
+    .wim {
+      padding: 10px 14px;
+      border-left: 3px solid #c9a96e;
+      background: #fffbf0;
+    }
+
+    .wim .label, .research .label {
+      font-size: 8px; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 4px;
+    }
+
+    .wim .label { color: #a07830; }
+
+    .wim p {
+      font-size: 12px; color: #2a2a3e;
+      line-height: 1.6; font-style: italic;
+    }
+
+    .wim strong { color: #1a1a2e; font-style: normal; font-weight: 600; }
+
+    .research {
+      padding: 10px 14px;
+      border-left: 3px solid #2a2a4e;
+      background: #f2f3fa;
+    }
+
+    .research .label { color: #1a1a6e; }
+
+    .research ul { list-style: none; padding: 0; margin: 0; }
+
+    .research ul li {
+      font-size: 12px; color: #1a1a3e;
+      line-height: 1.65; font-weight: 400;
+      padding-left: 16px; position: relative;
+    }
+
+    .research ul li::before {
+      content: '→'; position: absolute; left: 0;
+      color: #c9a96e; font-size: 11px; font-weight: 700;
+    }
+
+    .featured a, .story-body a {
+      display: inline-block; margin-top: 10px;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: #c9a96e; text-decoration: none;
+      border-bottom: 1px solid #c9a96e60; padding-bottom: 1px;
+    }
+
+    /* ── STORY GRID ── */
+    .stories-grid { padding: 0 44px; }
+
+    .story {
+      padding: 22px 0;
+      border-bottom: 1px solid #ddd9ce;
+      display: grid;
+      grid-template-columns: 4px 1fr;
+      gap: 0 16px;
+    }
+
+    .story:last-child { border-bottom: none; }
+
+    .accent-bar { width: 4px; border-radius: 1px; align-self: stretch; }
+
+    .story-body .kicker { margin-bottom: 6px; }
+
+    .story-body h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px; font-weight: 600;
+      color: #1a1a2e; line-height: 1.3; margin-bottom: 8px;
+    }
+
+    /* Accent bar colours */
+    .bar-gold    { background: #c9a96e; }
+    .bar-navy    { background: #2a2a4e; }
+    .bar-sage    { background: #2a6a4a; }
+    .bar-crimson { background: #8a1a2e; }
+    .bar-slate   { background: #1a4a8a; }
+    .bar-violet  { background: #5a2a8a; }
+    .bar-teal    { background: #1a6a6a; }
+
+    /* Kicker colours */
+    .k-gold    { color: #8a6020; }
+    .k-sage    { color: #1a5a3a; }
+    .k-crimson { color: #8a1a2e; }
+    .k-slate   { color: #1a3a7a; }
+    .k-violet  { color: #4a1a7a; }
+    .k-navy    { color: #1a1a5e; }
+    .k-teal    { color: #0a5a5a; }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      margin: 4px 44px;
+      padding: 24px 36px;
+      background: #2a2a4e;
+      text-align: center;
+      border: 1.5px solid #1a1a2e;
+    }
+
+    .pull-quote::before {
+      content: '\201C';
+      font-family: 'Great Vibes', cursive;
+      font-size: 56px; color: #c9a96e;
+      line-height: 0.7; display: block; margin-bottom: 10px;
+    }
+
+    .pull-quote blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px; font-style: italic;
+      color: #f0ecdE; line-height: 1.6;
+    }
+
+    .pull-quote cite {
+      display: block; margin-top: 12px;
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: #c9a96e; font-style: normal;
+    }
+
+    /* ── MARKETS 101 BOX ── */
+    .markets-box {
+      margin: 20px 44px;
+      border: 1.5px solid #1a1a2e;
+      border-top: 4px solid #2a2a4e;
+      background: #ffffff;
+    }
+
+    .markets-box-header {
+      background: #2a2a4e;
+      padding: 10px 22px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .markets-box-header span {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase; color: #c9a96e;
+    }
+
+    .markets-box-body { padding: 20px 22px; }
+
+    .markets-box-body p {
+      font-size: 12px; color: #1a1a3e; line-height: 1.65;
+      margin-bottom: 14px; font-weight: 400;
+    }
+
+    .markets-box-body p:last-child { margin-bottom: 0; }
+
+    .markets-box-body strong { font-weight: 600; color: #1a1a2e; }
+
+    .term-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+
+    .term {
+      padding: 10px 12px;
+      background: #f4f3fa;
+      border-left: 3px solid #2a2a4e;
+    }
+
+    .term .t { font-size: 11px; font-weight: 700; color: #1a1a4e; margin-bottom: 3px; }
+    .term .d { font-size: 11px; color: #3a3a5a; line-height: 1.5; }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: linear-gradient(160deg, #1a1a2e 0%, #2a2a4e 100%);
+      padding: 36px 44px;
+      text-align: center;
+      border-top: 2px solid #1a1a2e;
+    }
+
+    .footer .footer-logo {
+      font-family: 'Great Vibes', cursive;
+      font-size: 44px; color: #c9a96e;
+    }
+
+    .footer-rule {
+      width: 40px; height: 1px;
+      background: #3a3a6a; margin: 12px auto 16px;
+    }
+
+    .footer p {
+      font-size: 11px; color: #8888a8;
+      line-height: 1.9; font-weight: 400;
+    }
+
+    .footer .next {
+      margin-top: 14px; font-size: 10px;
+      color: #6868a0; letter-spacing: 2px; text-transform: uppercase;
+    }
+
+    .footer .next span { color: #c9a96e; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <div class="overline">Intelligence Brief · AI · Markets · Product</div>
+    <h1>Market Prompt</h1>
+    <div class="subtitle">Daily Edition · AI in Public Markets</div>
+    <div class="meta-row">
+      <span>15 July 2026</span>
+      <div class="sep"></div>
+      <span>Issue No. 42</span>
+      <div class="sep"></div>
+      <span>10 Stories</span>
+    </div>
+  </div>
+
+  <!-- DAILY BANNER -->
+  <div class="daily-banner">
+    <p>⚡ <strong>Daily briefings now live</strong> — headline signals, model releases, and market-moving AI developments every morning. Stay sharp, every day.</p>
+  </div>
+
+  <!-- OPENING -->
+  <div class="opening-band">
+    <p>Goldman Sachs reports a record $20.3B quarter — a 44% EPS beat — with management flagging AI-sector deal flow as a multi-year structural driver. The S&amp;P 500 is on course for 22% Q2 earnings growth, the second consecutive quarter above 20%. Simultaneously, a $22M raise for LinqAlpha and a Bloomberg challenge to the industry — "would you let AI manage your portfolio?" — signal that the real product question is no longer can AI do this, but who governs it when it does.</p>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="stat-item">
+      <div class="num">44%</div>
+      <div class="desc">Goldman Sachs EPS beat vs. Street consensus — $20.98 actual vs. $14.48 estimated, Q2 2026 — Benzinga</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">22%</div>
+      <div class="desc">S&amp;P 500 Q2 2026 projected earnings growth YoY — the second consecutive quarter above 20% — FactSet</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">$5T+</div>
+      <div class="desc">Combined AUM of LinqAlpha's 70+ institutional AI clients, including Causeway Capital and Schonfeld — PRNewswire, Jul 2026</div>
+    </div>
+  </div>
+
+  <!-- ═══ PUBLIC MARKETS ═══ -->
+  <div class="section-header">
+    <div class="pill gold">Public Markets</div>
+    <div class="rule gold"></div>
+  </div>
+
+  <div class="featured">
+    <div class="featured-inner">
+      <div class="kicker k-gold">Lead Story · Benzinga / Yahoo Finance · 15 Jul 2026</div>
+      <h2>Goldman Sachs Delivers Record Quarter — AI Deal Flow Is the Growth Story</h2>
+      <p>Goldman Sachs reported Q2 2026 revenues of $20.3B with EPS of $20.98 — a 44% beat against Street consensus of $14.48. The record result was driven by a surge in M&amp;A advisory and capital markets activity, with H1 2026 global deal volumes reaching $1 trillion — a record half-year figure. Management explicitly cited AI infrastructure buildout as a durable multi-year driver across advisory, financing, and structuring. Morgan Stanley also reports today.</p>
+      <div class="callouts">
+        <div class="wim">
+          <div class="label">Why It Matters</div>
+          <p>Goldman's record quarter is partly an AI story: AI-sector M&amp;A and infrastructure financing are a material part of the pipeline. <strong>The firms building AI products are the same firms bankrolling AI companies — your users are sitting inside that feedback loop.</strong></p>
+        </div>
+        <div class="research">
+          <div class="label">Research &amp; Think About</div>
+          <ul>
+            <li>Learn what "M&amp;A advisory" actually involves — what role does financial analysis play, and where is AI displacing or augmenting it?</li>
+            <li>Read the Goldman Q2 earnings call transcript at Benzinga — listen for the language management uses around AI and deal origination</li>
+            <li>Ask: which of Goldman's earnings drivers are most likely to be automated by 2028 — and what does that mean for headcount, workflow, and tooling?</li>
+          </ul>
+        </div>
+      </div>
+      <a href="https://www.benzinga.com/news/26/07/60449209/goldman-sachs-group-q2-2026-earnings-call-transcript">Read at Benzinga →</a>
+    </div>
+  </div>
+
+  <div class="stories-grid">
+
+    <div class="story">
+      <div class="accent-bar bar-gold"></div>
+      <div class="story-body">
+        <div class="kicker k-gold">Earnings Season · FactSet / CNBC</div>
+        <h3>S&amp;P 500 Tracking 22% Q2 Earnings Growth — AI Infrastructure Stocks Lead</h3>
+        <p>FactSet's current blended estimate puts S&amp;P 500 Q2 2026 YoY earnings growth at 22% — a second consecutive quarter above 20%. Today's reporters include Goldman, Morgan Stanley, BlackRock, and Johnson &amp; Johnson. Empire State Manufacturing and June PPI data also land this morning. AI-infrastructure names remain the primary driver of the growth delta.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>Your users are building portfolios in the middle of an AI-driven earnings cycle. <strong>Understanding which sectors are lifting the aggregate — and why — is the domain knowledge that makes your analyst tools credible.</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Bookmark FactSet's "Earnings Insight" weekly PDF — it tracks S&amp;P 500 earnings data in real time and is freely available</li>
+              <li>Learn what "blended estimate" means — why do analysts report this rather than just the consensus?</li>
+              <li>Understand why AI-infrastructure names (data centres, chips, cloud) are so heavily weighted in Q2's growth delta</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://www.cnbc.com/2026/07/10/stock-market-next-week-outlook-for-july-13-17-2026.html">Read at CNBC →</a>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="accent-bar bar-slate"></div>
+      <div class="story-body">
+        <div class="kicker k-slate">Buy-Side AI · PRNewswire · 2 Jul 2026</div>
+        <h3>LinqAlpha Raises $22M to Build AI Agents That Learn Your Investment Framework</h3>
+        <p>New York-based LinqAlpha — founded by ex-Goldman analysts and MIT PhDs — raised a $22M Series A led by AVP and Atinum Investment. Its agents learn each institution's investment framework and synthesise filings, transcripts, and news into personalised signals. Clients include Causeway Capital and Schonfeld; the firm's 70+ institutional users collectively manage $5T+ AUM.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>LinqAlpha's framing — agents that adapt to <em>your</em> process, not generic summarisation — is the product direction the buy side is demanding. <strong>Generic AI research tools are being outcompeted by tools that learn the user's investment framework. That is a direct design challenge for your product.</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Read the LinqAlpha PRNewswire release — understand what "personalised signal synthesis" means vs. standard document summarisation</li>
+              <li>Ask your analyst users: does your current tool adapt to how they think, or does it give the same output to everyone?</li>
+              <li>Research Causeway Capital and Schonfeld's investment styles — what does it say about LinqAlpha that these two very different firms are both clients?</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://www.prnewswire.com/news-releases/linqalpha-raises-22-million-to-build-the-alpha-intelligence-layer-for-global-public-markets-302816647.html">Read at PRNewswire →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PULL QUOTE -->
+  <div class="pull-quote">
+    <blockquote>We're enthusiastic about the results but also want to caution against uncritically accepting what amounts to in-sample, overly confident answers of AI.</blockquote>
+    <cite>Thomas Salopek, JPMorgan Strategist — on AI agents beating the 60/40 portfolio in backtests, July 2026</cite>
+  </div>
+
+  <!-- ═══ PUBLIC MARKETS 101 ═══ -->
+  <div class="section-header" style="margin-top:16px;">
+    <div class="pill teal">Public Markets 101</div>
+    <div class="rule teal"></div>
+  </div>
+
+  <div class="markets-box">
+    <div class="markets-box-header">
+      <span>Essential concepts for your role</span>
+    </div>
+    <div class="markets-box-body">
+      <p>Today's stories are full of terms your users take for granted — from Goldman's record EPS beat to LinqAlpha's $5T AUM client base. Here are six concepts you need to own to sound credible in the room.</p>
+      <div class="term-grid">
+        <div class="term">
+          <div class="t">EPS (Earnings Per Share)</div>
+          <div class="d">Net profit divided by shares outstanding. The headline metric every analyst watches on earnings day. Goldman's $20.98 EPS vs. a $14.48 estimate is why today's result is a market event.</div>
+        </div>
+        <div class="term">
+          <div class="t">Consensus Estimate</div>
+          <div class="d">The aggregated analyst forecast for a company's earnings or revenue. When Goldman "beats consensus," it means actuals came in above this average. Beating or missing the consensus — not the prior year — is what moves the stock.</div>
+        </div>
+        <div class="term">
+          <div class="t">AUM (Assets Under Management)</div>
+          <div class="d">The total value of capital a fund or firm actively manages. LinqAlpha's 70+ clients manage $5T+ AUM. AUM is how the buy side measures itself — larger AUM means more at stake in every data and tooling decision.</div>
+        </div>
+        <div class="term">
+          <div class="t">M&amp;A Advisory</div>
+          <div class="d">The service investment banks provide to companies buying or selling other businesses — structuring deals, running valuations, managing negotiations. Goldman's record quarter was driven partly by surging AI-sector M&amp;A activity.</div>
+        </div>
+        <div class="term">
+          <div class="t">Forward Guidance</div>
+          <div class="d">Management's forecast for future revenue or earnings. Often moves a stock more than the actual result. AI is increasingly used to detect shifts in guidance language across earnings transcripts — a core analyst workflow.</div>
+        </div>
+        <div class="term">
+          <div class="t">Earnings Season</div>
+          <div class="d">The four-to-six-week window each quarter when S&amp;P 500 companies report results. We're in one now — today alone brings Goldman, Morgan Stanley, BlackRock, and JNJ. Your analysts' workload spikes during this period, which shapes what features matter most.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ AGENTIC AI ═══ -->
+  <div class="section-header">
+    <div class="pill sage">Agentic AI</div>
+    <div class="rule sage"></div>
+  </div>
+
+  <div class="stories-grid">
+
+    <div class="story">
+      <div class="accent-bar bar-sage"></div>
+      <div class="story-body">
+        <div class="kicker k-sage">Investment Research · Bloomberg Professional</div>
+        <h3>Bloomberg: The Hard Part of AI in Investment Research Starts After the Pilot</h3>
+        <p>Bloomberg Professional's analysis argues that AI has cleared the demo bar — summarising 60-page reports in seconds, flagging language shifts in earnings transcripts. What's harder: governance, data quality, workflow integration, and accountability structures. Most firms are stuck between "impressive pilot" and "useful at scale."</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>This is your product challenge, precisely stated. <strong>The gap between demo and production is where AI PMs either create or destroy value — it is an organisational and product design problem, not a model problem.</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Read the Bloomberg Professional piece — identify the specific reasons firms stall between pilot and production</li>
+              <li>Map each blocker (governance, data quality, integration, accountability) to a decision that sits with your product team vs. your engineering or compliance team</li>
+              <li>Ask: what would have to be true about your firm's data quality for AI to do genuinely useful work at scale — and who owns getting there?</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://www.bloomberg.com/professional/insights/artificial-intelligence/ai-in-investment-research-why-the-hard-part-starts-after-the-pilot/">Read at Bloomberg Professional →</a>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="accent-bar bar-sage"></div>
+      <div class="story-body">
+        <div class="kicker k-sage">AdvisorTech · Kitces · July 2026</div>
+        <h3>Salesforce, RightCapital, YCharts All Ship AI Features in the Same Month</h3>
+        <p>Three notable AI tool launches hit the wealth management layer in July: Salesforce added "Meeting Concierge" and "Run My Day" to Agentforce for Financial Services; RightCapital launched "Iris" to scan for client data gaps; YCharts launched "Y" for AI-driven investment analysis support. AI is reaching the workflow layer, not just research.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>When Salesforce and RightCapital ship AI in the same month, the baseline for "table stakes" shifts. <strong>Your product must compete with what established platforms are now embedding into tools your users already use daily.</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Read the Kitces AdvisorTech roundup — it is the best monthly summary of what the wealth management software stack is shipping</li>
+              <li>For each of the three features, ask: is this a workflow improvement or just AI bolted on? What is the acceptance criterion for a feature that actually changes behaviour?</li>
+              <li>Understand what Salesforce Agentforce is — it signals where enterprise AI is heading for all financial services, not just wealth management</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://www.kitces.com/blog/the-latest-in-financial-advisortech-july-2026-salesforce-rightcapital-ycharts-ai-news/">Read at Kitces →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ REGULATION ═══ -->
+  <div class="section-header">
+    <div class="pill crimson">Regulation</div>
+    <div class="rule crimson"></div>
+  </div>
+
+  <div class="stories-grid">
+
+    <div class="story">
+      <div class="accent-bar bar-crimson"></div>
+      <div class="story-body">
+        <div class="kicker k-crimson">UK Regulatory Analysis · Norton Rose Fulbright · Jul 2026</div>
+        <h3>NRF: What Agentic AI in Finance Actually Means for Compliance Teams</h3>
+        <p>Norton Rose Fulbright's July analysis translates the FCA's Mills Review into compliance obligations: consumer duty still applies when an agent acts on a customer's behalf; SM&amp;CR accountability attaches to whoever defines the agent's objectives; and bias in AI outputs is already a regulatory issue under existing FCA principles — no new rules required.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>The Mills Review sets the direction; this piece shows what it means for product builders today. <strong>If your agent makes a recommendation that causes consumer harm, the accountability question under SM&amp;CR lands with the person who signed off the agent's design — which may include you.</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Understand the Senior Managers and Certification Regime (SM&amp;CR) — who at your firm holds a Senior Manager Function, and does that cover AI product decisions?</li>
+              <li>Ask your compliance team: what is the process for approving an AI feature that touches a regulated output — and has that process been updated for agentic AI?</li>
+              <li>Read the NRF analysis at nortonrosefulbright.com — search "agentic AI financial services July 2026"</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://www.nortonrosefulbright.com/en/knowledge/publications/agentic-ai-in-financial-services">Read at Norton Rose Fulbright →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ FROM THE LABS ═══ -->
+  <div class="section-header">
+    <div class="pill navy">From the Labs</div>
+    <div class="rule navy"></div>
+  </div>
+
+  <div class="stories-grid">
+
+    <div class="story">
+      <div class="accent-bar bar-navy"></div>
+      <div class="story-body">
+        <div class="kicker k-navy">Google DeepMind · Release Expected 17 Jul</div>
+        <h3>Google Scraps Gemini 3.5 Pro Base Architecture — Full Rebuild Targets Thursday</h3>
+        <p>Google DeepMind scrapped the Gemini 3.5 Pro base architecture after internal engineers identified structural failures in recursive tool-calling and SVG generation. The rebuild targets a 2M token context window and a Deep Think Reasoning Layer for autonomous, multi-step workflows. Unverified specs; release expected July 17.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>A full architectural rebuild two days before launch signals how high the agentic AI bar has risen. <strong>A 2M-token context window changes what "analyse a full portfolio" means — your product roadmap should account for what becomes possible at that scale.</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Understand what "recursive tool-calling" is — it is the technical foundation of multi-step agentic workflows, and the reason Google had to rebuild</li>
+              <li>Learn to estimate token counts — how many earnings call transcripts, 10-Ks, or analyst reports fit in 2M tokens? This frames what your agents could process in a single pass</li>
+              <li>Read the HackerNoon analysis of Google's decision for the engineering context behind the delay</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://hackernoon.com/google-delays-gemini-35-pro-to-july-17-the-strategic-play-behind-the-scrapped-base-model">Read at HackerNoon →</a>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="accent-bar bar-navy"></div>
+      <div class="story-body">
+        <div class="kicker k-navy">Anthropic · 30 Jun 2026</div>
+        <h3>Claude Sonnet 5 Is the Default Model — and the Most Agentic Sonnet Yet</h3>
+        <p>Anthropic launched Claude Sonnet 5 on June 30, billing it as the most agentic Sonnet to date. It autonomously uses browsers and terminals, checks its own output without prompting, and completes complex multi-step tasks where prior Sonnets stalled. Performance approaches Opus 4.8 at introductory pricing of $2/$10 per million tokens. Now the default for Free and Pro plans.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>Sonnet 5 is the most capable, most affordable agentic model Anthropic has released. <strong>If your product is built on earlier Sonnet versions, the case for upgrading is now a product decision, not just a technical one — it will materially change what your agents can do autonomously.</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Read the Anthropic Sonnet 5 announcement at anthropic.com/news/claude-sonnet-5 — note the specific agentic capabilities listed and map them to your use cases</li>
+              <li>Understand what "checks its own output without prompting" means architecturally — this is called self-critique or constitutional checking and it changes the reliability profile of agentic outputs</li>
+              <li>Calculate what moving to Sonnet 5 would cost at your current usage levels vs. prior versions — make the business case yourself before your engineers do</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://www.anthropic.com/news/claude-sonnet-5">Read at Anthropic →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ AI PRODUCT MANAGEMENT ═══ -->
+  <div class="section-header">
+    <div class="pill violet">AI Product Management</div>
+    <div class="rule violet"></div>
+  </div>
+
+  <div class="stories-grid">
+
+    <div class="story">
+      <div class="accent-bar bar-violet"></div>
+      <div class="story-body">
+        <div class="kicker k-violet">Role Evolution · Product School · 2026 Survey</div>
+        <h3>94% of PMs Use AI Daily — But the Role Is Becoming Orchestration, Not Execution</h3>
+        <p>Product School's 2026 PM survey finds 94% of product professionals now use AI regularly; nearly half have it deeply embedded in their workflow. The structural shift: the PM role is moving from feature management to AI orchestration. Top skills employers prize for 2027: systems thinking, AI governance judgement, and business acumen over execution speed.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>The PM who can define what an AI agent is allowed to do — and design the governance layer around it — is increasingly rare. <strong>That is the exact role you are positioning for. The gap between AI PM and AI orchestration PM is where the premium is moving.</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Read Product School's 2026 PM trends report — note which skill shifts are relevant to your role specifically vs. generic PM upskilling</li>
+              <li>Write a one-paragraph definition of what "AI orchestration" means in your current product context — if you can't write it clearly, you can't lead it</li>
+              <li>Ask: what does a systems thinking framing of your current product look like — who are the agents, what are the inputs, what are the guardrails, and who owns the failure modes?</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://productschool.com/blog/product-fundamentals/product-management-trends">Read at Product School →</a>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="accent-bar bar-violet"></div>
+      <div class="story-body">
+        <div class="kicker k-violet">Portfolio AI · Bloomberg · 14 Jul 2026</div>
+        <h3>Bloomberg Asks the Buy Side: "Would You Let an AI Agent Manage Your Portfolio Allocation?"</h3>
+        <p>Bloomberg's markets newsletter followed up JPMorgan's backtest results with a direct challenge to the industry: is the buy side ready to hand discretionary allocation decisions to AI agents — not just research support, but live portfolio construction? The implicit answer from most practitioners: not yet, and the governance infrastructure isn't ready.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>This is the exact question your product will eventually have to answer. <strong>The answer isn't just about model capability — it's about audit trails, rollback mechanisms, and who is accountable when the agent gets it wrong. Those are product decisions, not model decisions.</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Read the Bloomberg newsletter piece — think about which parts of your users' workflow are closest to "discretionary allocation decisions"</li>
+              <li>For any AI feature that could influence a portfolio decision at your firm: what is the audit trail, who can override it, and where does accountability sit?</li>
+              <li>Research what "human-in-the-loop" architectures look like at firms that have deployed this — Bridgewater's research on AI decision support is a useful reference point</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://www.bloomberg.com/news/newsletters/2026-07-14/would-you-let-an-ai-agent-manage-your-portfolio-s-asset-allocation">Read at Bloomberg →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">Market Prompt</div>
+    <div class="footer-rule"></div>
+    <p>
+      Market Prompt · AI in Public Markets<br/>
+      Daily briefings · Every morning<br/>
+      <span style="color:#5858a0; font-family:monospace;">newsletters/2026-07-15.html</span>
+    </p>
+    <div class="next">Next edition · <span>16 July 2026</span></div>
+  </div>
+
+</div>
+</body>
+</html>
