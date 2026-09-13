@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Market Prompt — Issue No. 102 — 13 September 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #e8e4d8;
+      font-family: 'Inter', sans-serif;
+      color: #1a1a2e;
+      padding: 40px 20px;
+    }
+
+    /* Square, bordered container */
+    .wrapper {
+      max-width: 680px;
+      margin: 0 auto;
+      border: 2px solid #1a1a2e;
+      box-shadow: 6px 6px 0px #1a1a2e;
+      background: #fffdf7;
+    }
+
+    /* ── MASTHEAD ── */
+    .masthead {
+      background: linear-gradient(160deg, #1a1a2e 0%, #2a2a4e 100%);
+      padding: 44px 48px 36px;
+      text-align: center;
+    }
+
+    .masthead::after {
+      content: '';
+      display: block;
+      width: 80px; height: 1px;
+      background: linear-gradient(to right, transparent, #c9a96e, transparent);
+      margin: 24px auto 0;
+    }
+
+    .masthead .overline {
+      font-size: 9px; font-weight: 600;
+      letter-spacing: 4px; text-transform: uppercase;
+      color: #c9a96e; margin-bottom: 14px;
+    }
+
+    .masthead h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 88px; color: #f9f5ec; line-height: 1;
+      text-shadow: 0 2px 20px rgba(201,169,110,0.25);
+    }
+
+    .masthead .subtitle {
+      font-size: 11px; font-weight: 500;
+      color: #d4d0e8;
+      letter-spacing: 3px; text-transform: uppercase; margin-top: 10px;
+    }
+
+    .masthead .meta-row {
+      display: flex; justify-content: center;
+      align-items: center; gap: 18px; margin-top: 20px;
+    }
+
+    .masthead .meta-row span {
+      font-size: 11px; font-weight: 500;
+      color: #c8c8e4;
+      letter-spacing: 1.5px; text-transform: uppercase;
+    }
+
+    .masthead .meta-row .sep {
+      width: 4px; height: 4px;
+      background: #c9a96e; border-radius: 50%;
+    }
+
+    /* ── DAILY BANNER ── */
+    .daily-banner {
+      background: #c9a96e;
+      padding: 11px 40px;
+      display: flex; align-items: center; gap: 12px;
+      border-bottom: 2px solid #1a1a2e;
+    }
+
+    .daily-banner p {
+      font-size: 12px; font-weight: 500; color: #1a1a2e; line-height: 1.4;
+    }
+
+    /* ── OPENING BAND ── */
+    .opening-band {
+      background: #ffffff;
+      padding: 24px 44px;
+      border-bottom: 1px solid #ddd9ce;
+      border-left: 5px solid #c9a96e;
+    }
+
+    .opening-band p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px; font-style: italic;
+      color: #1a1a2e; line-height: 1.65;
+    }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      background: #2a2a4e;
+      padding: 28px 44px;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-bottom: 2px solid #1a1a2e;
+    }
+
+    .stat-item { text-align: center; padding: 0 12px; position: relative; }
+
+    .stat-item + .stat-item::before {
+      content: ''; position: absolute;
+      left: 0; top: 10%; height: 80%; width: 1px; background: #3a3a6a;
+    }
+
+    .stat-item .num {
+      font-family: 'Great Vibes', cursive;
+      font-size: 40px; color: #c9a96e; line-height: 1.15;
+    }
+
+    .stat-item .desc {
+      font-size: 10px; color: #a8a8c8; line-height: 1.5; margin-top: 4px;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      padding: 32px 44px 0;
+      display: flex; align-items: center; gap: 14px;
+    }
+
+    .pill {
+      font-size: 8px; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase;
+      padding: 5px 12px; white-space: nowrap;
+    }
+
+    .section-header .rule { flex: 1; height: 1px; }
+
+    .pill.gold    { background: #c9a96e; color: #1a1a2e; }
+    .pill.navy    { background: #2a2a4e; color: #f0ecd8; }
+    .pill.sage    { background: #2a5a3a; color: #c8ead0; }
+    .pill.crimson { background: #6a1a2a; color: #f0c8d0; }
+    .pill.slate   { background: #1a3a6a; color: #c8d8f0; }
+    .pill.violet  { background: #3a1a6a; color: #d8c8f0; }
+    .pill.teal    { background: #1a5a5a; color: #c8eaea; }
+
+    .rule.gold    { background: linear-gradient(to right, #c9a96e50, transparent); }
+    .rule.navy    { background: linear-gradient(to right, #2a2a4e40, transparent); }
+    .rule.sage    { background: linear-gradient(to right, #2a5a3a30, transparent); }
+    .rule.crimson { background: linear-gradient(to right, #6a1a2a30, transparent); }
+    .rule.slate   { background: linear-gradient(to right, #1a3a6a30, transparent); }
+    .rule.violet  { background: linear-gradient(to right, #3a1a6a30, transparent); }
+    .rule.teal    { background: linear-gradient(to right, #1a5a5a30, transparent); }
+
+    /* ── FEATURED STORY ── */
+    .featured {
+      margin: 20px 44px;
+      border: 1.5px solid #1a1a2e;
+      border-top: 4px solid #c9a96e;
+      background: #ffffff;
+    }
+
+    .featured-inner { padding: 24px 28px 20px; }
+
+    .kicker {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 8px;
+    }
+
+    .featured h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; font-weight: 600;
+      color: #1a1a2e; line-height: 1.25; margin-bottom: 10px;
+    }
+
+    .featured > .featured-inner > p,
+    .story-body > p {
+      font-size: 13px; line-height: 1.75;
+      color: #2a2a3e;
+      font-weight: 400;
+    }
+
+    /* ── CALLOUT BLOCKS ── */
+    .callouts { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+
+    .wim {
+      padding: 10px 14px;
+      border-left: 3px solid #c9a96e;
+      background: #fffbf0;
+    }
+
+    .wim .label, .research .label {
+      font-size: 8px; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 4px;
+    }
+
+    .wim .label { color: #a07830; }
+
+    .wim p {
+      font-size: 12px; color: #2a2a3e;
+      line-height: 1.6; font-style: italic;
+    }
+
+    .wim strong { color: #1a1a2e; font-style: normal; font-weight: 600; }
+
+    .research {
+      padding: 10px 14px;
+      border-left: 3px solid #2a2a4e;
+      background: #f2f3fa;
+    }
+
+    .research .label { color: #1a1a6e; }
+
+    .research ul { list-style: none; padding: 0; margin: 0; }
+
+    .research ul li {
+      font-size: 12px; color: #1a1a3e;
+      line-height: 1.65; font-weight: 400;
+      padding-left: 16px; position: relative;
+    }
+
+    .research ul li::before {
+      content: '→'; position: absolute; left: 0;
+      color: #c9a96e; font-size: 11px; font-weight: 700;
+    }
+
+    .featured a, .story-body a {
+      display: inline-block; margin-top: 10px;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: #c9a96e; text-decoration: none;
+      border-bottom: 1px solid #c9a96e60; padding-bottom: 1px;
+    }
+
+    /* ── STORY GRID ── */
+    .stories-grid { padding: 0 44px; }
+
+    .story {
+      padding: 22px 0;
+      border-bottom: 1px solid #ddd9ce;
+      display: grid;
+      grid-template-columns: 4px 1fr;
+      gap: 0 16px;
+    }
+
+    .story:last-child { border-bottom: none; }
+
+    .accent-bar { width: 4px; border-radius: 1px; align-self: stretch; }
+
+    .story-body .kicker { margin-bottom: 6px; }
+
+    .story-body h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px; font-weight: 600;
+      color: #1a1a2e; line-height: 1.3; margin-bottom: 8px;
+    }
+
+    /* Accent bar colours */
+    .bar-gold    { background: #c9a96e; }
+    .bar-navy    { background: #2a2a4e; }
+    .bar-sage    { background: #2a6a4a; }
+    .bar-crimson { background: #8a1a2e; }
+    .bar-slate   { background: #1a4a8a; }
+    .bar-violet  { background: #5a2a8a; }
+    .bar-teal    { background: #1a6a6a; }
+
+    /* Kicker colours */
+    .k-gold    { color: #8a6020; }
+    .k-sage    { color: #1a5a3a; }
+    .k-crimson { color: #8a1a2e; }
+    .k-slate   { color: #1a3a7a; }
+    .k-violet  { color: #4a1a7a; }
+    .k-navy    { color: #1a1a5e; }
+    .k-teal    { color: #0a5a5a; }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      margin: 4px 44px;
+      padding: 24px 36px;
+      background: #2a2a4e;
+      text-align: center;
+      border: 1.5px solid #1a1a2e;
+    }
+
+    .pull-quote::before {
+      content: '\201C';
+      font-family: 'Great Vibes', cursive;
+      font-size: 56px; color: #c9a96e;
+      line-height: 0.7; display: block; margin-bottom: 10px;
+    }
+
+    .pull-quote blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px; font-style: italic;
+      color: #f0ecdE; line-height: 1.6;
+    }
+
+    .pull-quote cite {
+      display: block; margin-top: 12px;
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: #c9a96e; font-style: normal;
+    }
+
+    /* ── MARKETS 101 BOX ── */
+    .markets-box {
+      margin: 20px 44px;
+      border: 1.5px solid #1a1a2e;
+      border-top: 4px solid #2a2a4e;
+      background: #ffffff;
+    }
+
+    .markets-box-header {
+      background: #2a2a4e;
+      padding: 10px 22px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .markets-box-header span {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase; color: #c9a96e;
+    }
+
+    .markets-box-body { padding: 20px 22px; }
+
+    .markets-box-body p {
+      font-size: 12px; color: #1a1a3e; line-height: 1.65;
+      margin-bottom: 14px; font-weight: 400;
+    }
+
+    .markets-box-body p:last-child { margin-bottom: 0; }
+
+    .markets-box-body strong { font-weight: 600; color: #1a1a2e; }
+
+    .term-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+
+    .term {
+      padding: 10px 12px;
+      background: #f4f3fa;
+      border-left: 3px solid #2a2a4e;
+    }
+
+    .term .t { font-size: 11px; font-weight: 700; color: #1a1a4e; margin-bottom: 3px; }
+    .term .d { font-size: 11px; color: #3a3a5a; line-height: 1.5; }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: linear-gradient(160deg, #1a1a2e 0%, #2a2a4e 100%);
+      padding: 36px 44px;
+      text-align: center;
+      border-top: 2px solid #1a1a2e;
+    }
+
+    .footer .footer-logo {
+      font-family: 'Great Vibes', cursive;
+      font-size: 44px; color: #c9a96e;
+    }
+
+    .footer-rule {
+      width: 40px; height: 1px;
+      background: #3a3a6a; margin: 12px auto 16px;
+    }
+
+    .footer p {
+      font-size: 11px; color: #8888a8;
+      line-height: 1.9; font-weight: 400;
+    }
+
+    .footer .next {
+      margin-top: 14px; font-size: 10px;
+      color: #6868a0; letter-spacing: 2px; text-transform: uppercase;
+    }
+
+    .footer .next span { color: #c9a96e; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <div class="overline">Intelligence Brief · AI · Markets · Product</div>
+    <h1>Market Prompt</h1>
+    <div class="subtitle">Daily Edition · AI in Public Markets</div>
+    <div class="meta-row">
+      <span>13 September 2026</span>
+      <div class="sep"></div>
+      <span>Issue No. 102</span>
+      <div class="sep"></div>
+      <span>10 Stories</span>
+    </div>
+  </div>
+
+  <!-- DAILY BANNER -->
+  <div class="daily-banner">
+    <p>⚡ <strong>Daily briefings, every weekday</strong> — headline signals, model releases, and market-moving AI developments. Stay sharp, every day.</p>
+  </div>
+
+  <!-- OPENING -->
+  <div class="opening-band">
+    <p>Four major AI labs shipped flagship models in a single September week — "model fatigue" is now a real enterprise problem, and enterprise buyers can't keep up. The FCA is finalising its most practical AI governance guidance yet, with SM&CR accountability moving from principle to practice. And Goldman, JPMorgan, Citi, and Barclays are quietly trimming junior analyst intakes — the AI reshaping of buy-side research has begun in earnest.</p>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="stat-item">
+      <div class="num">54%</div>
+      <div class="desc">of CFOs name AI agent integration their single biggest digital transformation priority in 2026. Deloitte CFO Signals Survey.</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">75%</div>
+      <div class="desc">cut in prompt-cache read costs with Claude Fable 5.1 — reducing agentic workflow costs by up to 45%. Anthropic, Sept 2026.</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">60%</div>
+      <div class="desc">reduction in routine client admin time reported by beta firms using WealthAi for Advisors. WealthAi, Sept 2026.</div>
+    </div>
+  </div>
+
+  <!-- ═══ PUBLIC MARKETS ═══ -->
+  <div class="section-header">
+    <div class="pill gold">Public Markets</div>
+    <div class="rule gold"></div>
+  </div>
+
+  <div class="featured">
+    <div class="featured-inner">
+      <div class="kicker k-gold">Lead Story</div>
+      <h2>Goldman, JPMorgan, Citi and Barclays Are Cutting Junior Analyst Classes — AI Is the Reason</h2>
+      <p>Four of the world's largest investment banks are reducing their intake of junior analysts as AI takes on the research, summarisation, and pitch-deck work once assigned to first-years. Goldman's CIO says AI will touch every employee within three years — augmenting, not replacing, the analysts who remain.</p>
+      <div class="callouts">
+        <div class="wim">
+          <div class="label">Why It Matters</div>
+          <p>The analysts your product is meant to serve are the same ones whose entry-level roles are being restructured. <strong>Build for the senior analyst who survived — someone who interrogates outputs, not just consumes them.</strong> Explainability isn't a feature, it's a survival mechanism.</p>
+        </div>
+        <div class="research">
+          <div class="label">Research &amp; Think About</div>
+          <ul>
+            <li>Map the exact workflows junior analysts perform today — what does a first-year actually do in a typical week?</li>
+            <li>Read: arXiv 2303.17564 BloombergGPT — why finance-specific training data matters for analyst tools</li>
+            <li>Ask a buy-side analyst: what AI output would you be willing to put your name next to for a client?</li>
+          </ul>
+        </div>
+      </div>
+      <a href="https://techjacksolutions.com/ai-brief/goldman-jpmorgan-citi-and-barclays-are-cutting-junior-analys/">Read more →</a>
+    </div>
+  </div>
+
+  <div class="stories-grid">
+
+    <div class="story">
+      <div class="accent-bar bar-gold"></div>
+      <div class="story-body">
+        <div class="kicker k-gold">Wealth Management</div>
+        <h3>WealthAi for Advisors Launches — 60% Less Admin, Same Relationship Model</h3>
+        <p>WealthAi's new advisor platform consolidates meeting notes, document generation, compliance oversight, and market data in one AI-led interface. Beta firms report a 60% reduction in routine client administration time — a meaningful recapture of billable relationship hours.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>The headline is 60% — but the product bet is: <strong>if advisors recapture this time, where does it go?</strong> Relationship depth, portfolio strategy, or just more clients per head? That answer shapes how you design your own tool's value proposition.</p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Research "augmentation vs. replacement" in buy-side AI — how do firms frame productivity gains internally?</li>
+              <li>Look at how MSCI AI Portfolio Insights handles explainability for institutional clients</li>
+              <li>Ask your analysts: what is the single admin task they most want back? That's your first feature.</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://fintech.global/2026/09/09/wealth-managements-ai-rush-are-firms-getting-it-right/">Read at Fintech Global →</a>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="accent-bar bar-slate"></div>
+      <div class="story-body">
+        <div class="kicker k-slate">Industry Research</div>
+        <h3>Cambridge Judge: 80%+ of Financial Firms Deploying AI — Focus Shifts to Scale and Governance</h3>
+        <p>The 2026 Global AI in Financial Services Report from Cambridge Judge Business School confirms over 80% of financial services firms are now using or actively adopting AI. The policy debate has moved on: from "should we adopt?" to "how do we govern this at scale?"</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>If 80%+ are already in, your users aren't asking whether to use AI — they're asking <strong>whether your specific tool is trustworthy, auditable, and worth the governance overhead.</strong> Quality and accountability are your product problem now, not adoption.</p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Read the Cambridge Judge report executive summary — it's publicly available and cites real adoption data</li>
+              <li>Understand "model governance" — how do firms audit AI decisions after the fact in a regulated context?</li>
+              <li>Where are firms still in pilot mode? Those are your early-majority customers — and the hardest to convert.</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://www.jbs.cam.ac.uk/faculty-research/centres/alternative-finance/publications/2026-global-ai-in-financial-services-report/">Read the report →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PULL QUOTE -->
+  <div class="pull-quote">
+    <blockquote>We're all moving to faster cadences — getting back after summer vacation has something to do with it.</blockquote>
+    <cite>Sam Altman, CEO OpenAI — CNBC, 6 September 2026, on the one-week wave of major model releases</cite>
+  </div>
+
+  <!-- ═══ PUBLIC MARKETS 101 ═══ -->
+  <div class="section-header" style="margin-top:16px;">
+    <div class="pill teal">Public Markets 101</div>
+    <div class="rule teal"></div>
+  </div>
+
+  <div class="markets-box">
+    <div class="markets-box-header">
+      <span>Essential concepts for your role</span>
+    </div>
+    <div class="markets-box-body">
+      <p>Your portfolio managers and analysts live inside these concepts daily. Here are six terms that come up constantly in buy-side conversations — different from last edition's set, designed to build your vocabulary one rotation at a time.</p>
+      <div class="term-grid">
+        <div class="term">
+          <div class="t">Liquidity</div>
+          <div class="d">How easily an asset can be bought or sold without moving its price. Illiquid assets (private credit, small-cap equities) carry a premium — and a risk. AI tools that surface liquidity signals are particularly valuable in stressed markets.</div>
+        </div>
+        <div class="term">
+          <div class="t">Benchmark Index</div>
+          <div class="d">A reference index (e.g. S&P 500, MSCI World, Bloomberg Aggregate) against which a portfolio's returns are measured. Understanding which benchmark a fund tracks is essential context for any AI product built for PMs.</div>
+        </div>
+        <div class="term">
+          <div class="t">Short Selling</div>
+          <div class="d">Borrowing and selling a security you don't own, betting the price will fall. You buy it back later at a lower price to profit. A core strategy for hedge funds — and a key signal for sentiment-based AI analytics.</div>
+        </div>
+        <div class="term">
+          <div class="t">Drawdown</div>
+          <div class="d">The peak-to-trough decline in portfolio value over a period. A 20% drawdown means the portfolio fell 20% from its highest point before recovering. A key risk metric PMs use to evaluate strategy resilience.</div>
+        </div>
+        <div class="term">
+          <div class="t">Systematic vs. Discretionary</div>
+          <div class="d">Systematic strategies follow quantitative rules with minimal human override. Discretionary relies on a manager's judgment. Most AI products are targeting the systematic space — but the real opportunity may be in augmenting discretionary judgment.</div>
+        </div>
+        <div class="term">
+          <div class="t">Earnings Per Share (EPS)</div>
+          <div class="d">A company's net profit divided by outstanding shares. A core metric analysts track quarterly. "Beat or miss" on EPS often moves a stock materially — making earnings season one of the highest-value periods for your AI product to prove itself.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ AGENTIC AI ═══ -->
+  <div class="section-header">
+    <div class="pill sage">Agentic AI</div>
+    <div class="rule sage"></div>
+  </div>
+
+  <div class="stories-grid">
+    <div class="story">
+      <div class="accent-bar bar-sage"></div>
+      <div class="story-body">
+        <div class="kicker k-sage">Enterprise Adoption</div>
+        <h3>54% of CFOs Name AI Agent Integration Their Top Priority — But Only 11% Are in Production</h3>
+        <p>Deloitte's 2026 CFO Signals Survey finds 54% of CFOs have named AI agent integration their single biggest digital transformation priority. Wolters Kluwer finds 44% of finance teams will use agentic AI this year — but only 11% have reached production. The gap is enormous.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>That 43-point gap between intent and delivery is not a technology problem — it's a product problem. <strong>The scaffolding that moves firms from pilot to live workflow without uncontrolled agentic behaviour is exactly what you should be building.</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Read about "human-in-the-loop" design patterns for agentic finance workflows — where should agents pause and escalate?</li>
+              <li>Understand "exception handling" in an agentic context: when does the agent stop and ask for human intervention?</li>
+              <li>Read: arXiv 2411.04788 — AI agent collaboration in financial research tasks</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://assistents.ai/blogs/agentic-ai-in-finance-and-accounting">Read full analysis →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ REGULATION ═══ -->
+  <div class="section-header">
+    <div class="pill crimson">Regulation</div>
+    <div class="rule crimson"></div>
+  </div>
+
+  <div class="stories-grid">
+
+    <div class="story">
+      <div class="accent-bar bar-crimson"></div>
+      <div class="story-body">
+        <div class="kicker k-crimson">FCA · UK</div>
+        <h3>FCA to Publish Practical AI Governance Guidance Before Year-End — SM&CR Accountability in Focus</h3>
+        <p>The FCA is on track to publish comprehensive practical guidance on consumer protection rules and SM&CR accountability for AI-related harm before end of 2026. Firms are advised now to build AI risk committees, embed bias audits into model lifecycles, and document human-in-the-loop controls for high-impact decisions.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>This guidance will define what "auditability" means in practice for AI outputs at regulated firms. <strong>If your product informs a buy or sell decision, your audit trail is a regulatory requirement — design it into your architecture from day one, not as an afterthought.</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Read the FCA Consumer Duty framework: what constitutes a "good outcome" for an AI-assisted investment decision?</li>
+              <li>Under SM&CR: who is the named "Senior Manager" accountable for an AI output failure at your firm?</li>
+              <li>Ropes &amp; Gray's June 2026 FCA governance briefing is publicly available — practical and worth reading</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://www.ropesgray.com/en/insights/viewpoints/2026/06/102n7e3/from-principles-to-practice-the-fcas-evolving-expectations-on-ai-governance">Read Ropes &amp; Gray briefing →</a>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="accent-bar bar-crimson"></div>
+      <div class="story-body">
+        <div class="kicker k-crimson">UK Government · Policy</div>
+        <h3>UK Publishes Financial Services AI Adoption Plan — "Growth Over Caution" Signal to Industry</h3>
+        <p>The UK government's Financial Services AI Adoption Plan signals intent to position the UK as an AI-friendly financial hub, explicitly encouraging regulators to facilitate adoption alongside oversight. The Bank of England and PRA maintain their technology-agnostic stance.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>A regulatory environment that actively encourages AI adoption is a tailwind for your product — but it also means more competitors will enter the space faster. <strong>Speed of delivery, not just quality, starts to matter more.</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Compare the UK's "principles-based" approach with the EU AI Act's "rules-based" framework — what does each mean for your product's compliance posture?</li>
+              <li>If your firm operates across UK and EU: that regulatory bifurcation is a product design decision, not just a legal one</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://www.gov.uk/government/publications/ai-adoption-plan-financial-services/financial-services-ai-adoption-plan">Read on GOV.UK →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ FROM THE LABS ═══ -->
+  <div class="section-header">
+    <div class="pill navy">From the Labs</div>
+    <div class="rule navy"></div>
+  </div>
+
+  <div class="stories-grid">
+
+    <div class="story">
+      <div class="accent-bar bar-navy"></div>
+      <div class="story-body">
+        <div class="kicker k-navy">Anthropic</div>
+        <h3>Claude Fable 5.1 Ships — 75% Cache Read Cost Cut and Invisible Text Watermarking</h3>
+        <p>Fable 5.1 and Mythos 5.1 landed 1 September with unchanged input/output pricing but a 4× cut in prompt-cache read costs — from $1.00 to $0.25 per million tokens. Agentic workloads see up to 45% lower total costs. Invisible text watermarking and a detection API enter private preview.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>Cache-read cost cuts directly benefit financial AI products with long system prompts and repeated regulatory context. <strong>If analysts run repeated queries against the same document base, Fable 5.1's pricing change is a meaningful product cost decision.</strong> Watermarking also has client disclosure implications.</p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Understand "prompt caching" — why it matters for high-frequency analyst queries running the same context repeatedly</li>
+              <li>Read Anthropic's model card for Fable 5.1 — what are its stated limitations and refusal patterns for financial use cases?</li>
+              <li>Watermarking AI outputs: if client-facing content is AI-generated, what disclosure obligations apply at your firm?</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://venturebeat.com/technology/anthropics-claude-fable-5-1-and-mythos-5-1-arrive-with-a-75-cost-reduction-for-fable-cache-reads">Read at VentureBeat →</a>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="accent-bar bar-navy"></div>
+      <div class="story-body">
+        <div class="kicker k-navy">Labs Race</div>
+        <h3>"Model Fatigue" Sets In — Four Major Labs Shipped Flagship Models in One Week</h3>
+        <p>Anthropic (Fable 5.1), OpenAI (GPT-6 Astra), Google (Gemini 3.8 Flash), and Meta (Muse Spark 1.3) all released major models between 1–3 September. Enterprise IT managers report spending outsized hours comparing costs and capabilities — some have capped their shortlist at five models instead of ten.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>Model selection is now a PM decision with direct cost, capability, and vendor-risk implications. <strong>How do you build a product that stays model-agnostic without sacrificing performance?</strong> Goldman's multi-model architecture remains the clearest enterprise roadmap.</p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Read about "model-agnostic architecture" — how do you design a product that can swap underlying models without rebuilding?</li>
+              <li>Understand key AI benchmarks (MMLU, HumanEval, MATH) as a PM — know how to evaluate competing models for your specific use case</li>
+              <li>Write down your criteria for choosing between GPT-6 Astra and Fable 5.1 for your current product — be specific</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://www.cnbc.com/2026/09/06/meta-google-openai-anthropic-ai-model-fatigue.html">Read at CNBC →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ AI PRODUCT MANAGEMENT ═══ -->
+  <div class="section-header">
+    <div class="pill violet">AI Product Management</div>
+    <div class="rule violet"></div>
+  </div>
+
+  <div class="stories-grid">
+
+    <div class="story">
+      <div class="accent-bar bar-violet"></div>
+      <div class="story-body">
+        <div class="kicker k-violet">Role Evolution</div>
+        <h3>The PM Role Is Being Redefined Around AI Orchestration — Judgment Is the Last Defensible Skill</h3>
+        <p>Product management in 2026 has shifted from features and roadmaps to AI orchestration and systems design. MCP is standardising how AI connects to tools. "Vibe coding" lets PMs prototype without engineers. The one irreducible PM skill left: knowing when to intervene in an agentic workflow.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>"Judgment" sounds abstract until it's tested. <strong>In financial AI, the highest-stakes PM decision is knowing when a multi-agent system has produced a counterintuitive output that could harm a client.</strong> Building that instinct requires deep domain knowledge — not just AI knowledge.</p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Read: Ant Murphy's "How Product is Changing in 2026" — practical, grounded, non-theoretical</li>
+              <li>Learn what MCP (Model Context Protocol) is and why it matters for AI product interoperability across tools</li>
+              <li>Spend one hour watching an analyst complete a real research workflow without AI — what decisions do they make?</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://www.antmurphy.me/newsletter/how-product-is-changing-in-2026">Read Ant Murphy →</a>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="accent-bar bar-violet"></div>
+      <div class="story-body">
+        <div class="kicker k-violet">Skills</div>
+        <h3>59% of PMs Say Strategy Is Most Critical — But AI-Specific Gaps Are Leaving Money on the Table</h3>
+        <p>2026 data: 59% of product professionals rank strategy and business acumen as most critical. But AI-specific skills — prompt design, agentic workflow management, model evaluation — remain rare. PMs who can participate in eval design command a significant hiring premium.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>Strategy without technical vocabulary leaves you dependent on engineers to define what's possible. <strong>You don't need to code — but you need enough ML literacy to interrogate model outputs and push back when something doesn't smell right.</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Take one free fast.ai lesson — understand what "training" an LLM actually involves at a conceptual level</li>
+              <li>Design a simple eval framework for one feature in your current product: what does "good" look like, and how would you measure it?</li>
+              <li>Read the Institute of AI PM's 2026 skills framework at institutepm.com — match it against your current skill set honestly</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://www.institutepm.com/knowledge-hub/ai-product-management-2026">Read at Institute of AI PM →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">Market Prompt</div>
+    <div class="footer-rule"></div>
+    <p>
+      Market Prompt · AI in Public Markets<br/>
+      Daily briefings, every weekday<br/>
+      <span style="color:#5858a0; font-family:monospace;">newsletters/2026-09-13.html</span>
+    </p>
+    <div class="next">Next edition · <span>14 September 2026</span></div>
+  </div>
+
+</div>
+</body>
+</html>
