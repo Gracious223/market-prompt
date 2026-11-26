@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Market Prompt — Issue No. 176 — 26 November 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #e8e4d8;
+      font-family: 'Inter', sans-serif;
+      color: #1a1a2e;
+      padding: 40px 20px;
+    }
+
+    /* Square, bordered container */
+    .wrapper {
+      max-width: 680px;
+      margin: 0 auto;
+      border: 2px solid #1a1a2e;
+      box-shadow: 6px 6px 0px #1a1a2e;
+      background: #fffdf7;
+    }
+
+    /* ── MASTHEAD ── */
+    .masthead {
+      background: linear-gradient(160deg, #1a1a2e 0%, #2a2a4e 100%);
+      padding: 44px 48px 36px;
+      text-align: center;
+    }
+
+    .masthead::after {
+      content: '';
+      display: block;
+      width: 80px; height: 1px;
+      background: linear-gradient(to right, transparent, #c9a96e, transparent);
+      margin: 24px auto 0;
+    }
+
+    .masthead .overline {
+      font-size: 9px; font-weight: 600;
+      letter-spacing: 4px; text-transform: uppercase;
+      color: #c9a96e; margin-bottom: 14px;
+    }
+
+    .masthead h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 88px; color: #f9f5ec; line-height: 1;
+      text-shadow: 0 2px 20px rgba(201,169,110,0.25);
+    }
+
+    .masthead .subtitle {
+      font-size: 11px; font-weight: 500;
+      color: #d4d0e8;
+      letter-spacing: 3px; text-transform: uppercase; margin-top: 10px;
+    }
+
+    .masthead .meta-row {
+      display: flex; justify-content: center;
+      align-items: center; gap: 18px; margin-top: 20px;
+    }
+
+    .masthead .meta-row span {
+      font-size: 11px; font-weight: 500;
+      color: #c8c8e4;
+      letter-spacing: 1.5px; text-transform: uppercase;
+    }
+
+    .masthead .meta-row .sep {
+      width: 4px; height: 4px;
+      background: #c9a96e; border-radius: 50%;
+    }
+
+    /* ── DAILY BANNER ── */
+    .daily-banner {
+      background: #c9a96e;
+      padding: 11px 40px;
+      display: flex; align-items: center; gap: 12px;
+      border-bottom: 2px solid #1a1a2e;
+    }
+
+    .daily-banner p {
+      font-size: 12px; font-weight: 500; color: #1a1a2e; line-height: 1.4;
+    }
+
+    /* ── OPENING BAND ── */
+    .opening-band {
+      background: #ffffff;
+      padding: 24px 44px;
+      border-bottom: 1px solid #ddd9ce;
+      border-left: 5px solid #c9a96e;
+    }
+
+    .opening-band p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px; font-style: italic;
+      color: #1a1a2e; line-height: 1.65;
+    }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      background: #2a2a4e;
+      padding: 28px 44px;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-bottom: 2px solid #1a1a2e;
+    }
+
+    .stat-item { text-align: center; padding: 0 12px; position: relative; }
+
+    .stat-item + .stat-item::before {
+      content: ''; position: absolute;
+      left: 0; top: 10%; height: 80%; width: 1px; background: #3a3a6a;
+    }
+
+    .stat-item .num {
+      font-family: 'Great Vibes', cursive;
+      font-size: 40px; color: #c9a96e; line-height: 1.15;
+    }
+
+    .stat-item .desc {
+      font-size: 10px; color: #a8a8c8; line-height: 1.5; margin-top: 4px;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      padding: 32px 44px 0;
+      display: flex; align-items: center; gap: 14px;
+    }
+
+    .pill {
+      font-size: 8px; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase;
+      padding: 5px 12px; white-space: nowrap;
+    }
+
+    .section-header .rule { flex: 1; height: 1px; }
+
+    .pill.gold    { background: #c9a96e; color: #1a1a2e; }
+    .pill.navy    { background: #2a2a4e; color: #f0ecd8; }
+    .pill.sage    { background: #2a5a3a; color: #c8ead0; }
+    .pill.crimson { background: #6a1a2a; color: #f0c8d0; }
+    .pill.slate   { background: #1a3a6a; color: #c8d8f0; }
+    .pill.violet  { background: #3a1a6a; color: #d8c8f0; }
+    .pill.teal    { background: #1a5a5a; color: #c8eaea; }
+
+    .rule.gold    { background: linear-gradient(to right, #c9a96e50, transparent); }
+    .rule.navy    { background: linear-gradient(to right, #2a2a4e40, transparent); }
+    .rule.sage    { background: linear-gradient(to right, #2a5a3a30, transparent); }
+    .rule.crimson { background: linear-gradient(to right, #6a1a2a30, transparent); }
+    .rule.slate   { background: linear-gradient(to right, #1a3a6a30, transparent); }
+    .rule.violet  { background: linear-gradient(to right, #3a1a6a30, transparent); }
+    .rule.teal    { background: linear-gradient(to right, #1a5a5a30, transparent); }
+
+    /* ── FEATURED STORY ── */
+    .featured {
+      margin: 20px 44px;
+      border: 1.5px solid #1a1a2e;
+      border-top: 4px solid #c9a96e;
+      background: #ffffff;
+    }
+
+    .featured-inner { padding: 24px 28px 20px; }
+
+    .kicker {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 8px;
+    }
+
+    .featured h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; font-weight: 600;
+      color: #1a1a2e; line-height: 1.25; margin-bottom: 10px;
+    }
+
+    .featured > .featured-inner > p,
+    .story-body > p {
+      font-size: 13px; line-height: 1.75;
+      color: #2a2a3e;
+      font-weight: 400;
+    }
+
+    /* ── CALLOUT BLOCKS ── */
+    .callouts { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+
+    .wim {
+      padding: 10px 14px;
+      border-left: 3px solid #c9a96e;
+      background: #fffbf0;
+    }
+
+    .wim .label, .research .label {
+      font-size: 8px; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 4px;
+    }
+
+    .wim .label { color: #a07830; }
+
+    .wim p {
+      font-size: 12px; color: #2a2a3e;
+      line-height: 1.6; font-style: italic;
+    }
+
+    .wim strong { color: #1a1a2e; font-style: normal; font-weight: 600; }
+
+    .research {
+      padding: 10px 14px;
+      border-left: 3px solid #2a2a4e;
+      background: #f2f3fa;
+    }
+
+    .research .label { color: #1a1a6e; }
+
+    .research ul { list-style: none; padding: 0; margin: 0; }
+
+    .research ul li {
+      font-size: 12px; color: #1a1a3e;
+      line-height: 1.65; font-weight: 400;
+      padding-left: 16px; position: relative;
+    }
+
+    .research ul li::before {
+      content: '→'; position: absolute; left: 0;
+      color: #c9a96e; font-size: 11px; font-weight: 700;
+    }
+
+    .featured a, .story-body a {
+      display: inline-block; margin-top: 10px;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: #c9a96e; text-decoration: none;
+      border-bottom: 1px solid #c9a96e60; padding-bottom: 1px;
+    }
+
+    /* ── STORY GRID ── */
+    .stories-grid { padding: 0 44px; }
+
+    .story {
+      padding: 22px 0;
+      border-bottom: 1px solid #ddd9ce;
+      display: grid;
+      grid-template-columns: 4px 1fr;
+      gap: 0 16px;
+    }
+
+    .story:last-child { border-bottom: none; }
+
+    .accent-bar { width: 4px; border-radius: 1px; align-self: stretch; }
+
+    .story-body .kicker { margin-bottom: 6px; }
+
+    .story-body h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px; font-weight: 600;
+      color: #1a1a2e; line-height: 1.3; margin-bottom: 8px;
+    }
+
+    /* Accent bar colours */
+    .bar-gold    { background: #c9a96e; }
+    .bar-navy    { background: #2a2a4e; }
+    .bar-sage    { background: #2a6a4a; }
+    .bar-crimson { background: #8a1a2e; }
+    .bar-slate   { background: #1a4a8a; }
+    .bar-violet  { background: #5a2a8a; }
+    .bar-teal    { background: #1a6a6a; }
+
+    /* Kicker colours */
+    .k-gold    { color: #8a6020; }
+    .k-sage    { color: #1a5a3a; }
+    .k-crimson { color: #8a1a2e; }
+    .k-slate   { color: #1a3a7a; }
+    .k-violet  { color: #4a1a7a; }
+    .k-navy    { color: #1a1a5e; }
+    .k-teal    { color: #0a5a5a; }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      margin: 4px 44px;
+      padding: 24px 36px;
+      background: #2a2a4e;
+      text-align: center;
+      border: 1.5px solid #1a1a2e;
+    }
+
+    .pull-quote::before {
+      content: '\201C';
+      font-family: 'Great Vibes', cursive;
+      font-size: 56px; color: #c9a96e;
+      line-height: 0.7; display: block; margin-bottom: 10px;
+    }
+
+    .pull-quote blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px; font-style: italic;
+      color: #f0ecdE; line-height: 1.6;
+    }
+
+    .pull-quote cite {
+      display: block; margin-top: 12px;
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: #c9a96e; font-style: normal;
+    }
+
+    /* ── MARKETS 101 BOX ── */
+    .markets-box {
+      margin: 20px 44px;
+      border: 1.5px solid #1a1a2e;
+      border-top: 4px solid #2a2a4e;
+      background: #ffffff;
+    }
+
+    .markets-box-header {
+      background: #2a2a4e;
+      padding: 10px 22px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .markets-box-header span {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase; color: #c9a96e;
+    }
+
+    .markets-box-body { padding: 20px 22px; }
+
+    .markets-box-body p {
+      font-size: 12px; color: #1a1a3e; line-height: 1.65;
+      margin-bottom: 14px; font-weight: 400;
+    }
+
+    .markets-box-body p:last-child { margin-bottom: 0; }
+
+    .markets-box-body strong { font-weight: 600; color: #1a1a2e; }
+
+    .term-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+
+    .term {
+      padding: 10px 12px;
+      background: #f4f3fa;
+      border-left: 3px solid #2a2a4e;
+    }
+
+    .term .t { font-size: 11px; font-weight: 700; color: #1a1a4e; margin-bottom: 3px; }
+    .term .d { font-size: 11px; color: #3a3a5a; line-height: 1.5; }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: linear-gradient(160deg, #1a1a2e 0%, #2a2a4e 100%);
+      padding: 36px 44px;
+      text-align: center;
+      border-top: 2px solid #1a1a2e;
+    }
+
+    .footer .footer-logo {
+      font-family: 'Great Vibes', cursive;
+      font-size: 44px; color: #c9a96e;
+    }
+
+    .footer-rule {
+      width: 40px; height: 1px;
+      background: #3a3a6a; margin: 12px auto 16px;
+    }
+
+    .footer p {
+      font-size: 11px; color: #8888a8;
+      line-height: 1.9; font-weight: 400;
+    }
+
+    .footer .next {
+      margin-top: 14px; font-size: 10px;
+      color: #6868a0; letter-spacing: 2px; text-transform: uppercase;
+    }
+
+    .footer .next span { color: #c9a96e; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <div class="overline">Intelligence Brief · AI · Markets · Product</div>
+    <h1>Market Prompt</h1>
+    <div class="subtitle">Daily Edition · AI in Public Markets</div>
+    <div class="meta-row">
+      <span>26 November 2026</span>
+      <div class="sep"></div>
+      <span>Issue No. 176</span>
+      <div class="sep"></div>
+      <span>10 Stories</span>
+    </div>
+  </div>
+
+  <!-- DAILY BANNER -->
+  <div class="daily-banner">
+    <p>⚡ <strong>Daily briefings are live</strong> — headline signals, model releases, and market-moving AI developments every morning. Stay sharp, every day.</p>
+  </div>
+
+  <!-- OPENING -->
+  <div class="opening-band">
+    <p>The FCA broke new ground this week, publishing its first formal expectations for agentic AI in financial services — a moment that resets the compliance conversation for every product team. Meanwhile, three major model families upgraded in November alone, and the gap between firms planning agentic AI and those actually in production remains stubbornly wide. Regulatory clarity is arriving just as the deployment sprint begins.</p>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="stat-item">
+      <div class="num">44%</div>
+      <div class="desc">Finance teams deploying agentic AI in 2026 — yet only 11% at production scale</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">85%</div>
+      <div class="desc">AI PM job postings in 2026 explicitly mention AI/ML requirements</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">3</div>
+      <div class="desc">Major model families upgraded in November: Fable 5.2, GPT-6.2, Gemini 4 Neon</div>
+    </div>
+  </div>
+
+  <!-- ═══ PUBLIC MARKETS ═══ -->
+  <div class="section-header">
+    <div class="pill gold">Public Markets</div>
+    <div class="rule gold"></div>
+  </div>
+
+  <div class="featured">
+    <div class="featured-inner">
+      <div class="kicker k-gold">Lead Story</div>
+      <h2>BNY Mellon: Real-Time Data and Agentic AI Are Redefining Buy-Side Operations</h2>
+      <p>BNY Mellon's latest institutional research argues that agentic AI is acting as an always-on advisor across the investment lifecycle — from pre-trade analysis through post-trade reconciliation. Its key finding: tools automating isolated tasks produce only linear gains when underlying data remains fragmented. Without unified data infrastructure, agentic AI amplifies existing problems rather than solving them.</p>
+      <div class="callouts">
+        <div class="wim">
+          <div class="label">Why It Matters</div>
+          <p>Your product's value ceiling is set by data quality, not model capability. <strong>Before scoping agentic features, map every data source your analysts touch — fragmentation is your first product problem.</strong></p>
+        </div>
+        <div class="research">
+          <div class="label">Research &amp; Think About</div>
+          <ul>
+            <li>Ask your data engineers: where does data live in silos that an AI agent couldn't cross today?</li>
+            <li>Read: BNY's piece on how pre-trade, in-flight, and post-trade data differ structurally</li>
+            <li>What is a "data mesh" architecture? Why is it becoming an AI prerequisite at large buy-side firms?</li>
+          </ul>
+        </div>
+      </div>
+      <a href="https://www.bny.com/corporate/global/en/insights/agentic-ai-real-time-data-redefining-buy-side-operations.html">Read at BNY →</a>
+    </div>
+  </div>
+
+  <div class="stories-grid">
+
+    <div class="story">
+      <div class="accent-bar bar-gold"></div>
+      <div class="story-body">
+        <div class="kicker k-gold">Portfolio Tools</div>
+        <h3>Lumivero Launches POLI: AI Agents for Portfolio Planning in Plain Language</h3>
+        <p>Lumivero's POLI lets users interrogate their project and investment portfolio in natural language and simulate allocation changes in real time. Notably, their own research found only 10% of users would act on an AI recommendation without significant human review — a sharp data point on AI trust in financial decisions.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>Trust is the product gap. <strong>Confidence intervals, source citations, and explainability are not edge cases — they are the core feature for analyst adoption.</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>What would it take for your users to increase their trust threshold from 10% to 50%?</li>
+              <li>Research "AI decision support" vs. "AI decision making" — the design framing determines adoption</li>
+              <li>How does Lumivero's natural language interface compare to Bloomberg Terminal's command syntax?</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://securitybrief.asia/story/lumivero-launches-poli-ai-agents-for-portfolio-planning">Read at SecurityBrief →</a>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="accent-bar bar-slate"></div>
+      <div class="story-body">
+        <div class="kicker k-slate">Systematic Investing</div>
+        <h3>Acadian Asset Management: AI Gets Guardrails, Not the Keys</h3>
+        <p>Risk.net profiles Acadian's approach to AI in systematic investing — the firm built formal guardrails around its ML systems to limit autonomous algorithm behaviour. Its own published research warns that applying generative AI to systematic investing requires specialist expertise most teams lack. Augmentation, not automation, is the stated goal.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>The most sophisticated quant houses are still choosing human-in-the-loop. <strong>Your "autonomous" AI product story needs to account for where and why human oversight remains essential.</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Read Acadian's "Generative AI: Sizzle and Steak" paper — it's the most honest industry take on the limits</li>
+              <li>What is "model drift" and why does it matter more in systematic investing than in other domains?</li>
+              <li>How do you design a feedback loop that lets analysts correct AI outputs without slowing them down?</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://www.risk.net/asset-management/6656031/systematic-manager-puts-up-guardrails-for-ai">Read at Risk.net →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PULL QUOTE -->
+  <div class="pull-quote">
+    <blockquote>Tools that automate isolated tasks produce only linear gains when the underlying data is fragmented. Agentic AI amplifies existing problems as readily as it solves them.</blockquote>
+    <cite>BNY Mellon Institutional Research, 2026</cite>
+  </div>
+
+  <!-- ═══ PUBLIC MARKETS 101 ═══ -->
+  <div class="section-header" style="margin-top:16px;">
+    <div class="pill teal">Public Markets 101</div>
+    <div class="rule teal"></div>
+  </div>
+
+  <div class="markets-box">
+    <div class="markets-box-header">
+      <span>Essential concepts for your role</span>
+    </div>
+    <div class="markets-box-body">
+      <p>Six more terms your portfolio managers and analysts use daily. Building this vocabulary lets you ask sharper questions, write better PRDs, and earn credibility in investment conversations.</p>
+      <div class="term-grid">
+        <div class="term">
+          <div class="t">Market Capitalisation</div>
+          <div class="d">Share price × total shares outstanding. It classifies companies as large-cap, mid-cap, or small-cap. AI tools often filter and screen securities by market cap as a first-pass risk proxy.</div>
+        </div>
+        <div class="term">
+          <div class="t">Price-to-Earnings (P/E) Ratio</div>
+          <div class="d">Share price ÷ earnings per share. A core valuation metric. A high P/E implies growth expectations; a low one implies value or risk. LLMs are being used to contextualise P/E moves against narrative signals.</div>
+        </div>
+        <div class="term">
+          <div class="t">Short Selling</div>
+          <div class="d">Borrowing and selling a security in expectation of buying it back cheaper. Short sellers are often the first to identify corporate fraud — AI-assisted short research is a growing use case at hedge funds.</div>
+        </div>
+        <div class="term">
+          <div class="t">Derivatives</div>
+          <div class="d">Financial instruments whose value derives from an underlying asset — options, futures, swaps. Used to hedge risk or take leveraged positions. Increasingly, AI agents are being tested on derivatives pricing desks.</div>
+        </div>
+        <div class="term">
+          <div class="t">Active vs. Passive Investing</div>
+          <div class="d">Active: a manager picks securities to beat a benchmark. Passive: a fund tracks an index. The active/passive debate is shifting again as AI challenges the assumption that beating the market requires human judgment.</div>
+        </div>
+        <div class="term">
+          <div class="t">Bid-Ask Spread</div>
+          <div class="d">The gap between the price a buyer will pay (bid) and the price a seller will accept (ask). A wider spread signals lower liquidity. AI is compressing spreads in some markets by improving price discovery speed.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ AGENTIC AI ═══ -->
+  <div class="section-header">
+    <div class="pill sage">Agentic AI</div>
+    <div class="rule sage"></div>
+  </div>
+
+  <div class="stories-grid">
+    <div class="story">
+      <div class="accent-bar bar-sage"></div>
+      <div class="story-body">
+        <div class="kicker k-sage">Buy-Side Trading</div>
+        <h3>AI Expands the Scope of Buy-Side Trading — But Human Escalation Remains Non-Negotiable</h3>
+        <p>Traders Magazine surveys the state of agentic AI on buy-side desks: order routing, transaction cost analysis, and execution monitoring are the first workflows going autonomous. The consistent finding — systems are designed to escalate to humans when judgment is needed, not replace it. The automation wins in speed; the human wins on context and accountability.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>Every agentic AI product needs an "escalation design" — when does the agent hand back to the human, and how? <strong>That boundary is a product decision with regulatory and liability implications.</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Read: arXiv 2411.08804 (FinRobot) — multi-agent framework mimicking analyst reasoning for equity research</li>
+              <li>What is "transaction cost analysis" (TCA)? Why is it one of the first workflows being automated?</li>
+              <li>Design a simple escalation matrix: what triggers a human review in your product today?</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://www.tradersmagazine.com/featured_articles/ai-expands-the-scope-of-buy-side-trading/">Read at Traders Magazine →</a>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="accent-bar bar-sage"></div>
+      <div class="story-body">
+        <div class="kicker k-sage">Insurance &amp; Risk</div>
+        <h3>Opterrix Ships AI-Powered Portfolio Workflow for Insurance Exposures</h3>
+        <p>Opterrix launched a conversational AI workflow for analysing insurance portfolio exposures, integrating a GenAI assistant directly into portfolio risk review. It's notable as a sector-specific deployment — not a general LLM bolted on, but a workflow-native agent trained on insurance data structures.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>Domain-specific AI products are winning over general-purpose tools in regulated sectors. <strong>Your moat is the financial data your analysts already trust — not access to the same base model as everyone else.</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>What is "exposure management" in portfolio terms? How does it differ between insurance and equities?</li>
+              <li>Compare Opterrix's approach to Vanguard's Expert Insights — same pattern, different verticals</li>
+              <li>How would you define "workflow-native" vs. "bolted-on" AI in a one-page PRD framing?</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://www.insurancejournal.com/news/midwest/2026/10/30/890963.htm">Read at Insurance Journal →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ REGULATION ═══ -->
+  <div class="section-header">
+    <div class="pill crimson">Regulation</div>
+    <div class="rule crimson"></div>
+  </div>
+
+  <div class="stories-grid">
+
+    <div class="story">
+      <div class="accent-bar bar-crimson"></div>
+      <div class="story-body">
+        <div class="kicker k-crimson">FCA · UK · Breaking</div>
+        <h3>FCA Sets Out Formal Rules of the Road for Agentic AI in Financial Services</h3>
+        <p>On 24 November, the FCA published its landmark "Our approach to Agentic AI" guidance — the first formal expectations document for autonomous AI agents operating in regulated financial services. The framework stays principles-based and outcome-focused: no new AI rulebook, but a clear signal that tech providers may need authorisation if their agents carry out regulated activities. Senior managers must take "reasonable steps" to understand AI risks. Firms remain responsible when third-party AI systems cause harm.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>This directly governs your product. <strong>If your AI agent executes, recommends, or influences a regulated activity, your firm — and named senior managers — carry accountability.</strong> This is not a future concern.</p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Read the FCA's "Our approach to Agentic AI" page directly — bookmark it as a standing reference</li>
+              <li>Under SM&CR: identify the Senior Manager at your firm who would be accountable for an AI-caused harm today</li>
+              <li>What does "authorisation" mean for an AI agent? Read Freshfields' analysis for a legal view</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://www.regulationtomorrow.com/2026/11/new-fca-webpage-our-approach-to-agentic-ai/">Read analysis →</a>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="accent-bar bar-crimson"></div>
+      <div class="story-body">
+        <div class="kicker k-crimson">FCA · Authorisation</div>
+        <h3>FCA Signals Agentic AI Authorisation May Be Required at Launch — Not Just in Principle</h3>
+        <p>Finance X Magazine's reading of the FCA's new guidance goes further: authorisation requirements for agentic AI providers may apply at the point of launch, not retrospectively. Banks in both the UK and US have already begun blocking third-party AI agents from accessing customer accounts — a de facto precaution ahead of formal rules.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>Build regulatory review into your product launch checklist now. <strong>An AI agent that slips through compliance review at MVP stage becomes a costly retrofit problem at scale.</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>What is an FCA "authorised activity"? List the activities your product currently touches</li>
+              <li>Read PwC's agentic AI regulatory preparation guide — practical steps for financial services firms</li>
+              <li>Why are banks blocking third-party AI agents from customer accounts? What is the liability risk model?</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://www.financexmagazine.com/post/fca-signals-agentic-ai-authorisation-may-be-required-at-launch">Read at Finance X →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ FROM THE LABS ═══ -->
+  <div class="section-header">
+    <div class="pill navy">From the Labs</div>
+    <div class="rule navy"></div>
+  </div>
+
+  <div class="stories-grid">
+
+    <div class="story">
+      <div class="accent-bar bar-navy"></div>
+      <div class="story-body">
+        <div class="kicker k-navy">Anthropic</div>
+        <h3>Claude Fable 5.2 Debuts as Anthropic's New Flagship — Above Opus 5.5</h3>
+        <p>Anthropic released Claude Fable 5.2 on 9 November, positioning it above Claude Opus 5.5 on nearly every capability benchmark Anthropic tested. It lands as a new top-of-stack model for enterprise deployments — including, potentially, the kind of financial AI products this newsletter covers each week.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>Model capability improvements are product decisions for you: should your internal analysts be on the latest model, or does stability matter more than capability at the margin? <strong>Your model selection policy is a governance document, not just a technical choice.</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>What is the difference between a "frontier" and an "enterprise" model deployment? Ask your infrastructure team</li>
+              <li>Read Anthropic's model card for Fable 5.2 — what safety properties are relevant to finance?</li>
+              <li>How often should you re-evaluate your model choice? Build a lightweight model review cadence into your roadmap</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://tecadmin.net/november-2026-ai-model-releases/">Read model timeline →</a>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="accent-bar bar-navy"></div>
+      <div class="story-body">
+        <div class="kicker k-navy">OpenAI · Google</div>
+        <h3>GPT-6.2 and Gemini 4 Neon Both Ship — November Becomes the Densest Month for Model Releases</h3>
+        <p>OpenAI released GPT-6.2 Astra and Sol on 17 November. Google followed with Gemini 4 Neon on 18 November. With Anthropic's Fable 5.2 on the 9th, November 2026 may be the most compressed model release period on record. All three labs describe the frontier race as genuinely neck-and-neck.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>Rapid release cycles mean your product needs an evaluation framework, not just a model choice. <strong>How do you benchmark new models against your analysts' actual workflows before making a switch?</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Build a simple eval: 10 real analyst tasks, run across two models, score on accuracy and latency</li>
+              <li>What is "model-agnostic architecture"? Goldman Sachs built one — learn why</li>
+              <li>Read LLM Gateway's model timeline — it's the fastest reference for tracking releases</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://llmgateway.io/timeline">Track model releases →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ AI PRODUCT MANAGEMENT ═══ -->
+  <div class="section-header">
+    <div class="pill violet">AI Product Management</div>
+    <div class="rule violet"></div>
+  </div>
+
+  <div class="stories-grid">
+
+    <div class="story">
+      <div class="accent-bar bar-violet"></div>
+      <div class="story-body">
+        <div class="kicker k-violet">Hiring &amp; Skills</div>
+        <h3>85% of AI PM Jobs Now Require AI/ML — But 32% Specifically Demand Evals</h3>
+        <p>Dexity's analysis of 654 AI PM job descriptions in 2026 finds AI literacy and data judgment are baseline — but the real differentiator is evaluation design. PMs who can build and interpret model eval frameworks command a significant hiring premium. Strategy and business acumen still rank above engineering depth in most postings.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>Knowing how to design an eval is the clearest technical skill separating good AI PMs from great ones. <strong>It's also directly applicable to your role: how do you currently know when your AI product is working?</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>What is an "LLM eval"? Read Hamel Husain's guide — it's the best practical introduction available</li>
+              <li>Write one eval for your current product: what does "correct" look like for a single analyst task?</li>
+              <li>Read: Dexity's AI PM skills breakdown — compare your current skill set against the 2026 benchmark</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://dexity.com/intel/ai-product-management-in-2026-the-skills-that-actually-get-you-hired">Read skills breakdown →</a>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="accent-bar bar-violet"></div>
+      <div class="story-body">
+        <div class="kicker k-violet">Role Evolution</div>
+        <h3>The AI PM Role Is Shifting From Feature Manager to Agentic Orchestrator</h3>
+        <p>Multiple 2026 analyses converge on the same finding: agentic AI is replacing isolated chatbot features, MCP (Model Context Protocol) is standardising how AI connects to tools, and vibe coding is letting PMs prototype directly. The AI PM who only manages a backlog is being squeezed out; the one who can reason about agent architectures is in demand.</p>
+        <div class="callouts">
+          <div class="wim">
+            <div class="label">Why It Matters</div>
+            <p>You are building at exactly the right moment. <strong>The transition from feature PM to agentic orchestrator is happening now — and your physics and NLP background gives you a foundation most PMs lack.</strong></p>
+          </div>
+          <div class="research">
+            <div class="label">Research &amp; Think About</div>
+            <ul>
+              <li>Read Ant Murphy's "How Product Is Changing in 2026" — it's the clearest strategic take on the PM role shift</li>
+              <li>What is MCP (Model Context Protocol)? Learn the basics — it's becoming infrastructure-layer knowledge for AI PMs</li>
+              <li>Try building a simple agentic prototype with Claude or GPT-6.2 — even a 30-minute experiment builds intuition</li>
+            </ul>
+          </div>
+        </div>
+        <a href="https://antmurphy.medium.com/how-product-is-changing-in-2026-78a08f150aca">Read at Medium →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">Market Prompt</div>
+    <div class="footer-rule"></div>
+    <p>
+      Market Prompt · AI in Public Markets<br/>
+      Daily briefings · Every weekday<br/>
+      <span style="color:#5858a0; font-family:monospace;">newsletters/2026-11-26.html</span>
+    </p>
+    <div class="next">Next edition · <span>27 November 2026</span></div>
+  </div>
+
+</div>
+</body>
+</html>
